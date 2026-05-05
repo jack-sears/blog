@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-04-30T13:28:34-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Soccer Analytics Blog</title><subtitle>Ideas, projects, and analysis</subtitle><entry><title type="html">Sample Post</title><link href="http://localhost:4000/notes/2026/04/30/second-ballls-post.html" rel="alternate" type="text/html" title="Sample Post" /><published>2026-04-30T00:00:00-04:00</published><updated>2026-04-30T00:00:00-04:00</updated><id>http://localhost:4000/notes/2026/04/30/second-ballls-post</id><content type="html" xml:base="http://localhost:4000/notes/2026/04/30/second-ballls-post.html"><![CDATA[<p>This is a sample post.</p>
+
+<h2 id="a-section">A section</h2>
+
+<ul>
+  <li>Bullet</li>
+  <li>Bullet</li>
+</ul>
+
+<h3 id="code">Code</h3>
+
+<p>```python
+print(“hello world”)</p>]]></content><author><name></name></author><category term="notes" /><summary type="html"><![CDATA[This is a sample post.]]></summary></entry></feed>

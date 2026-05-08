@@ -1,13 +1,56 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-04-30T13:28:34-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Soccer Analytics Blog</title><subtitle>Ideas, projects, and analysis</subtitle><entry><title type="html">Sample Post</title><link href="http://localhost:4000/notes/2026/04/30/second-ballls-post.html" rel="alternate" type="text/html" title="Sample Post" /><published>2026-04-30T00:00:00-04:00</published><updated>2026-04-30T00:00:00-04:00</updated><id>http://localhost:4000/notes/2026/04/30/second-ballls-post</id><content type="html" xml:base="http://localhost:4000/notes/2026/04/30/second-ballls-post.html"><![CDATA[<p>This is a sample post.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-05-07T13:09:07-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Jack’s Blog</title><subtitle>A blog where I post about the projects and ideas I have been working on relating to football analytics.</subtitle><entry><title type="html">Analyzing Second Ball Wins</title><link href="http://localhost:4000/notes/2026/05/06/analyzingSB.html" rel="alternate" type="text/html" title="Analyzing Second Ball Wins" /><published>2026-05-06T00:00:00-04:00</published><updated>2026-05-06T00:00:00-04:00</updated><id>http://localhost:4000/notes/2026/05/06/analyzingSB</id><content type="html" xml:base="http://localhost:4000/notes/2026/05/06/analyzingSB.html"><![CDATA[<p>Brief introduction goes here</p>
 
-<h2 id="a-section">A section</h2>
+<h2 id="background">Background</h2>
+<p>Here we talk about Hang’s work and other industry work</p>
 
+<h2 id="updated-definitions-and-methodology">Updated Definitions and Methodology</h2>]]></content><author><name></name></author><category term="notes" /><summary type="html"><![CDATA[Brief introduction goes here]]></summary></entry><entry><title type="html">Quantifying Second Ball Wins</title><link href="http://localhost:4000/notes/2026/04/30/quanitfyingSB.html" rel="alternate" type="text/html" title="Quantifying Second Ball Wins" /><published>2026-04-30T00:00:00-04:00</published><updated>2026-04-30T00:00:00-04:00</updated><id>http://localhost:4000/notes/2026/04/30/quanitfyingSB</id><content type="html" xml:base="http://localhost:4000/notes/2026/04/30/quanitfyingSB.html"><![CDATA[<p>The evaluation of the in-game actions of players to assess their impact on the outcome
+of a game is an important sub-section of soccer analytics [2]. Unlike traditional
+statistics that focus on goals and assists, evaluating other actions that players perform
+delves deeper into the nuances of player behaviour and decision-making.</p>
+
+<p>An action that often goes unnoticed is the ability to win second balls [3]. A second
+ball is a possession gain following an intervention from an attempted long pass. Simply
+put, a second ball occurs after the ball is kicked long and neither team clearly controls
+it. Instead, the ball bounces, gets deflected, or is contested, and then the players rush
+to try and take control of the ball. A quote from Pep Guardiola,
+one of the most successful soccer managers, states the importance of winning second
+balls, ”The main thing in English football is to control the second ball. Without that,
+you cannot survive.” [4].</p>
+
+<p>Despite the importance of winning second balls, there is a lack of research quantifying
+and analyzing the value of winning second balls and how to do so successfully. Therefore this post aims to extend some of the research done and pose future direction for further work/extensions.</p>
+
+<h2 id="definition-and-example">Definition and Example</h2>
+
+<p>Let’s begin by establishing a working definition for second balls. The following definitions have been adapted from a <a href="https://lchunhang.medium.com/quantifying-second-ball-wins-d626ac56f108">blog</a> post by Chun Hang, but remain largely unchanged since I think it’s a great definition.</p>
+
+<p>SECOND BALL DEFINITION</p>
+
+<p>And to further build intuition for those who are less familiar with second balls, I think seeing a real example does a great job.</p>
+
+<p>SECOND BALL VID</p>
+
+<p>It is clear from the example that second balls can lead to chaotic and quick attacking chances in favor of the winner. Before beginning to quantify them, let’s investigate their importance a little bit more.</p>
+
+<h2 id="importance-of-second-balls">Importance of Second Balls</h2>
+
+<p>The following brief analysis examines the relationship between second ball success, goal difference, and overall team performance. It should not be taken as fact but rather a thought provoking analysis to give reason why we should investigate second balls deeper.</p>
+
+<h3 id="league-performance">League Performance</h3>
+
+<p>Using data from the top 5 European leagues in 2015/2016, a linear regression is performed on goal difference (GD) vs total points earned in a season.</p>
+
+<p>GD VS POINT PICTURE</p>
+
+<p>An R^2 value of 0.95 demonstrates a strong linear relationship between GD and points. Based on the regression an increase in GD by 1 corresponds to an expected points increase of 0.65 points. Potentially even marginal improvements in GD can affect a team’s league standing position.</p>
+
+<h3 id="shot-creation">Shot Creation</h3>
+
+<p>Now, let’s look at the role second balls play in generating goal-scoring opportunities. The following information is extracted from the dataset:</p>
 <ul>
-  <li>Bullet</li>
-  <li>Bullet</li>
+  <li>19.38% of second ball wins result in a shot within the following possession.</li>
+  <li>The average expected goal (xG) value per shot is 10.1%.</li>
+  <li>On average teams contest approximately 24 second balls per game.</li>
 </ul>
 
-<h3 id="code">Code</h3>
-
-<p>```python
-print(“hello world”)</p>]]></content><author><name></name></author><category term="notes" /><summary type="html"><![CDATA[This is a sample post.]]></summary></entry></feed>
+<p>The above list suggest increasing second ball wins could lead to a higher number of shots for a team. Also note, expected goals is a metric that predicts the probability that a shot results in a goal</p>]]></content><author><name></name></author><category term="notes" /><summary type="html"><![CDATA[The evaluation of the in-game actions of players to assess their impact on the outcome of a game is an important sub-section of soccer analytics [2]. Unlike traditional statistics that focus on goals and assists, evaluating other actions that players perform delves deeper into the nuances of player behaviour and decision-making.]]></summary></entry></feed>

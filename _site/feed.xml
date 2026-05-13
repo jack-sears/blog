@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-05-08T12:37:55-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Jack’s Blog</title><subtitle>A blog where I post about the projects and ideas I have been working on relating to football analytics.</subtitle><entry><title type="html">Analyzing Second Ball Wins</title><link href="http://localhost:4000/notes/2026/05/06/analyzingSB.html" rel="alternate" type="text/html" title="Analyzing Second Ball Wins" /><published>2026-05-06T00:00:00-04:00</published><updated>2026-05-06T00:00:00-04:00</updated><id>http://localhost:4000/notes/2026/05/06/analyzingSB</id><content type="html" xml:base="http://localhost:4000/notes/2026/05/06/analyzingSB.html"><![CDATA[<p>Brief introduction goes here</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-05-12T16:21:59-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Jack’s Blog</title><subtitle>A blog where I post about the projects and ideas I have been working on relating to football analytics.</subtitle><entry><title type="html">Analyzing Second Ball Wins</title><link href="http://localhost:4000/notes/2026/05/06/analyzingSB.html" rel="alternate" type="text/html" title="Analyzing Second Ball Wins" /><published>2026-05-06T00:00:00-04:00</published><updated>2026-05-06T00:00:00-04:00</updated><id>http://localhost:4000/notes/2026/05/06/analyzingSB</id><content type="html" xml:base="http://localhost:4000/notes/2026/05/06/analyzingSB.html"><![CDATA[<p>Brief introduction goes here</p>
 
 <h2 id="background">Background</h2>
 <p>Here we talk about Hang’s work and other industry work</p>
@@ -53,4 +53,41 @@ and analyzing the value of winning second balls and how to do so successfully. T
   <li>On average teams contest approximately 24 second balls per game.</li>
 </ul>
 
-<p>The above list suggest increasing second ball wins could lead to a higher number of shots for a team. Also note, expected goals is a metric that predicts the probability that a shot results in a goal</p>]]></content><author><name></name></author><category term="notes" /><summary type="html"><![CDATA[The evaluation of the in-game actions of players to assess their impact on the outcome of a game is an important sub-section of soccer analytics [2]. Unlike traditional statistics that focus on goals and assists, evaluating other actions that players perform delves deeper into the nuances of player behaviour and decision-making.]]></summary></entry></feed>
+<p>The above list suggest increasing second ball wins could lead to a higher number of shots for a team. Also note, expected goals is a metric that predicts the probability that a shot results in a goal by using various features such as distance to goal, angle to goal, etc.</p>
+
+<h3 id="impact-of-winning-more-second-balls">Impact of Winning More Second Balls</h3>
+
+<p>Now let’s look at the potential impact on a team that wins an additional 5 second balls per match. Based on the dataset:</p>
+
+<ul>
+  <li>Approximately 0.97 additional shots per game, or 36.81 additional shots per season (for a standard 38 game season).</li>
+  <li>Given an average xG per shot of 0.101, this translates to 3.72 expected goals gined per season.</li>
+  <li>Conversely, by preventing the opponent from winning these second balls, a team can reduce shots conceded, preventing 3.72 expected goals against per season.</li>
+  <li>Thus, a team could see a net gain as large as 7.44 GD per season.</li>
+</ul>
+
+<h3 id="translating-second-ball-success-to-league-points">Translating Second Ball Success to League Points</h3>
+
+<p>Finally, by using the regression model, a 7.44 GD corresponds to an additional 4.84 points over a season. It may not seem like much, but minor differences in points can define team’s seasons as success or failure. Below is the league table from the 2015/2016 premier league, where the data is taken from.</p>
+
+<p>LEAGUE TABLE 2015/2016.</p>
+
+<h2 id="other-second-ball-research">Other Second Ball Research</h2>
+
+<p>To date, only one research <a href="https://www.tandfonline.com/doi/full/10.1080/24748668.2025.2462399">paper</a> has directly analyzed second balls, while few online blogs/articles offer exploratory analyses (<a href="https://lchunhang.medium.com/quantifying-second-ball-wins-d626ac56f108">here</a> and <a href="https://www.nytimes.com/athletic/6193329/2025/03/13/measuring-second-balls-premier-league-analysis/">here</a>).</p>
+
+<p><a href="https://www.tandfonline.com/doi/full/10.1080/24748668.2025.2462399">Sunjic et al.</a> analyzed how second balls affect technical performance.</p>
+
+<h2 id="second-ball-chains">Second Ball Chains</h2>
+
+<h2 id="second-ball-possessions">Second Ball Possessions</h2>
+
+<h2 id="mathematical-definition-of-second-balls">Mathematical Definition of Second Balls</h2>
+
+<h2 id="results">Results</h2>
+
+<h3 id="second-ball-rankings">Second Ball Rankings</h3>
+
+<h3 id="second-ball-heatmaps">Second Ball Heatmaps</h3>
+
+<h2 id="conclusions">Conclusions</h2>]]></content><author><name></name></author><category term="notes" /><summary type="html"><![CDATA[The evaluation of the in-game actions of players to assess their impact on the outcome of a game is an important sub-section of soccer analytics [2]. Unlike traditional statistics that focus on goals and assists, evaluating other actions that players perform delves deeper into the nuances of player behaviour and decision-making.]]></summary></entry></feed>

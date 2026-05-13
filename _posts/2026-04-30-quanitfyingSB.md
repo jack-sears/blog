@@ -54,7 +54,46 @@ Now, let's look at the role second balls play in generating goal-scoring opportu
 - The average expected goal (xG) value per shot is 10.1%.
 - On average teams contest approximately 24 second balls per game.
 
-The above list suggest increasing second ball wins could lead to a higher number of shots for a team. Also note, expected goals is a metric that predicts the probability that a shot results in a goal
+The above list suggest increasing second ball wins could lead to a higher number of shots for a team. Also note, expected goals is a metric that predicts the probability that a shot results in a goal by using various features such as distance to goal, angle to goal, etc.
+
+### Impact of Winning More Second Balls
+
+Now let's look at the potential impact on a team that wins an additional 5 second balls per match. Based on the dataset:
+
+- Approximately 0.97 additional shots per game, or 36.81 additional shots per season (for a standard 38 game season).
+- Given an average xG per shot of 0.101, this translates to 3.72 expected goals gined per season.
+- Conversely, by preventing the opponent from winning these second balls, a team can reduce shots conceded, preventing 3.72 expected goals against per season.
+- Thus, a team could see a net gain as large as 7.44 GD per season.
+
+### Translating Second Ball Success to League Points
+
+Finally, by using the regression model, a 7.44 GD corresponds to an additional 4.84 points over a season. It may not seem like much, but minor differences in points can define team's seasons as success or failure. Below is the league table from the 2015/2016 premier league, where the data is taken from.
+
+LEAGUE TABLE 2015/2016.
+
+## Other Second Ball Research
+
+To date, only one research [paper][sunjic] has directly analyzed second balls, while few online blogs/articles offer exploratory analyses ([here][chun-hang] and [here][nyt]).
+
+[Sunjic et al.][sunjic] analyzed how second balls affect technical performance. 
+
+## Second Ball Chains
+
+## Second Ball Possessions
+
+## Mathematical Definition of Second Balls
+
+## Results
+
+### Second Ball Rankings
+
+### Second Ball Heatmaps
+
+## Conclusions
 
 
 [chun-hang]: https://lchunhang.medium.com/quantifying-second-ball-wins-d626ac56f108
+
+[sunjic]: https://www.tandfonline.com/doi/full/10.1080/24748668.2025.2462399
+
+[nyt]: https://www.nytimes.com/athletic/6193329/2025/03/13/measuring-second-balls-premier-league-analysis/

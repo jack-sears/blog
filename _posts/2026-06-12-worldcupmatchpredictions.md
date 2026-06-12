@@ -277,3 +277,7 @@ TBP
 [overunder]: https://www.cbssports.com/betting/news/over-under-betting/
 
 ## Wrap Up
+
+Updated June 12, 2026
+
+I don't have much to say right now other than GO CANADA, and hopefully these predictions can serve me well. I will at the least update this post at the end of every groupstage game, but hopefully more often than that. Anyways I appreciate those who made it this far and best of luck to you and your team you will be cheering on this World Cup! 

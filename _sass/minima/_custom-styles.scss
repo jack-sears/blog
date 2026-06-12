@@ -1,0 +1,30 @@
+// _sass/minima/custom-styles.scss
+
+.definition {
+  background-color: rgba(52, 152, 219, 0.1) !important;
+  border-left: 4px solid rgba(52, 152, 219, 0.8);
+  padding: 12px 16px;
+  margin: 20px 0;
+  border-radius: 0 4px 4px 0;
+}
+
+.theorem {
+  background-color: rgba(46, 204, 113, 0.1) !important;
+  border-left: 4px solid rgba(46, 204, 113, 0.8);
+  padding: 12px 16px;
+  margin: 20px 0;
+  border-radius: 0 4px 4px 0;
+}
+
+.proposition {
+  background-color: rgba(155, 89, 182, 0.1) !important;
+  border-left: 4px solid rgba(155, 89, 182, 0.8);
+  padding: 12px 16px;
+  margin: 20px 0;
+  border-radius: 0 4px 4px 0;
+}
+
+.box-title {
+  font-weight: bold;
+  margin-bottom: 6px;
+}

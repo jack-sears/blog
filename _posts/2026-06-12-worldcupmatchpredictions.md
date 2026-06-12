@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Predicting the World Cup"
-date: 2026-06-11
+date: 2026-06-12
 categories: [notes]
 ---
 

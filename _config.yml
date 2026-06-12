@@ -22,8 +22,8 @@ title: Jack's Blog
 email: jacksears01@gmail.com
 description: A blog where I post about the projects and ideas I have been working on relating to football analytics. 
   
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/blog" # the subpath of your site, e.g. /blog
+url: "https://jack-sears.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: jacksears_
 github_username:  jack-sears
 

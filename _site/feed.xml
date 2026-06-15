@@ -1,174 +1,174 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-06-12T14:13:29-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Jack’s Blog</title><subtitle>A blog where I post about the projects and ideas I have been working on relating to football analytics.</subtitle><entry><title type="html">Predicting the World Cup</title><link href="http://localhost:4000/notes/2026/06/12/worldcupmatchpredictions.html" rel="alternate" type="text/html" title="Predicting the World Cup" /><published>2026-06-12T00:00:00-04:00</published><updated>2026-06-12T00:00:00-04:00</updated><id>http://localhost:4000/notes/2026/06/12/worldcupmatchpredictions</id><content type="html" xml:base="http://localhost:4000/notes/2026/06/12/worldcupmatchpredictions.html"><![CDATA[<script type="text/javascript" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-</script>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2026-06-15T11:27:41-04:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">Jack’s Blog</title><subtitle>A blog where I post about the projects and ideas I have been working on relating to football analytics.</subtitle><entry><title type="html">Predicting the World Cup</title><link href="http://localhost:4000/blog/notes/2026/06/12/worldcupmatchpredictions.html" rel="alternate" type="text/html" title="Predicting the World Cup" /><published>2026-06-12T00:00:00-04:00</published><updated>2026-06-12T00:00:00-04:00</updated><id>http://localhost:4000/blog/notes/2026/06/12/worldcupmatchpredictions</id><content type="html" xml:base="http://localhost:4000/blog/notes/2026/06/12/worldcupmatchpredictions.html">&lt;script type=&quot;text/javascript&quot; async=&quot;&quot; src=&quot;https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js&quot;&gt;
+&lt;/script&gt;
 
-<p>In honour of the start of the 2026 Fifa World Cup and my competitive nature to try and win my office score prediction pool, I decided to quickly throw together a “fun” analysis using some of my math, programming, and most importantly, claude background.</p>
+&lt;p&gt;In honour of the start of the 2026 Fifa World Cup and my competitive nature to try and win my office score prediction pool, I decided to quickly throw together a “fun” analysis using some of my math, programming, and most importantly, claude background.&lt;/p&gt;
 
-<h2 id="scoring">Scoring</h2>
+&lt;h2 id=&quot;scoring&quot;&gt;Scoring&lt;/h2&gt;
 
-<p>The league is pretty straight forward. Players make a score prediction for every game in the world cup and are scored based on the following criteria:</p>
+&lt;p&gt;The league is pretty straight forward. Players make a score prediction for every game in the world cup and are scored based on the following criteria:&lt;/p&gt;
 
-<ol>
-  <li>3 points if you predict the exact score</li>
-  <li>1.5 points if you get the result right and your score is close</li>
-  <li>1 point if your result is right but your score isn’t close</li>
-  <li>0 points if you don’t get the result right</li>
-</ol>
+&lt;ol&gt;
+  &lt;li&gt;3 points if you predict the exact score&lt;/li&gt;
+  &lt;li&gt;1.5 points if you get the result right and your score is close&lt;/li&gt;
+  &lt;li&gt;1 point if your result is right but your score isn’t close&lt;/li&gt;
+  &lt;li&gt;0 points if you don’t get the result right&lt;/li&gt;
+&lt;/ol&gt;
 
-<p>What “your score is close” means is beyond me and I didn’t feel like checking so here we are. Also note that you can make the predictions anytime before the game starts. Anyways shoutout <a href="https://www.superbru.com/">SuperBru</a> for this prediction game and let’s get into it.</p>
+&lt;p&gt;What “your score is close” means is beyond me and I didn’t feel like checking so here we are. Also note that you can make the predictions anytime before the game starts. Anyways shoutout &lt;a href=&quot;https://www.superbru.com/&quot;&gt;SuperBru&lt;/a&gt; for this prediction game and let’s get into it.&lt;/p&gt;
 
-<h2 id="my-approach">My Approach</h2>
+&lt;h2 id=&quot;my-approach&quot;&gt;My Approach&lt;/h2&gt;
 
-<p>I aim to go for a hybrid approach of using data as well as fan intuition to make my predictions. The goal will be to create baseline predictions using available data and then develop a framework that uses added information to hopefully enhance the predictions. To keep things simple I am going to use <a href="https://help.smarkets.com/hc/en-gb/articles/214108649-What-is-1X2-betting">1X2</a> and <a href="https://www.cbssports.com/betting/news/over-under-betting/">over/under</a> betting odds for each game to base the predictions off of. Then I will use some simple historical facts/stats to create a guideline to complete my decision making for the final scores to predict.</p>
+&lt;p&gt;I aim to go for a hybrid approach of using data as well as fan intuition to make my predictions. The goal will be to create baseline predictions using available data and then develop a framework that uses added information to hopefully enhance the predictions. To keep things simple I am going to use &lt;a href=&quot;https://help.smarkets.com/hc/en-gb/articles/214108649-What-is-1X2-betting&quot;&gt;1X2&lt;/a&gt; and &lt;a href=&quot;https://www.cbssports.com/betting/news/over-under-betting/&quot;&gt;over/under&lt;/a&gt; betting odds for each game to base the predictions off of. Then I will use some simple historical facts/stats to create a guideline to complete my decision making for the final scores to predict.&lt;/p&gt;
 
-<h3 id="betting-odds">Betting Odds</h3>
+&lt;h3 id=&quot;betting-odds&quot;&gt;Betting Odds&lt;/h3&gt;
 
-<div style="display:flex; gap:1.5rem; flex-wrap:wrap; margin:1.5rem 0;">
+&lt;div style=&quot;display:flex; gap:1.5rem; flex-wrap:wrap; margin:1.5rem 0;&quot;&gt;
 
-  <div style="flex:1; min-width:220px; border:1px solid #e8e8e8; border-radius:6px; padding:1.2rem 1.4rem;">
-    <p style="margin:0 0 0.5rem; font-size:0.72rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#888;">Term</p>
-    <p style="margin:0 0 0.75rem; font-size:1.3rem; font-weight:600; color:#111;">1X2 Odds</p>
-    <p style="margin:0; font-size:0.92rem; line-height:1.7; color:#444;">
-      A three-way market where <strong>1</strong> = home win, <strong>X</strong> = draw, <strong>2</strong> = away win.
+  &lt;div style=&quot;flex:1; min-width:220px; border:1px solid #e8e8e8; border-radius:6px; padding:1.2rem 1.4rem;&quot;&gt;
+    &lt;p style=&quot;margin:0 0 0.5rem; font-size:0.72rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#888;&quot;&gt;Term&lt;/p&gt;
+    &lt;p style=&quot;margin:0 0 0.75rem; font-size:1.3rem; font-weight:600; color:#111;&quot;&gt;1X2 Odds&lt;/p&gt;
+    &lt;p style=&quot;margin:0; font-size:0.92rem; line-height:1.7; color:#444;&quot;&gt;
+      A three-way market where &lt;strong&gt;1&lt;/strong&gt; = home win, &lt;strong&gt;X&lt;/strong&gt; = draw, &lt;strong&gt;2&lt;/strong&gt; = away win.
       Each outcome is priced in decimal odds, so dividing 1 by the odds to get the implied probability.
       A price of 1.65 implies a 60.6% chance.
-    </p>
-  </div>
+    &lt;/p&gt;
+  &lt;/div&gt;
 
-  <div style="flex:1; min-width:220px; border:1px solid #e8e8e8; border-radius:6px; padding:1.2rem 1.4rem;">
-    <p style="margin:0 0 0.5rem; font-size:0.72rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#888;">Term</p>
-    <p style="margin:0 0 0.75rem; font-size:1.3rem; font-weight:600; color:#111;">Over / Under</p>
-    <p style="margin:0; font-size:0.92rem; line-height:1.7; color:#444;">
-      A market on total goals scored by both teams. The most common line is <strong>2.5</strong> —
+  &lt;div style=&quot;flex:1; min-width:220px; border:1px solid #e8e8e8; border-radius:6px; padding:1.2rem 1.4rem;&quot;&gt;
+    &lt;p style=&quot;margin:0 0 0.5rem; font-size:0.72rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#888;&quot;&gt;Term&lt;/p&gt;
+    &lt;p style=&quot;margin:0 0 0.75rem; font-size:1.3rem; font-weight:600; color:#111;&quot;&gt;Over / Under&lt;/p&gt;
+    &lt;p style=&quot;margin:0; font-size:0.92rem; line-height:1.7; color:#444;&quot;&gt;
+      A market on total goals scored by both teams. The most common line is &lt;strong&gt;2.5&lt;/strong&gt; —
       you bet on whether the game finishes with 3 or more goals (over) or 2 or fewer (under). Same idea as 1X2 for finding implied probability.
-    </p>
-  </div>
+    &lt;/p&gt;
+  &lt;/div&gt;
 
-</div>
+&lt;/div&gt;
 
-<p>I found <a href="https://the-odds-api.com/">The Odds Api</a>, which is a super cool api that gives you access to upcoming and historical sports betting odds. It has a free subscription tier where you get 500 free credits and get decent access to their data. Unfortunately, only paid members can get historical odds so I was not able to check that out, but otherwise it was easy to use and had everything I needed. Below is a simple python script showing how to extract 1X2 and over/under odds from the api. You can also check out the website above which has detailed documentation about using the API.</p>
+&lt;p&gt;I found &lt;a href=&quot;https://the-odds-api.com/&quot;&gt;The Odds Api&lt;/a&gt;, which is a super cool api that gives you access to upcoming and historical sports betting odds. It has a free subscription tier where you get 500 free credits and get decent access to their data. Unfortunately, only paid members can get historical odds so I was not able to check that out, but otherwise it was easy to use and had everything I needed. Below is a simple python script showing how to extract 1X2 and over/under odds from the api. You can also check out the website above which has detailed documentation about using the API.&lt;/p&gt;
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">requests</span>
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;requests&lt;/span&gt;
 
-<span class="c1">#get you key from their website when signing up and reference documenation for sport
-</span><span class="n">API_KEY</span> <span class="o">=</span> <span class="sh">"</span><span class="s">your_key_here</span><span class="sh">"</span>
-<span class="n">SPORT</span>   <span class="o">=</span> <span class="sh">"</span><span class="s">soccer__fifa_world_cup</span><span class="sh">"</span>  
+&lt;span class=&quot;c1&quot;&gt;#get you key from their website when signing up and reference documenation for sport
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;API_KEY&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;your_key_here&quot;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;SPORT&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;soccer__fifa_world_cup&quot;&lt;/span&gt;  
 
-<span class="c1">#request the correct API endpoint for odds you want
-</span><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span>
-    <span class="sh">"</span><span class="s">https://api.the-odds-api.com/v4/sports/{}/odds</span><span class="sh">"</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">SPORT</span><span class="p">),</span>
-    <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-        <span class="sh">"</span><span class="s">apiKey</span><span class="sh">"</span><span class="p">:</span>      <span class="n">API_KEY</span><span class="p">,</span>
-        <span class="sh">"</span><span class="s">regions</span><span class="sh">"</span><span class="p">:</span>     <span class="sh">"</span><span class="s">uk</span><span class="sh">"</span><span class="p">,</span>
-        <span class="sh">"</span><span class="s">markets</span><span class="sh">"</span><span class="p">:</span>     <span class="sh">"</span><span class="s">h2h,totals</span><span class="sh">"</span><span class="p">,</span>
-        <span class="sh">"</span><span class="s">oddsFormat</span><span class="sh">"</span><span class="p">:</span>  <span class="sh">"</span><span class="s">decimal</span><span class="sh">"</span><span class="p">,</span>
-    <span class="p">}</span>
-<span class="p">)</span>
+&lt;span class=&quot;c1&quot;&gt;#request the correct API endpoint for odds you want
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;requests&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;https://api.the-odds-api.com/v4/sports/{}/odds&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SPORT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;apiKey&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;      &lt;span class=&quot;n&quot;&gt;API_KEY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;regions&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;     &lt;span class=&quot;s&quot;&gt;&quot;uk&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;markets&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;     &lt;span class=&quot;s&quot;&gt;&quot;h2h,totals&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;oddsFormat&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;  &lt;span class=&quot;s&quot;&gt;&quot;decimal&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-<span class="c1"># to check how many credits you have left (optional)
-</span><span class="n">response</span><span class="p">.</span><span class="nf">raise_for_status</span><span class="p">()</span>
-    <span class="n">remaining</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">headers</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">x-requests-remaining</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">?</span><span class="sh">"</span><span class="p">)</span>
-    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  [API] Requests remaining this month: </span><span class="si">{</span><span class="n">remaining</span><span class="si">}</span><span class="se">\n</span><span class="sh">"</span><span class="p">)</span> 
+&lt;span class=&quot;c1&quot;&gt;# to check how many credits you have left (optional)
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;raise_for_status&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;remaining&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;x-requests-remaining&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;?&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sa&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;  [API] Requests remaining this month: &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remaining&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
 
-<span class="c1"># get each home and away odds from the first book maker
-</span><span class="k">for</span> <span class="k">match</span> <span class="ow">in</span> <span class="n">response</span><span class="p">.</span><span class="nf">json</span><span class="p">():</span>
-    <span class="n">home</span> <span class="o">=</span> <span class="k">match</span><span class="p">[</span><span class="sh">"</span><span class="s">home_team</span><span class="sh">"</span><span class="p">]</span>
-    <span class="n">away</span> <span class="o">=</span> <span class="k">match</span><span class="p">[</span><span class="sh">"</span><span class="s">away_team</span><span class="sh">"</span><span class="p">]</span>
+&lt;span class=&quot;c1&quot;&gt;# get each home and away odds from the first book maker
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;match&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;home&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;home_team&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;away&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;away_team&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
 
-    <span class="k">for</span> <span class="n">bookmaker</span> <span class="ow">in</span> <span class="k">match</span><span class="p">[</span><span class="sh">"</span><span class="s">bookmakers</span><span class="sh">"</span><span class="p">]:</span>
-        <span class="k">for</span> <span class="n">market</span> <span class="ow">in</span> <span class="n">bookmaker</span><span class="p">[</span><span class="sh">"</span><span class="s">markets</span><span class="sh">"</span><span class="p">]:</span>
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bookmaker&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;bookmakers&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;market&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bookmaker&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;markets&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt;
 
-            <span class="k">if</span> <span class="n">market</span><span class="p">[</span><span class="sh">"</span><span class="s">key</span><span class="sh">"</span><span class="p">]</span> <span class="o">==</span> <span class="sh">"</span><span class="s">h2h</span><span class="sh">"</span><span class="p">:</span>
-                <span class="n">odds</span> <span class="o">=</span> <span class="p">{</span><span class="n">o</span><span class="p">[</span><span class="sh">"</span><span class="s">name</span><span class="sh">"</span><span class="p">]:</span> <span class="n">o</span><span class="p">[</span><span class="sh">"</span><span class="s">price</span><span class="sh">"</span><span class="p">]</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">market</span><span class="p">[</span><span class="sh">"</span><span class="s">outcomes</span><span class="sh">"</span><span class="p">]}</span>
-                <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">home</span><span class="si">}</span><span class="s"> vs </span><span class="si">{</span><span class="n">away</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
-                <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  H: </span><span class="si">{</span><span class="n">odds</span><span class="p">[</span><span class="n">home</span><span class="p">]</span><span class="si">}</span><span class="s">  D: </span><span class="si">{</span><span class="n">odds</span><span class="p">[</span><span class="sh">'</span><span class="s">Draw</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">  A: </span><span class="si">{</span><span class="n">odds</span><span class="p">[</span><span class="n">away</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;market&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;key&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;h2h&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;odds&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;price&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;o&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;market&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;outcomes&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]}&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sa&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;home&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; vs &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;away&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sa&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;  H: &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;odds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;home&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;  D: &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;odds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;Draw&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;  A: &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;odds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;away&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-            <span class="k">if</span> <span class="n">market</span><span class="p">[</span><span class="sh">"</span><span class="s">key</span><span class="sh">"</span><span class="p">]</span> <span class="o">==</span> <span class="sh">"</span><span class="s">totals</span><span class="sh">"</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">market</span><span class="p">[</span><span class="sh">"</span><span class="s">outcomes</span><span class="sh">"</span><span class="p">]:</span>
-                    <span class="k">if</span> <span class="n">o</span><span class="p">[</span><span class="sh">"</span><span class="s">name</span><span class="sh">"</span><span class="p">]</span> <span class="o">==</span> <span class="sh">"</span><span class="s">Over</span><span class="sh">"</span><span class="p">:</span>
-                        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">  O/U </span><span class="si">{</span><span class="n">o</span><span class="p">[</span><span class="sh">'</span><span class="s">point</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">o</span><span class="p">[</span><span class="sh">'</span><span class="s">price</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
-        <span class="k">break</span>  <span class="c1"># first bookmaker only
-</span></code></pre></div></div>
-<p>My idea was that if I had the bookies odds for every team’s winning chances, as well as the line of over/under 2.5 goals in a game, then I figured I could do some sort of reverse engineering to predict each team’s winning probability and number of goals expected to score. A main theme was trying to keep the model as simple, but meaningful as possible.</p>
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;market&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;key&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;totals&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;o&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;market&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;outcomes&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt;
+                    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Over&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sa&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;  O/U &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;point&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;: &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;price&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# first bookmaker only
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;My idea was that if I had the bookies odds for every team’s winning chances, as well as the line of over/under 2.5 goals in a game, then I figured I could do some sort of reverse engineering to predict each team’s winning probability and number of goals expected to score. A main theme was trying to keep the model as simple, but meaningful as possible.&lt;/p&gt;
 
-<h2 id="math-behind-the-model">Math Behind the Model</h2>
+&lt;h2 id=&quot;math-behind-the-model&quot;&gt;Math Behind the Model&lt;/h2&gt;
 
-<p>The model uses the Poisson distribution to estimate underlying win and goal probabilites from the betting odds. The poisson distribution is a discrete probability distribution, meaning that it gives the likelihood of a countable outcome occurring <a href="https://www.scribbr.com/statistics/poisson-distribution/">(definition here)</a>. The outcome in our case is the number of goals scored in a given fixture and this value is represented by λ. The poisson distribution can be used if the following two conditions are met:</p>
+&lt;p&gt;The model uses the Poisson distribution to estimate underlying win and goal probabilites from the betting odds. The poisson distribution is a discrete probability distribution, meaning that it gives the likelihood of a countable outcome occurring &lt;a href=&quot;https://www.scribbr.com/statistics/poisson-distribution/&quot;&gt;(definition here)&lt;/a&gt;. The outcome in our case is the number of goals scored in a given fixture and this value is represented by λ. The poisson distribution can be used if the following two conditions are met:&lt;/p&gt;
 
-<ol>
-  <li>Individual events happen at random and are independent.</li>
-  <li>We know the mean (average) number of events occurring within a given time interval.</li>
-</ol>
+&lt;ol&gt;
+  &lt;li&gt;Individual events happen at random and are independent.&lt;/li&gt;
+  &lt;li&gt;We know the mean (average) number of events occurring within a given time interval.&lt;/li&gt;
+&lt;/ol&gt;
 
-<p>Number 1 is an assumption of our model. What it means is that to use the poisson distribution, goals in a soccer game must happen randomly and the impact of a goal must not affect the likelihood of who scores the next goal. In reality this is not necessarily the case as a team that concedes might push extra hard for an equalizer or blow up and concede more, however scoring in soccer is random enough to justify making this assumption.</p>
+&lt;p&gt;Number 1 is an assumption of our model. What it means is that to use the poisson distribution, goals in a soccer game must happen randomly and the impact of a goal must not affect the likelihood of who scores the next goal. In reality this is not necessarily the case as a team that concedes might push extra hard for an equalizer or blow up and concede more, however scoring in soccer is random enough to justify making this assumption.&lt;/p&gt;
 
-<p>Number 2 says we must know the average number of goals occurring in a game and although we do not know this, by using the over/under 2.5 goals odds, we can solve and estimate it.</p>
+&lt;p&gt;Number 2 says we must know the average number of goals occurring in a game and although we do not know this, by using the over/under 2.5 goals odds, we can solve and estimate it.&lt;/p&gt;
 
-<hr />
+&lt;hr /&gt;
 
-<h3 id="step-1-vig-removal">Step 1: Vig Removal</h3>
+&lt;h3 id=&quot;step-1-vig-removal&quot;&gt;Step 1: Vig Removal&lt;/h3&gt;
 
-<p>Just before we dive into estimating the number of goals per game, we are going to address something called <a href="https://www.legalsportsreport.com/how-to-bet/vigorish/">vigorish</a> (or vig for short). Vig is a commission added to the betting odds to ensure the bookmakers can take a profit. For a three-way market (home/draw/away) the implied probabilities, calculated as <code class="language-plaintext highlighter-rouge">1 / decimal_odds</code>, sum to more than 1. That excess is the bookmaker’s cut. Before using the odds for anything we strip it out by normalising:</p>
+&lt;p&gt;Just before we dive into estimating the number of goals per game, we are going to address something called &lt;a href=&quot;https://www.legalsportsreport.com/how-to-bet/vigorish/&quot;&gt;vigorish&lt;/a&gt; (or vig for short). Vig is a commission added to the betting odds to ensure the bookmakers can take a profit. For a three-way market (home/draw/away) the implied probabilities, calculated as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1 / decimal_odds&lt;/code&gt;, sum to more than 1. That excess is the bookmaker’s cut. Before using the odds for anything we strip it out by normalising:&lt;/p&gt;
 
 \[\hat{p}_i = \frac{p_i}{\sum_j p_j}\]
 
-<p>For example, odds of 1.65 / 3.80 / 5.50 produce raw probabilities that sum to 1.051. After normalisation: home 57.7%, draw 25.0%, away 17.3%.</p>
+&lt;p&gt;where &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;p_i = 1 / decimal_odds_i&lt;/code&gt; is the raw implied probability for outcome &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;i&lt;/code&gt;, and the sum in the denominator runs over all outcomes &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;j&lt;/code&gt; in the market. For example, odds of 1.65 / 3.80 / 5.50 produce raw probabilities that sum to 1.051. After normalisation: home 57.7%, draw 25.0%, away 17.3%.&lt;/p&gt;
 
-<hr />
+&lt;hr /&gt;
 
-<h3 id="step-2-solving-for-expected-goals-λ">Step 2: Solving for Expected Goals (λ)</h3>
+&lt;h3 id=&quot;step-2-solving-for-expected-goals-λ&quot;&gt;Step 2: Solving for Expected Goals (λ)&lt;/h3&gt;
 
-<p>We model total goals as a Poisson random variable with unknown mean λ. The Poisson PMF is:</p>
+&lt;p&gt;We model total goals as a Poisson random variable with unknown mean λ (the average number of goals we expect in the match). The Poisson PMF is:&lt;/p&gt;
 
 \[P(X = k) = \frac{\lambda^k e^{-\lambda}}{k!}\]
 
-<p>The over/under 2.5 market gives us P(goals ≥ 3) directly. We need the λ that satisfies:</p>
+&lt;p&gt;where X is the total number of goals scored, k is a specific goal count, and e is Euler’s number. The over/under 2.5 market gives us P(goals ≥ 3) directly. We need the λ that satisfies:&lt;/p&gt;
 
 \[P(X \geq 3 \mid \lambda) = 1 - \sum_{k=0}^{2} \frac{\lambda^k e^{-\lambda}}{k!} = p_{\text{over}}\]
 
-<p>There is no closed-form solution, so we define:</p>
+&lt;p&gt;where &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;p_over&lt;/code&gt; is the normalised implied probability from the over 2.5 odds. There is no closed-form solution, so we define:&lt;/p&gt;
 
 \[f(\lambda) = P(X \geq 3 \mid \lambda) - p_{\text{over}} = 0\]
 
-<p>and solve numerically using <a href="https://mathworld.wolfram.com/BrentsMethod.html">Brent’s method</a>. There is no possible way to rearange for λ, so we have to use a numerical method like Brent’s. A market implying 55% chance of over 2.5 goals solves to λ ≈ 2.88.</p>
+&lt;p&gt;and solve numerically using &lt;a href=&quot;https://mathworld.wolfram.com/BrentsMethod.html&quot;&gt;Brent’s method&lt;/a&gt;. There is no possible way to rearrange for λ, so we have to use a numerical method like Brent’s. A market implying 55% chance of over 2.5 goals solves to λ ≈ 2.88.&lt;/p&gt;
 
-<hr />
+&lt;hr /&gt;
 
-<h3 id="step-3-splitting-λ-between-teams">Step 3: Splitting λ Between Teams</h3>
+&lt;h3 id=&quot;step-3-splitting-λ-between-teams&quot;&gt;Step 3: Splitting λ Between Teams&lt;/h3&gt;
 
-<p>We now have total expected goals but need to assign them to each team. We use the 1X2 win probabilities as a proxy for relative attacking strength, the stronger team gets a proportionally larger share:</p>
+&lt;p&gt;We now have total expected goals but need to assign them to each team. We use the 1X2 win probabilities as a proxy for relative team strength, the stronger team gets a proportionally larger share:&lt;/p&gt;
 
 \[s = \frac{\hat{p}_{\text{home}}}{\hat{p}_{\text{home}} + \hat{p}_{\text{away}}}\]
 
 \[\lambda_h = \lambda \cdot s \qquad \lambda_a = \lambda \cdot (1 - s)\]
 
-<p>For our example: s = 0.577 / (0.577 + 0.173) = 0.769, giving λ_h = 2.21 and λ_a = 0.67.</p>
+&lt;p&gt;where s is the home team’s share of the two-outcome (home/away) probability, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;p_home&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;p_away&lt;/code&gt; are the normalised win probabilities from Step 1, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lambda_h&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lambda_a&lt;/code&gt; are the resulting expected goals for the home and away team respectively. For our example: s = 0.577 / (0.577 + 0.173) = 0.769, giving λ_h = 2.21 and λ_a = 0.67.&lt;/p&gt;
 
-<hr />
+&lt;hr /&gt;
 
-<h3 id="known-limitations">Known Limitations</h3>
+&lt;h3 id=&quot;known-limitations&quot;&gt;Known Limitations&lt;/h3&gt;
 
-<p><strong>Draw probability is discarded in the split.</strong> The proportional split only uses win probabilities. A 25% draw probability implies the two teams’ lambdas should be close together; 10% implies they should be far apart. This information is currently unused.</p>
+&lt;p&gt;&lt;strong&gt;Draw probability is discarded in the split.&lt;/strong&gt; The proportional split only uses win probabilities. A 25% draw probability implies the two teams’ lambdas should be close together; 10% implies they should be far apart. This information is currently unused.&lt;/p&gt;
 
-<p><strong>No team news or lineups.</strong> The model doesn’t know if a key player is injured or if a team is already qualified or knocked out. The market prices result probabilities but not always the scoreline distribution cleanly.</p>
+&lt;p&gt;&lt;strong&gt;No team news or lineups.&lt;/strong&gt; The model doesn’t know if a key player is injured or if a team is already qualified or knocked out. The market prices result probabilities but not always the scoreline distribution cleanly.&lt;/p&gt;
 
-<h2 id="making-the-predictions">Making the predictions</h2>
+&lt;h2 id=&quot;making-the-predictions&quot;&gt;Making the predictions&lt;/h2&gt;
 
-<p>The following structure will be used to make predictions:</p>
-<ol>
-  <li>For the first round use models predictions as is regardless of team news or injury.</li>
-  <li>At the conclusion of round 1, look over injuries/team news to see if any outliers can be identified. I.e predictions under or over predicting goals.</li>
-  <li>Get updated betting odds from API before the start of round 2.</li>
-  <li>Use model predictions again, but adjust by a goal up or down depending on whether teams are missing key players.</li>
-  <li>Same idea for final round, depending on how predictions are going two options. If good then continue with the current method, then take a look at most common score lines so far in tournament and use those for each prediction in hopes to make up some points be hitting correct scores.</li>
-</ol>
+&lt;p&gt;The following structure will be used to make predictions:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;For the first round use models predictions as is regardless of team news or injury.&lt;/li&gt;
+  &lt;li&gt;At the conclusion of round 1, look over injuries/team news to see if any outliers can be identified. I.e predictions under or over predicting goals.&lt;/li&gt;
+  &lt;li&gt;Get updated betting odds from API before the start of round 2.&lt;/li&gt;
+  &lt;li&gt;Use model predictions again, but adjust by a goal up or down depending on whether teams are missing key players.&lt;/li&gt;
+  &lt;li&gt;Same idea for final round, depending on how predictions are going two options. If good then continue with the current method, then take a look at most common score lines so far in tournament and use those for each prediction in hopes to make up some points by hitting correct scores.&lt;/li&gt;
+&lt;/ol&gt;
 
-<p>Below are the following predictions for each group stage game and will be updated and dated as they are played.</p>
+&lt;p&gt;Below are the following predictions for each group stage game and will be updated and dated as they are played.&lt;/p&gt;
 
-<h3 id="group-stage-1">Group Stage 1</h3>
+&lt;h3 id=&quot;group-stage-1&quot;&gt;Group Stage 1&lt;/h3&gt;
 
-<p>Last updated: June 12, 2026</p>
+&lt;p&gt;Last updated: June 12, 2026&lt;/p&gt;
 
-<style>
+&lt;style&gt;
 .wc-table { width: 100%; border-collapse: collapse; font-size: 14px; }
 .wc-table th { text-align: left; font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #888; padding: 6px 10px; border-bottom: 1px solid #e8e8e8; }
 .wc-table td { padding: 8px 10px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
@@ -183,88 +183,352 @@
 .wc-hit.result { background: #fdf3e3; color: #a06010; }
 .wc-hit.wrong  { background: #fdf0f0; color: #a03030; }
 .wc-hit.tbd    { color: #ccc; }
-</style>
+&lt;/style&gt;
 
-<table class="wc-table">
-  <thead>
-    <tr>
-      <th>Date</th>
-      <th>Match</th>
-      <th>Predicted</th>
-      <th>xG</th>
-      <th>Actual</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody id="wc-tbody"></tbody>
-</table>
+&lt;table class=&quot;wc-table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Date&lt;/th&gt;
+      &lt;th&gt;Match&lt;/th&gt;
+      &lt;th&gt;Predicted&lt;/th&gt;
+      &lt;th&gt;xG&lt;/th&gt;
+      &lt;th&gt;Actual&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody id=&quot;wc-tbody&quot;&gt;&lt;/tbody&gt;
+&lt;/table&gt;
 
-<script>
+&lt;script&gt;
 (function() {
   const m = [
-    ["Jun 11","Mexico","South Africa",2.08,0.34,"2-0"],
-    ["Jun 12","South Korea","Czech Republic",1.25,1.14,"2-1"],
-    ["Jun 12","Canada","Bosnia & Herz.",1.74,0.69,""],
-    ["Jun 13","USA","Paraguay",1.62,0.75,""],
-    ["Jun 13","Qatar","Switzerland",0.24,2.74,""],
-    ["Jun 13","Brazil","Morocco",1.95,0.59,""],
-    ["Jun 14","Haiti","Scotland",0.56,2.16,""],
-    ["Jun 14","Australia","Turkey",0.64,1.93,""],
-    ["Jun 14","Germany","Curaçao",4.19,0.11,""],
-    ["Jun 14","Netherlands","Japan",1.70,0.94,""],
-    ["Jun 14","Ivory Coast","Ecuador",0.83,1.22,""],
-    ["Jun 15","Sweden","Tunisia",1.63,0.73,""],
-    ["Jun 15","Spain","Cape Verde",3.46,0.15,""],
-    ["Jun 15","Belgium","Egypt",2.00,0.61,""],
-    ["Jun 15","Saudi Arabia","Uruguay",0.42,2.20,""],
-    ["Jun 16","Iran","New Zealand",1.68,0.67,""],
-    ["Jun 16","France","Senegal",2.21,0.45,""],
-    ["Jun 16","Iraq","Norway",0.25,2.85,""],
-    ["Jun 17","Argentina","Algeria",2.31,0.36,""],
-    ["Jun 17","Austria","Jordan",2.66,0.38,""],
-    ["Jun 17","Portugal","DR Congo",2.61,0.31,""],
-    ["Jun 17","England","Croatia",1.86,0.66,""],
-    ["Jun 17","Ghana","Panama",1.48,0.90,""],
-    ["Jun 18","Uzbekistan","Colombia",0.36,2.27,""],
+    [&quot;Jun 11&quot;,&quot;Mexico&quot;,&quot;South Africa&quot;,2.08,0.34,&quot;2-0&quot;],
+    [&quot;Jun 12&quot;,&quot;South Korea&quot;,&quot;Czech Republic&quot;,1.25,1.14,&quot;2-1&quot;],
+    [&quot;Jun 12&quot;,&quot;Canada&quot;,&quot;Bosnia &amp; Herz.&quot;,1.74,0.69,&quot;1-1&quot;],
+    [&quot;Jun 13&quot;,&quot;USA&quot;,&quot;Paraguay&quot;,1.62,0.75,&quot;4-1&quot;],
+    [&quot;Jun 13&quot;,&quot;Qatar&quot;,&quot;Switzerland&quot;,0.24,2.74,&quot;1-1&quot;],
+    [&quot;Jun 13&quot;,&quot;Brazil&quot;,&quot;Morocco&quot;,1.95,0.59,&quot;1-1&quot;],
+    [&quot;Jun 14&quot;,&quot;Haiti&quot;,&quot;Scotland&quot;,0.56,2.16,&quot;0-1&quot;],
+    [&quot;Jun 14&quot;,&quot;Australia&quot;,&quot;Turkey&quot;,0.64,1.93,&quot;2-0&quot;],
+    [&quot;Jun 14&quot;,&quot;Germany&quot;,&quot;Curaçao&quot;,4.19,0.11,&quot;7-1&quot;],
+    [&quot;Jun 14&quot;,&quot;Netherlands&quot;,&quot;Japan&quot;,1.70,0.94,&quot;2-2&quot;],
+    [&quot;Jun 14&quot;,&quot;Ivory Coast&quot;,&quot;Ecuador&quot;,0.83,1.22,&quot;1-0&quot;],
+    [&quot;Jun 15&quot;,&quot;Sweden&quot;,&quot;Tunisia&quot;,1.63,0.73,&quot;5-1&quot;],
+    [&quot;Jun 15&quot;,&quot;Spain&quot;,&quot;Cape Verde&quot;,3.46,0.15,&quot;&quot;],
+    [&quot;Jun 15&quot;,&quot;Belgium&quot;,&quot;Egypt&quot;,2.00,0.61,&quot;&quot;],
+    [&quot;Jun 15&quot;,&quot;Saudi Arabia&quot;,&quot;Uruguay&quot;,0.42,2.20,&quot;&quot;],
+    [&quot;Jun 16&quot;,&quot;Iran&quot;,&quot;New Zealand&quot;,1.68,0.67,&quot;&quot;],
+    [&quot;Jun 16&quot;,&quot;France&quot;,&quot;Senegal&quot;,2.21,0.45,&quot;&quot;],
+    [&quot;Jun 16&quot;,&quot;Iraq&quot;,&quot;Norway&quot;,0.25,2.85,&quot;&quot;],
+    [&quot;Jun 17&quot;,&quot;Argentina&quot;,&quot;Algeria&quot;,2.31,0.36,&quot;&quot;],
+    [&quot;Jun 17&quot;,&quot;Austria&quot;,&quot;Jordan&quot;,2.66,0.38,&quot;&quot;],
+    [&quot;Jun 17&quot;,&quot;Portugal&quot;,&quot;DR Congo&quot;,2.61,0.31,&quot;&quot;],
+    [&quot;Jun 17&quot;,&quot;England&quot;,&quot;Croatia&quot;,1.86,0.66,&quot;&quot;],
+    [&quot;Jun 17&quot;,&quot;Ghana&quot;,&quot;Panama&quot;,1.48,0.90,&quot;&quot;],
+    [&quot;Jun 18&quot;,&quot;Uzbekistan&quot;,&quot;Colombia&quot;,0.36,2.27,&quot;&quot;],
   ];
 
   function outcome(pred, actual) {
-    if (!actual) return '<span class="wc-hit tbd">–</span>';
-    if (pred === actual) return '<span class="wc-hit exact">exact</span>';
-    const pr = pred.split('-'), ar = actual.split('-');
+    if (!actual) return &apos;&lt;span class=&quot;wc-hit tbd&quot;&gt;–&lt;/span&gt;&apos;;
+    if (pred === actual) return &apos;&lt;span class=&quot;wc-hit exact&quot;&gt;exact&lt;/span&gt;&apos;;
+    const pr = pred.split(&apos;-&apos;), ar = actual.split(&apos;-&apos;);
     const ps = Math.sign(pr[0]-pr[1]), as = Math.sign(ar[0]-ar[1]);
     return ps === as
-      ? '<span class="wc-hit result">result</span>'
-      : '<span class="wc-hit wrong">wrong</span>';
+      ? &apos;&lt;span class=&quot;wc-hit result&quot;&gt;result&lt;/span&gt;&apos;
+      : &apos;&lt;span class=&quot;wc-hit wrong&quot;&gt;wrong&lt;/span&gt;&apos;;
   }
 
-  const tb = document.getElementById('wc-tbody');
+  const tb = document.getElementById(&apos;wc-tbody&apos;);
   m.forEach(function(r) {
     const lh=r[3], la=r[4], actual=r[5];
-    const pred = Math.round(lh)+'-'+Math.round(la);
+    const pred = Math.round(lh)+&apos;-&apos;+Math.round(la);
     tb.innerHTML +=
-      '<tr>' +
-      '<td class="wc-date">'+r[0]+'</td>' +
-      '<td>'+r[1]+' <span style="color:#ccc">vs</span> '+r[2]+'</td>' +
-      '<td class="wc-score">'+pred+'</td>' +
-      '<td class="wc-xg">'+lh.toFixed(2)+' / '+la.toFixed(2)+'</td>' +
-      '<td class="wc-actual">'+(actual||'–')+'</td>' +
-      '<td>'+outcome(pred, actual)+'</td>' +
-      '</tr>';
+      &apos;&lt;tr&gt;&apos; +
+      &apos;&lt;td class=&quot;wc-date&quot;&gt;&apos;+r[0]+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;td&gt;&apos;+r[1]+&apos; &lt;span style=&quot;color:#ccc&quot;&gt;vs&lt;/span&gt; &apos;+r[2]+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;td class=&quot;wc-score&quot;&gt;&apos;+pred+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;td class=&quot;wc-xg&quot;&gt;&apos;+lh.toFixed(2)+&apos; / &apos;+la.toFixed(2)+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;td class=&quot;wc-actual&quot;&gt;&apos;+(actual||&apos;–&apos;)+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;td&gt;&apos;+outcome(pred, actual)+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;/tr&gt;&apos;;
   });
 })();
-</script>
+&lt;/script&gt;
 
-<h3 id="group-stage-2">Group Stage 2</h3>
+&lt;h3 id=&quot;group-stage-2&quot;&gt;Group Stage 2&lt;/h3&gt;
 
-<p>TBP (To be predicted)</p>
+&lt;p&gt;TBP (To be predicted)&lt;/p&gt;
 
-<h3 id="group-stage-3">Group Stage 3</h3>
+&lt;h3 id=&quot;group-stage-3&quot;&gt;Group Stage 3&lt;/h3&gt;
 
-<p>TBP</p>
+&lt;p&gt;TBP&lt;/p&gt;
 
-<h2 id="wrap-up">Wrap Up</h2>
+&lt;h2 id=&quot;wrap-up&quot;&gt;Wrap Up&lt;/h2&gt;
 
-<p>Updated June 12, 2026</p>
+&lt;p&gt;Updated June 12, 2026&lt;/p&gt;
 
-<p>I don’t have much to say right now other than GO CANADA, and hopefully these predictions can serve me well. I will at the least update this post at the end of every groupstage game, but hopefully more often than that. Anyways I appreciate those who made it this far and best of luck to you and your team you will be cheering on this World Cup!</p>]]></content><author><name></name></author><category term="notes" /><summary type="html"><![CDATA[]]></summary></entry></feed>
+&lt;p&gt;I don’t have much to say right now other than GO CANADA, and hopefully these predictions can serve me well. I will at the least update this post at the end of every groupstage round, but hopefully more often than that. Anyways I appreciate those who made it this far and best of luck to you and your team you will be cheering on this World Cup!&lt;/p&gt;</content><author><name></name></author><category term="notes" /><summary type="html"></summary></entry><entry><title type="html">Welcome to Jekyll!</title><link href="http://localhost:4000/blog/jekyll/update/2026/05/06/example.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2026-05-06T12:42:24-04:00</published><updated>2026-05-06T12:42:24-04:00</updated><id>http://localhost:4000/blog/jekyll/update/2026/05/06/example</id><content type="html" xml:base="http://localhost:4000/blog/jekyll/update/2026/05/06/example.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+
+&lt;p&gt;Jekyll requires blog post files to be named according to the following format:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YEAR-MONTH-DAY-title.MARKUP&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Where &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YEAR&lt;/code&gt; is a four-digit number, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MONTH&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DAY&lt;/code&gt; are both two-digit numbers, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MARKUP&lt;/code&gt; is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+
+&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;Tom&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &apos;Hi, Tom&apos; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.</summary></entry><entry><title type="html">Analyzing Second Ball Wins</title><link href="http://localhost:4000/blog/notes/2026/05/06/analyzingSB.html" rel="alternate" type="text/html" title="Analyzing Second Ball Wins" /><published>2026-05-06T00:00:00-04:00</published><updated>2026-05-06T00:00:00-04:00</updated><id>http://localhost:4000/blog/notes/2026/05/06/analyzingSB</id><content type="html" xml:base="http://localhost:4000/blog/notes/2026/05/06/analyzingSB.html">&lt;p&gt;Brief introduction goes here&lt;/p&gt;
+
+&lt;h2 id=&quot;background&quot;&gt;Background&lt;/h2&gt;
+&lt;p&gt;Here we talk about Hang’s work and other industry work&lt;/p&gt;
+
+&lt;h2 id=&quot;updated-definitions-and-methodology&quot;&gt;Updated Definitions and Methodology&lt;/h2&gt;</content><author><name></name></author><category term="notes" /><summary type="html">Brief introduction goes here</summary></entry><entry><title type="html">Quantifying Second Ball Wins</title><link href="http://localhost:4000/blog/notes/2026/04/30/quanitfyingSB.html" rel="alternate" type="text/html" title="Quantifying Second Ball Wins" /><published>2026-04-30T00:00:00-04:00</published><updated>2026-04-30T00:00:00-04:00</updated><id>http://localhost:4000/blog/notes/2026/04/30/quanitfyingSB</id><content type="html" xml:base="http://localhost:4000/blog/notes/2026/04/30/quanitfyingSB.html">&lt;script type=&quot;text/javascript&quot; async=&quot;&quot; src=&quot;https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js&quot;&gt;
+&lt;/script&gt;
+
+&lt;p&gt;The evaluation of how in-game actions of soccer players affect the outcome
+of a game is an important part of soccer analytics [2]. Unlike traditional
+statistics that focus on goals and assists, evaluating other actions that players perform
+looks deeper into the nuances of player behaviour and decision-making.&lt;/p&gt;
+
+&lt;p&gt;An action that often goes unnoticed is the ability to win second balls [3]. A second
+ball is a possession gain following an intervention from an attempted long pass. Simply
+put, a second ball occurs after the ball is kicked long and neither team clearly controls
+it. Instead, the ball bounces, gets deflected, or is contested, and then players rush
+to try and take control of the ball. A quote from Pep Guardiola,
+one of the most successful soccer managers of all time, states the importance of winning second
+balls, ”The main thing in English football is to control the second ball. Without that,
+you cannot survive.” [4].&lt;/p&gt;
+
+&lt;p&gt;Despite the importance of winning second balls, there is a lack of research quantifying
+or analyzing the value of winning second balls and how to do so successfully. Therefore this post aims to extend the research done and pose future direction for further work/extensions.&lt;/p&gt;
+
+&lt;h2 id=&quot;definition-and-example&quot;&gt;Definition and Example&lt;/h2&gt;
+
+&lt;p&gt;Let’s begin by establishing a working definition for second balls. The following definitions have been adapted from a &lt;a href=&quot;https://lchunhang.medium.com/quantifying-second-ball-wins-d626ac56f108&quot;&gt;blog&lt;/a&gt; post by Chun Hang, but remain largely unchanged since I think they are a great definition.&lt;/p&gt;
+
+&lt;div class=&quot;definition&quot;&gt;
+  &lt;div class=&quot;box-title&quot;&gt;Definition 1 — Second Ball&lt;/div&gt;
+  The loose ball that results from an intervention following a long pass or clearance.
+  &lt;ol&gt;
+    &lt;li&gt;Long Pass (long ball): A pass with a length of 20 metres or greater that any player meets, successful or not. &lt;/li&gt;
+    &lt;li&gt;Interventions: The first point of contact with the long ball must be an intervention. This intervention can be in the form of an aerial duel between players, a clearance attempt, or miscontrol. The key part of the interaction is that it leads to a loose ball.&lt;/li&gt;
+    
+  &lt;/ol&gt;
+  
+&lt;/div&gt;
+
+&lt;div class=&quot;definition&quot;&gt;
+  &lt;div class=&quot;box-title&quot;&gt;Definition 2 - Second Ball Win&lt;/div&gt;
+  A possession gain or regain immediately following a second ball.
+  &lt;ol&gt;
+   &lt;li&gt;Possession Gain/Regain: A player controls the second ball gaining or regaining possession for their team. Including the player wit the ball, their team must complete two successful actions to be considerd a second ball win.&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+
+&lt;p&gt;And to further build intuition for those who are less familiar with second balls, I think seeing a real example does a great job.&lt;/p&gt;
+
+&lt;video width=&quot;560&quot; controls=&quot;&quot; playsinline=&quot;&quot; preload=&quot;auto&quot;&gt;
+  &lt;source src=&quot;/assets/ADBA_example.mp4&quot; type=&quot;video/mp4; codecs=avc1.42E01E,mp4a.40.2&quot; /&gt;
+&lt;/video&gt;
+
+&lt;p&gt;It is clear from the example that second balls can lead to chaotic and quick attacking chances in favor of the winner. Before beginning to quantify them, let’s investigate their importance a little bit more.&lt;/p&gt;
+
+&lt;h2 id=&quot;importance-of-second-balls&quot;&gt;Importance of Second Balls&lt;/h2&gt;
+
+&lt;p&gt;The following brief analysis examines the relationship between second ball success, goal difference, and overall team performance. It should not be taken as fact but rather a thought provoking analysis to give reason why we should investigate second balls deeper.&lt;/p&gt;
+
+&lt;h3 id=&quot;league-performance&quot;&gt;League Performance&lt;/h3&gt;
+
+&lt;p&gt;Using data from the top 5 European leagues in 2015/2016, a linear regression is performed on goal difference (GD) vs total points earned in a season.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/gd_vs_pts.png&quot; alt=&quot;Alt text&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;An R^2 value of 0.95 demonstrates a strong linear relationship between GD and points. Based on the regression an increase in GD by 1 corresponds to an expected points increase of 0.65 points. Potentially even marginal improvements in GD can affect a team’s league standing position.&lt;/p&gt;
+
+&lt;h3 id=&quot;shot-creation&quot;&gt;Shot Creation&lt;/h3&gt;
+
+&lt;p&gt;Now, let’s look at the role second balls play in generating goal-scoring opportunities. The following information is extracted from the dataset:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;19.38% of second ball wins result in a shot within the following possession.&lt;/li&gt;
+  &lt;li&gt;The average expected goal (xG) value per shot is 10.1%.&lt;/li&gt;
+  &lt;li&gt;On average teams contest approximately 24 second balls per game.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The above list suggest increasing second ball wins could lead to a higher number of shots for a team. Also note, expected goals is a metric that predicts the probability that a shot results in a goal by using various features such as distance to goal, angle to goal, etc.&lt;/p&gt;
+
+&lt;h3 id=&quot;impact-of-winning-more-second-balls&quot;&gt;Impact of Winning More Second Balls&lt;/h3&gt;
+
+&lt;p&gt;Now let’s look at the potential impact on a team that wins an additional 5 second balls per match. Based on the dataset:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Approximately 0.97 additional shots per game, or 36.81 additional shots per season (for a standard 38 game season).&lt;/li&gt;
+  &lt;li&gt;Given an average xG per shot of 0.101, this translates to 3.72 expected goals gined per season.&lt;/li&gt;
+  &lt;li&gt;Conversely, by preventing the opponent from winning these second balls, a team can reduce shots conceded, preventing 3.72 expected goals against per season.&lt;/li&gt;
+  &lt;li&gt;Thus, a team could see a net gain as large as 7.44 GD per season.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;translating-second-ball-success-to-league-points&quot;&gt;Translating Second Ball Success to League Points&lt;/h3&gt;
+
+&lt;p&gt;Finally, by using the regression model, a 7.44 GD corresponds to an additional 4.84 points over a season. It may not seem like much, but minor differences in points can define team’s seasons as success or failure. Below is the league table from the 2015/2016 premier league, where the data is taken from.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Rank&lt;/th&gt;
+      &lt;th&gt;Team&lt;/th&gt;
+      &lt;th&gt;Points&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr style=&quot;background-color: rgba(46, 204, 113, 0.5);&quot;&gt;
+      &lt;td&gt;1&lt;/td&gt;&lt;td&gt;Leicester City&lt;/td&gt;&lt;td&gt;81&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr style=&quot;background-color: rgba(241, 196, 15, 0.5);&quot;&gt;
+      &lt;td&gt;2&lt;/td&gt;&lt;td&gt;Arsenal&lt;/td&gt;&lt;td&gt;71&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr style=&quot;background-color: rgba(241, 196, 15, 0.5);&quot;&gt;
+      &lt;td&gt;3&lt;/td&gt;&lt;td&gt;Tottenham&lt;/td&gt;&lt;td&gt;70&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr style=&quot;background-color: rgba(241, 196, 15, 0.5);&quot;&gt;
+      &lt;td&gt;4&lt;/td&gt;&lt;td&gt;Manchester City&lt;/td&gt;&lt;td&gt;66&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr style=&quot;background-color: rgba(241, 196, 15, 0.5);&quot;&gt;
+      &lt;td&gt;5&lt;/td&gt;&lt;td&gt;Manchester United&lt;/td&gt;&lt;td&gt;66&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;6&lt;/td&gt;&lt;td&gt;Southampton&lt;/td&gt;&lt;td&gt;63&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;7&lt;/td&gt;&lt;td&gt;West Ham&lt;/td&gt;&lt;td&gt;62&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;8&lt;/td&gt;&lt;td&gt;Liverpool&lt;/td&gt;&lt;td&gt;60&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;9&lt;/td&gt;&lt;td&gt;Stoke City&lt;/td&gt;&lt;td&gt;51&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;10&lt;/td&gt;&lt;td&gt;Chelsea&lt;/td&gt;&lt;td&gt;50&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;11&lt;/td&gt;&lt;td&gt;Everton&lt;/td&gt;&lt;td&gt;47&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;12&lt;/td&gt;&lt;td&gt;Swansea City&lt;/td&gt;&lt;td&gt;47&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;13&lt;/td&gt;&lt;td&gt;Watford&lt;/td&gt;&lt;td&gt;45&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;14&lt;/td&gt;&lt;td&gt;West Brom&lt;/td&gt;&lt;td&gt;43&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;15&lt;/td&gt;&lt;td&gt;Crystal Palace&lt;/td&gt;&lt;td&gt;42&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;16&lt;/td&gt;&lt;td&gt;Bournemouth&lt;/td&gt;&lt;td&gt;42&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;17&lt;/td&gt;&lt;td&gt;Sunderland&lt;/td&gt;&lt;td&gt;39&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr style=&quot;background-color: rgba(231, 76, 60, 0.5);&quot;&gt;
+      &lt;td&gt;18&lt;/td&gt;&lt;td&gt;Newcastle&lt;/td&gt;&lt;td&gt;37&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr style=&quot;background-color: rgba(231, 76, 60, 0.5);&quot;&gt;
+      &lt;td&gt;19&lt;/td&gt;&lt;td&gt;Norwich City&lt;/td&gt;&lt;td&gt;34&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr style=&quot;background-color: rgba(231, 76, 60, 0.5);&quot;&gt;
+      &lt;td&gt;20&lt;/td&gt;&lt;td&gt;Aston Villa&lt;/td&gt;&lt;td&gt;17&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;div style=&quot;display: flex; gap: 20px; margin-top: 10px; margin-bottom: 30px;&quot;&gt;
+  &lt;div style=&quot;display: flex; align-items: center; gap: 6px;&quot;&gt;
+    &lt;div style=&quot;width: 16px; height: 16px; background-color: rgba(46, 204, 113, 0.5); border: 1px solid rgba(46, 204, 113, 0.8);&quot;&gt;&lt;/div&gt;
+    &lt;span&gt;Champions&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div style=&quot;display: flex; align-items: center; gap: 6px;&quot;&gt;
+    &lt;div style=&quot;width: 16px; height: 16px; background-color: rgba(241, 196, 15, 0.5); border: 1px solid rgba(241, 196, 15, 0.8);&quot;&gt;&lt;/div&gt;
+    &lt;span&gt;European Qualification&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div style=&quot;display: flex; align-items: center; gap: 6px;&quot;&gt;
+    &lt;div style=&quot;width: 16px; height: 16px; background-color: rgba(231, 76, 60, 0.5); border: 1px solid rgba(231, 76, 60, 0.8);&quot;&gt;&lt;/div&gt;
+    &lt;span&gt;Relegation&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;other-second-ball-research&quot;&gt;Other Second Ball Research&lt;/h2&gt;
+
+&lt;p&gt;To date, only one research &lt;a href=&quot;https://www.tandfonline.com/doi/full/10.1080/24748668.2025.2462399&quot;&gt;paper&lt;/a&gt; has directly analyzed second balls, while few online blogs/articles offer exploratory analyses (&lt;a href=&quot;https://lchunhang.medium.com/quantifying-second-ball-wins-d626ac56f108&quot;&gt;here&lt;/a&gt; and &lt;a href=&quot;https://www.nytimes.com/athletic/6193329/2025/03/13/measuring-second-balls-premier-league-analysis/&quot;&gt;here&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.tandfonline.com/doi/full/10.1080/24748668.2025.2462399&quot;&gt;Sunjic et al.&lt;/a&gt; analyze how second ball wins correlate with technical performance such as shots, passes, and dribbles. &lt;a href=&quot;https://www.nytimes.com/athletic/6193329/2025/03/13/measuring-second-balls-premier-league-analysis/&quot;&gt;Carey and Walid&lt;/a&gt; provide really cool graphics about premier league teams abilities from winning second balls to even looking at the number of defensive vs offensive second balls won for each team. While both very interesting, neither provide a clear mathematical definition that allows for algorithmic extraction.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://lchunhang.medium.com/quantifying-second-ball-wins-d626ac56f108&quot;&gt;Hang&lt;/a&gt; addresses this problem by creating an idea called “Second Ball Chains”, a chain of events that denote the actions leading up to a second ball. An example can be found below.&lt;/p&gt;
+
+&lt;svg viewBox=&quot;0 0 520 100&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; style=&quot;width:100%;max-width:600px&quot;&gt;
+  &lt;defs&gt;
+    &lt;marker id=&quot;arrow&quot; markerWidth=&quot;10&quot; markerHeight=&quot;7&quot; refX=&quot;10&quot; refY=&quot;3.5&quot; orient=&quot;auto&quot;&gt;
+      &lt;polygon points=&quot;0 0, 10 3.5, 0 7&quot; fill=&quot;#94a3b8&quot; /&gt;
+    &lt;/marker&gt;
+  &lt;/defs&gt;
+
+  &lt;!-- Box 1 --&gt;
+  &lt;rect x=&quot;10&quot; y=&quot;30&quot; width=&quot;140&quot; height=&quot;40&quot; rx=&quot;5&quot; fill=&quot;#e2e8f0&quot; stroke=&quot;#94a3b8&quot; /&gt;
+  &lt;text x=&quot;80&quot; y=&quot;55&quot; text-anchor=&quot;middle&quot; font-size=&quot;14&quot; fill=&quot;#1e293b&quot;&gt;Box One&lt;/text&gt;
+
+  &lt;!-- Arrow 1 --&gt;
+  &lt;line x1=&quot;150&quot; y1=&quot;50&quot; x2=&quot;190&quot; y2=&quot;50&quot; stroke=&quot;#94a3b8&quot; stroke-width=&quot;2&quot; marker-end=&quot;url(#arrow)&quot; /&gt;
+
+  &lt;!-- Box 2 --&gt;
+  &lt;rect x=&quot;190&quot; y=&quot;30&quot; width=&quot;140&quot; height=&quot;40&quot; rx=&quot;5&quot; fill=&quot;#e2e8f0&quot; stroke=&quot;#94a3b8&quot; /&gt;
+  &lt;text x=&quot;260&quot; y=&quot;55&quot; text-anchor=&quot;middle&quot; font-size=&quot;14&quot; fill=&quot;#1e293b&quot;&gt;Box Two&lt;/text&gt;
+
+  &lt;!-- Arrow 2 --&gt;
+  &lt;line x1=&quot;330&quot; y1=&quot;50&quot; x2=&quot;370&quot; y2=&quot;50&quot; stroke=&quot;#94a3b8&quot; stroke-width=&quot;2&quot; marker-end=&quot;url(#arrow)&quot; /&gt;
+
+  &lt;!-- Box 3 --&gt;
+  &lt;rect x=&quot;370&quot; y=&quot;30&quot; width=&quot;140&quot; height=&quot;40&quot; rx=&quot;5&quot; fill=&quot;#e2e8f0&quot; stroke=&quot;#94a3b8&quot; /&gt;
+  &lt;text x=&quot;440&quot; y=&quot;55&quot; text-anchor=&quot;middle&quot; font-size=&quot;14&quot; fill=&quot;#1e293b&quot;&gt;Box Three&lt;/text&gt;
+
+  &lt;!-- Arrow 3 --&gt;
+  &lt;line x1=&quot;410&quot; y1=&quot;50&quot; x2=&quot;450&quot; y2=&quot;50&quot; stroke=&quot;#94a3b8&quot; stroke-width=&quot;2&quot; marker-end=&quot;url(#arrow)&quot; /&gt;
+
+  &lt;!-- Box 4 --&gt;
+  &lt;rect x=&quot;540&quot; y=&quot;30&quot; width=&quot;140&quot; height=&quot;40&quot; rx=&quot;5&quot; fill=&quot;#e2e8f0&quot; stroke=&quot;#94a3b8&quot; /&gt;
+  &lt;text x=&quot;620&quot; y=&quot;55&quot; text-anchor=&quot;middle&quot; font-size=&quot;14&quot; fill=&quot;#1e293b&quot;&gt;Box Four&lt;/text&gt;
+&lt;/svg&gt;
+
+&lt;p&gt;The two problems I am trying to address in this post are:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Naming Conventions&lt;/li&gt;
+  &lt;li&gt;Higher-order balls (third balls, fourth balls, and so on)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;second-ball-chains&quot;&gt;Second Ball Chains&lt;/h2&gt;
+
+&lt;p&gt;The original second ball chains naming convention can be confusing. For example, ABABA means Team A long ball, followed by an aerial duel in which Team B wins, followed by Team A gaining the ball from the duel. I argue this is not clear from the above example. Instead it should look something like this:&lt;/p&gt;
+
+&lt;p&gt;ADBA EXAMPLE CHAIN&lt;/p&gt;
+
+&lt;h2 id=&quot;higher-order-balls&quot;&gt;Higher Order Balls&lt;/h2&gt;
+
+&lt;h2 id=&quot;second-ball-possessions&quot;&gt;Second Ball Possessions&lt;/h2&gt;
+
+&lt;p&gt;Now that we have updated second ball chains, we now define what happens after a second ball win: a second ball possession. The following defintion sets up future analysis (my [next][blogpost2] post).&lt;/p&gt;
+
+&lt;p&gt;SECOND BALL POSSESSION DEF&lt;/p&gt;
+
+&lt;h2 id=&quot;mathematical-definition-of-second-balls&quot;&gt;Mathematical Definition of Second Balls&lt;/h2&gt;
+
+&lt;p&gt;Now we define them mathematically to allow for automated extraction from a dataset.&lt;/p&gt;
+
+&lt;p&gt;FORMAL DEFINTION&lt;/p&gt;
+
+&lt;h2 id=&quot;results&quot;&gt;Results&lt;/h2&gt;
+
+&lt;p&gt;Finally, we have a few results. Similiarly to &lt;a href=&quot;https://lchunhang.medium.com/quantifying-second-ball-wins-d626ac56f108&quot;&gt;Hang&lt;/a&gt;, we can create a rankings for players and teams of second ball wins. Furthermore, we can create visuals that show the locations of every second ball win on a player and team level.&lt;/p&gt;
+
+&lt;h3 id=&quot;second-ball-rankings&quot;&gt;Second Ball Rankings&lt;/h3&gt;
+
+&lt;p&gt;QUANTITY TABLE HERE&lt;/p&gt;
+
+&lt;p&gt;Again this result is not new, first being shown by &lt;a href=&quot;https://lchunhang.medium.com/quantifying-second-ball-wins-d626ac56f108&quot;&gt;Hang&lt;/a&gt;, it has just been updated to incorporate our new framework including the updated second ball chains and higher order balls.&lt;/p&gt;
+
+&lt;h3 id=&quot;second-ball-heatmaps&quot;&gt;Second Ball Heatmaps&lt;/h3&gt;
+
+&lt;p&gt;By using the second ball algorithms we can create visuals that show where on the field second balls occur and which result in shots created in the subsequent second ball possession.&lt;/p&gt;
+
+&lt;p&gt;DECLAN RICE VISUAL HERE&lt;/p&gt;
+
+&lt;p&gt;It can also be done for a team, including when they lose a second ball. We can use these maps to visualize players second ball winning habits and which spaces on the pitch they occupy often.&lt;/p&gt;
+
+&lt;p&gt;ENGLAND VISUAL HERE&lt;/p&gt;
+
+&lt;p&gt;Although England won more second balls than they lost, there were more shots conceded than created. A likely explanation is that since England often dominates possession, opposition may focus on counterattacks through a direct, second ball inducing style of play, with the intention of creating attacking chances quickly after possession regain.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h2&gt;
+
+&lt;p&gt;In this post we investigated quantifying second balls in soccer. &lt;a href=&quot;https://lchunhang.medium.com/quantifying-second-ball-wins-d626ac56f108&quot;&gt;Hang’s&lt;/a&gt; framework was built upon, clearing up naming convention confusion as well as introducing higher order balls. Then a mathematical framework was created to allow for conistent extraction of second ball scenarios. Finally player and team statisitics and heatmaps were shown to visualize the quantification of second balls. What has yet to be answered is how second ball wins influence the resulting second ball possesion. Stay tuned for the next post to find out more! Thanks for reading and please feel free to share or leave comments or feedback on Twitter. I am always looking for ways to improve my writing and research skills. Cheers.&lt;/p&gt;</content><author><name></name></author><category term="notes" /><summary type="html"></summary></entry></feed>

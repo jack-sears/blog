@@ -52,7 +52,7 @@ Let's begin by establishing a working definition for second balls. The following
 And to further build intuition for those who are less familiar with second balls, I think seeing a real example does a great job.
 
 <video width="560" controls playsinline preload="auto">
-  <source src="/assets/ABA_example.mp4" type="video/mp4; codecs=avc1.42E01E,mp4a.40.2">
+  <source src="/assets/ADBA_example.mp4" type="video/mp4; codecs=avc1.42E01E,mp4a.40.2">
 </video>
 
 It is clear from the example that second balls can lead to chaotic and quick attacking chances in favor of the winner. Before beginning to quantify them, let's investigate their importance a little bit more.
@@ -163,7 +163,38 @@ To date, only one research [paper][sunjic] has directly analyzed second balls, w
 
 [Hang][chun-hang] addresses this problem by creating an idea called "Second Ball Chains", a chain of events that denote the actions leading up to a second ball. An example can be found below.
 
-ABABA SECOND BALL EXAMPLE.
+<svg viewBox="0 0 520 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:600px">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- Box 1 -->
+  <rect x="10" y="30" width="140" height="40" rx="5" fill="#e2e8f0" stroke="#94a3b8"/>
+  <text x="80" y="55" text-anchor="middle" font-size="14" fill="#1e293b">Box One</text>
+
+  <!-- Arrow 1 -->
+  <line x1="150" y1="50" x2="190" y2="50" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Box 2 -->
+  <rect x="190" y="30" width="140" height="40" rx="5" fill="#e2e8f0" stroke="#94a3b8"/>
+  <text x="260" y="55" text-anchor="middle" font-size="14" fill="#1e293b">Box Two</text>
+
+  <!-- Arrow 2 -->
+  <line x1="330" y1="50" x2="370" y2="50" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Box 3 -->
+  <rect x="370" y="30" width="140" height="40" rx="5" fill="#e2e8f0" stroke="#94a3b8"/>
+  <text x="440" y="55" text-anchor="middle" font-size="14" fill="#1e293b">Box Three</text>
+
+  <!-- Arrow 3 -->
+  <line x1="410" y1="50" x2="450" y2="50" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Box 4 -->
+  <rect x="540" y="30" width="140" height="40" rx="5" fill="#e2e8f0" stroke="#94a3b8"/>
+  <text x="620" y="55" text-anchor="middle" font-size="14" fill="#1e293b">Box Four</text>
+</svg>
 
 The two problems I am trying to address in this post are:
  - Naming Conventions

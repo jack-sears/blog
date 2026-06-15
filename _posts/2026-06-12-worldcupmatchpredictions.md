@@ -116,37 +116,38 @@ Just before we dive into estimating the number of goals per game, we are going t
 
 $$\hat{p}_i = \frac{p_i}{\sum_j p_j}$$
 
-For example, odds of 1.65 / 3.80 / 5.50 produce raw probabilities that sum to 1.051. After normalisation: home 57.7%, draw 25.0%, away 17.3%.
+where $p_i = 1 / \text{decimal\_odds}_i$ is the raw implied probability for outcome $i$, and the sum in the denominator runs over all outcomes $j$ in the market. For example, odds of 1.65 / 3.80 / 5.50 produce raw probabilities that sum to 1.051. After normalisation: home 57.7%, draw 25.0%, away 17.3%.
 
 ---
 
 ### Step 2: Solving for Expected Goals (λ)
 
-We model total goals as a Poisson random variable with unknown mean λ. The Poisson PMF is:
+We model total goals as a Poisson random variable with unknown mean $\lambda$ (the average number of goals we expect in the match). The Poisson PMF is:
 
 $$P(X = k) = \frac{\lambda^k e^{-\lambda}}{k!}$$
 
-The over/under 2.5 market gives us P(goals ≥ 3) directly. We need the λ that satisfies:
+where $X$ is the total number of goals scored, $k$ is a specific goal count, and $e$ is Euler's number. The over/under 2.5 market gives us P(goals ≥ 3) directly. We need the λ that satisfies:
 
 $$P(X \geq 3 \mid \lambda) = 1 - \sum_{k=0}^{2} \frac{\lambda^k e^{-\lambda}}{k!} = p_{\text{over}}$$
 
-There is no closed-form solution, so we define:
+where $p_{\text{over}}$ is the normalised implied probability from the over 2.5 odds. There is no closed-form solution, so we define:
 
 $$f(\lambda) = P(X \geq 3 \mid \lambda) - p_{\text{over}} = 0$$
 
-and solve numerically using [Brent's method][brent]. There is no possible way to rearange for λ, so we have to use a numerical method like Brent's. A market implying 55% chance of over 2.5 goals solves to λ ≈ 2.88.
+and solve numerically using [Brent's method][brent]. There is no possible way to rearrange for λ, so we have to use a numerical method like Brent's. A market implying 55% chance of over 2.5 goals solves to λ ≈ 2.88.
+
 
 ---
 
 ### Step 3: Splitting λ Between Teams
 
-We now have total expected goals but need to assign them to each team. We use the 1X2 win probabilities as a proxy for relative attacking strength, the stronger team gets a proportionally larger share:
+We now have total expected goals but need to assign them to each team. We use the 1X2 win probabilities as a proxy for relative team strength, the stronger team gets a proportionally larger share:
 
 $$s = \frac{\hat{p}_{\text{home}}}{\hat{p}_{\text{home}} + \hat{p}_{\text{away}}}$$
 
 $$\lambda_h = \lambda \cdot s \qquad \lambda_a = \lambda \cdot (1 - s)$$
 
-For our example: s = 0.577 / (0.577 + 0.173) = 0.769, giving λ_h = 2.21 and λ_a = 0.67.
+where $s$ is the home team's share of the two-outcome (home/away) probability, $\hat{p}_{\text{home}}$ and $\hat{p}_{\text{away}}$ are the normalised win probabilities from Step 1 (the draw probability is excluded here since it does not reflect relative attacking strength), and $\lambda_h$, $\lambda_a$ are the resulting expected goals for the home and away team respectively. For our example: s = 0.577 / (0.577 + 0.173) = 0.769, giving λ_h = 2.21 and λ_a = 0.67.
 
 ---
 
@@ -163,7 +164,7 @@ The following structure will be used to make predictions:
 1. At the conclusion of round 1, look over injuries/team news to see if any outliers can be identified. I.e predictions under or over predicting goals.
 1. Get updated betting odds from API before the start of round 2.
 1. Use model predictions again, but adjust by a goal up or down depending on whether teams are missing key players. 
-1. Same idea for final round, depending on how predictions are going two options. If good then continue with the current method, then take a look at most common score lines so far in tournament and use those for each prediction in hopes to make up some points be hitting correct scores.
+1. Same idea for final round, depending on how predictions are going two options. If good then continue with the current method, then take a look at most common score lines so far in tournament and use those for each prediction in hopes to make up some points by hitting correct scores.
 
 Below are the following predictions for each group stage game and will be updated and dated as they are played.
 

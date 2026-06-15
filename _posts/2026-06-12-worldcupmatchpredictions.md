@@ -122,15 +122,15 @@ where $p_i = 1 / \text{decimal\_odds}_i$ is the raw implied probability for outc
 
 ### Step 2: Solving for Expected Goals (λ)
 
-We model total goals as a Poisson random variable with unknown mean $\lambda$ (the average number of goals we expect in the match). The Poisson PMF is:
+We model total goals as a Poisson random variable with unknown mean λ (the average number of goals we expect in the match). The Poisson PMF is:
 
 $$P(X = k) = \frac{\lambda^k e^{-\lambda}}{k!}$$
 
-where $X$ is the total number of goals scored, $k$ is a specific goal count, and $e$ is Euler's number. The over/under 2.5 market gives us P(goals ≥ 3) directly. We need the λ that satisfies:
+where X is the total number of goals scored, k is a specific goal count, and e is Euler's number. The over/under 2.5 market gives us P(goals ≥ 3) directly. We need the λ that satisfies:
 
 $$P(X \geq 3 \mid \lambda) = 1 - \sum_{k=0}^{2} \frac{\lambda^k e^{-\lambda}}{k!} = p_{\text{over}}$$
 
-where $p_{\text{over}}$ is the normalised implied probability from the over 2.5 odds. There is no closed-form solution, so we define:
+where `p_over` is the normalised implied probability from the over 2.5 odds. There is no closed-form solution, so we define:
 
 $$f(\lambda) = P(X \geq 3 \mid \lambda) - p_{\text{over}} = 0$$
 
@@ -147,7 +147,7 @@ $$s = \frac{\hat{p}_{\text{home}}}{\hat{p}_{\text{home}} + \hat{p}_{\text{away}}
 
 $$\lambda_h = \lambda \cdot s \qquad \lambda_a = \lambda \cdot (1 - s)$$
 
-where $s$ is the home team's share of the two-outcome (home/away) probability, $\hat{p}_{\text{home}}$ and $\hat{p}_{\text{away}}$ are the normalised win probabilities from Step 1 (the draw probability is excluded here since it does not reflect relative attacking strength), and $\lambda_h$, $\lambda_a$ are the resulting expected goals for the home and away team respectively. For our example: s = 0.577 / (0.577 + 0.173) = 0.769, giving λ_h = 2.21 and λ_a = 0.67.
+where s is the home team's share of the two-outcome (home/away) probability, `p_home` and `p_away` are the normalised win probabilities from Step 1 (the draw probability is excluded here since it does not reflect relative attacking strength), and `lambda_h`, `lambda_a` are the resulting expected goals for the home and away team respectively. For our example: s = 0.577 / (0.577 + 0.173) = 0.769, giving λ_h = 2.21 and λ_a = 0.67.
 
 ---
 
@@ -281,4 +281,4 @@ TBP
 
 Updated June 12, 2026
 
-I don't have much to say right now other than GO CANADA, and hopefully these predictions can serve me well. I will at the least update this post at the end of every groupstage game, but hopefully more often than that. Anyways I appreciate those who made it this far and best of luck to you and your team you will be cheering on this World Cup! 
+I don't have much to say right now other than GO CANADA, and hopefully these predictions can serve me well. I will at the least update this post at the end of every groupstage round, but hopefully more often than that. Anyways I appreciate those who made it this far and best of luck to you and your team you will be cheering on this World Cup! 

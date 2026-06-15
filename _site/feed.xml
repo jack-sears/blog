@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2026-06-15T14:24:49-04:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">Jack’s Blog</title><subtitle>A blog where I post about the projects and ideas I have been working on relating to football analytics.</subtitle><entry><title type="html">Quantifying Second Balls</title><link href="http://localhost:4000/blog/notes/2026/06/15/quantifyingSB.html" rel="alternate" type="text/html" title="Quantifying Second Balls" /><published>2026-06-15T00:00:00-04:00</published><updated>2026-06-15T00:00:00-04:00</updated><id>http://localhost:4000/blog/notes/2026/06/15/quantifyingSB</id><content type="html" xml:base="http://localhost:4000/blog/notes/2026/06/15/quantifyingSB.html">&lt;p&gt;The evaluation of how in-game actions of soccer players affect the outcome
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2026-06-15T15:21:40-04:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">Jack’s Blog</title><subtitle>A blog where I post about the projects and ideas I have been working on relating to football analytics.</subtitle><entry><title type="html">Quantifying Second Balls</title><link href="http://localhost:4000/blog/notes/2026/06/15/quantifyingSB.html" rel="alternate" type="text/html" title="Quantifying Second Balls" /><published>2026-06-15T00:00:00-04:00</published><updated>2026-06-15T00:00:00-04:00</updated><id>http://localhost:4000/blog/notes/2026/06/15/quantifyingSB</id><content type="html" xml:base="http://localhost:4000/blog/notes/2026/06/15/quantifyingSB.html">&lt;p&gt;The evaluation of how in-game actions of soccer players affect the outcome
 of a game is an important part of soccer analytics [2]. Unlike traditional
 statistics that focus on goals and assists, evaluating other actions that players perform
 looks deeper into the nuances of player behaviour and decision-making.&lt;/p&gt;
@@ -408,11 +408,11 @@ or analyzing the value of winning second balls and how to do so successfully. Th
 
 &lt;p&gt;By using the second ball algorithms we can create visuals that show where on the field second balls occur and which result in shots created in the subsequent second ball possession.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/declan_fig.png&quot; alt=&quot;Declan Figure&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/declan_fig.png&quot; alt=&quot;Declan Figure&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;It can also be done for a team, including when they lose a second ball. We can use these maps to visualize players second ball winning habits and which spaces on the pitch they occupy often.&lt;/p&gt;
 
-&lt;p&gt;ENGLAND VISUAL HERE&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/assets/images/england_fig.png&quot; alt=&quot;England Figure&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Although England won more second balls than they lost, there were more shots conceded than created. A likely explanation is that since England often dominates possession, opposition may focus on counterattacks through a direct, second ball inducing style of play, with the intention of creating attacking chances quickly after possession regain.&lt;/p&gt;
 

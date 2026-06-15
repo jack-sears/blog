@@ -116,7 +116,7 @@ Just before we dive into estimating the number of goals per game, we are going t
 
 $$\hat{p}_i = \frac{p_i}{\sum_j p_j}$$
 
-where $p_i = 1 / \text{decimal\_odds}_i$ is the raw implied probability for outcome $i$, and the sum in the denominator runs over all outcomes $j$ in the market. For example, odds of 1.65 / 3.80 / 5.50 produce raw probabilities that sum to 1.051. After normalisation: home 57.7%, draw 25.0%, away 17.3%.
+where `p_i = 1 / decimal_odds_i` is the raw implied probability for outcome `i`, and the sum in the denominator runs over all outcomes `j` in the market. For example, odds of 1.65 / 3.80 / 5.50 produce raw probabilities that sum to 1.051. After normalisation: home 57.7%, draw 25.0%, away 17.3%.
 
 ---
 

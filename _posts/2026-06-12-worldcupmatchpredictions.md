@@ -147,7 +147,7 @@ $$s = \frac{\hat{p}_{\text{home}}}{\hat{p}_{\text{home}} + \hat{p}_{\text{away}}
 
 $$\lambda_h = \lambda \cdot s \qquad \lambda_a = \lambda \cdot (1 - s)$$
 
-where s is the home team's share of the two-outcome (home/away) probability, `p_home` and `p_away` are the normalised win probabilities from Step 1 (the draw probability is excluded here since it does not reflect relative attacking strength), and `lambda_h`, `lambda_a` are the resulting expected goals for the home and away team respectively. For our example: s = 0.577 / (0.577 + 0.173) = 0.769, giving λ_h = 2.21 and λ_a = 0.67.
+where s is the home team's share of the two-outcome (home/away) probability, `p_home` and `p_away` are the normalised win probabilities from Step 1, and `lambda_h`, `lambda_a` are the resulting expected goals for the home and away team respectively. For our example: s = 0.577 / (0.577 + 0.173) = 0.769, giving λ_h = 2.21 and λ_a = 0.67.
 
 ---
 

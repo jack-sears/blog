@@ -170,7 +170,7 @@ Below are the following predictions for each group stage game and will be update
 
 ### Group Stage 1
 
-Last updated: June 12, 2026
+Last updated: June 19, 2026
 
 <style>
 .wc-table { width: 100%; border-collapse: collapse; font-size: 14px; }
@@ -218,18 +218,18 @@ Last updated: June 12, 2026
     ["Jun 14","Netherlands","Japan",1.70,0.94,"2-2"],
     ["Jun 14","Ivory Coast","Ecuador",0.83,1.22,"1-0"],
     ["Jun 15","Sweden","Tunisia",1.63,0.73,"5-1"],
-    ["Jun 15","Spain","Cape Verde",3.46,0.15,""],
-    ["Jun 15","Belgium","Egypt",2.00,0.61,""],
-    ["Jun 15","Saudi Arabia","Uruguay",0.42,2.20,""],
-    ["Jun 16","Iran","New Zealand",1.68,0.67,""],
-    ["Jun 16","France","Senegal",2.21,0.45,""],
-    ["Jun 16","Iraq","Norway",0.25,2.85,""],
-    ["Jun 17","Argentina","Algeria",2.31,0.36,""],
-    ["Jun 17","Austria","Jordan",2.66,0.38,""],
-    ["Jun 17","Portugal","DR Congo",2.61,0.31,""],
-    ["Jun 17","England","Croatia",1.86,0.66,""],
-    ["Jun 17","Ghana","Panama",1.48,0.90,""],
-    ["Jun 18","Uzbekistan","Colombia",0.36,2.27,""],
+    ["Jun 15","Spain","Cape Verde",3.46,0.15,"0-0"],
+    ["Jun 15","Belgium","Egypt",2.00,0.61,"1-1"],
+    ["Jun 15","Saudi Arabia","Uruguay",0.42,2.20,"1-1"],
+    ["Jun 16","Iran","New Zealand",1.68,0.67,"2-2"],
+    ["Jun 16","France","Senegal",2.21,0.45,"3-1"],
+    ["Jun 16","Iraq","Norway",0.25,2.85,"1-4"],
+    ["Jun 17","Argentina","Algeria",2.31,0.36,"3-0"],
+    ["Jun 17","Austria","Jordan",2.66,0.38,"3-1"],
+    ["Jun 17","Portugal","DR Congo",2.61,0.31,"1-1"],
+    ["Jun 17","England","Croatia",1.86,0.66,"4-2"],
+    ["Jun 17","Ghana","Panama",1.48,0.90,"1-0"],
+    ["Jun 18","Uzbekistan","Colombia",0.36,2.27,"1-3"],
   ];
 
   function outcome(pred, actual) {
@@ -259,9 +259,136 @@ Last updated: June 12, 2026
 })();
 </script>
 
+#### Group Stage 1 Review
+
+After 24 games the model is holding up reasonably well on results (46% correct W/D/L vs 33% random baseline) but is systematically underestimating goals, missing by 0.42 per game on average.
+
+The bias is largely outlier-driven — Germany 7-1, Sweden 5-1, England 4-2, and USA 4-1 account for 11 of the 23 missing goals. Strip those blowouts out and the model is close to calibrated. For competitive games it's performing as expected.
+
+The bigger pattern is a **goal distribution mismatch**: the model clusters predictions around 3-goal games but the tournament is running hot, with 42% of matches producing 4+ goals and 1-1 appearing six times as the most common scoreline. The model generated zero sub-2-goal predictions; in reality 4 games finished with 1 goal or fewer.
+
+For matchday 2 I'll be nudging λ upward selectively for mismatched fixtures rather than applying a global adjustment — the blowout games were all heavy favourites against weak opposition, so that's where the model leaves the most on the table. Although 1-1 is the most common scoreline and my model rarely predicting, I am not going to adjust anything here yet and let the model run on the updated odds once again.
+
 ### Group Stage 2
 
-TBP (To be predicted)
+Updated June 19
+
+Only change I've made is a few 3-0 games bumped to 4-0. Purely based on strong teams playing weaker and the estimated xG being above 3 for the stronger team.
+
+<style>
+.wc-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.wc-table th { text-align: left; font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #888; padding: 6px 10px; border-bottom: 1px solid #e8e8e8; }
+.wc-table td { padding: 8px 10px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
+.wc-table tr:last-child td { border-bottom: none; }
+.wc-table tr:hover td { background: #fafafa; }
+.wc-score { font-weight: 600; font-size: 15px; font-family: monospace; white-space: nowrap; }
+.wc-actual { font-family: monospace; font-size: 14px; white-space: nowrap; }
+.wc-xg { font-size: 12px; color: #999; font-family: monospace; white-space: nowrap; }
+.wc-date { font-size: 11px; color: #aaa; white-space: nowrap; }
+.wc-hit { font-size: 11px; padding: 1px 6px; border-radius: 3px; white-space: nowrap; }
+.wc-hit.exact  { background: #edf7ee; color: #2d7a35; }
+.wc-hit.result { background: #fdf3e3; color: #a06010; }
+.wc-hit.wrong  { background: #fdf0f0; color: #a03030; }
+.wc-hit.tbd    { color: #ccc; }
+</style>
+
+<table class="wc-table">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Match</th>
+      <th>Predicted</th>
+      <th>xG</th>
+      <th>Actual</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="wc-tbody-r2"></tbody>
+</table>
+
+<script>
+(function() {
+  const m = [
+    ["Jun 18","Czech Republic","South Africa",1.60,0.76,"1-1"],
+    ["Jun 18","Switzerland","Bosnia & Herzegovina",2.01,0.55,"4-1"],
+    ["Jun 18","Canada","Qatar",2.36,0.29,"6-0"],
+    ["Jun 19","Mexico","South Korea",1.73,0.67,"1-0"],
+    ["Jun 19","USA","Australia",1.83,0.71,null],
+    ["Jun 19","Scotland","Morocco",0.76,1.58,null],
+    ["Jun 20","Brazil","Haiti",3.69,0.15,null],
+    ["Jun 20","Turkey","Paraguay",1.41,0.92,null],
+    ["Jun 20","Netherlands","Sweden",2.02,0.64,null],
+    ["Jun 20","Germany","Ivory Coast",2.17,0.60,null],
+    ["Jun 21","Ecuador","Curaçao",2.74,0.24,null],
+    ["Jun 21","Tunisia","Japan",0.59,1.80,null],
+    ["Jun 21","Spain","Saudi Arabia",3.12,0.15,null],
+    ["Jun 21","Belgium","Iran",2.30,0.40,null],
+    ["Jun 21","Uruguay","Cape Verde",2.23,0.43,null],
+    ["Jun 22","New Zealand","Egypt",0.63,1.77,null],
+    ["Jun 22","Argentina","Austria",2.01,0.61,null],
+    ["Jun 22","France","Iraq",3.12,0.15,null],
+    ["Jun 23","Norway","Senegal",1.60,1.02,null],
+    ["Jun 23","Jordan","Algeria",0.51,2.15,null],
+    ["Jun 23","Portugal","Uzbekistan",2.87,0.32,null],
+    ["Jun 23","England","Ghana",2.57,0.36,null],
+    ["Jun 23","Panama","Croatia",0.50,2.07,null],
+    ["Jun 24","Colombia","DR Congo",2.03,0.41,null],
+  ];
+
+  const pred = {
+    "Czech Republic vs South Africa": "2-1",
+    "Switzerland vs Bosnia & Herzegovina": "2-1",
+    "Canada vs Qatar": "3-0",
+    "Mexico vs South Korea": "2-1",
+    "USA vs Australia": "2-1",
+    "Scotland vs Morocco": "1-2",
+    "Brazil vs Haiti": "4-0",
+    "Turkey vs Paraguay": "2-1",
+    "Netherlands vs Sweden": "2-1",
+    "Germany vs Ivory Coast": "2-1",
+    "Ecuador vs Curaçao": "3-0",
+    "Tunisia vs Japan": "0-2",
+    "Spain vs Saudi Arabia": "3-0",
+    "Belgium vs Iran": "2-0",
+    "Uruguay vs Cape Verde": "2-0",
+    "New Zealand vs Egypt": "1-2",
+    "Argentina vs Austria": "2-1",
+    "France vs Iraq": "4-0",
+    "Norway vs Senegal": "1-1",
+    "Jordan vs Algeria": "1-2",
+    "Portugal vs Uzbekistan": "3-0",
+    "England vs Ghana": "3-0",
+    "Panama vs Croatia": "0-2",
+    "Colombia vs DR Congo": "2-0",
+  };
+
+  function outcome(p, actual) {
+    if (!actual) return '<span class="wc-hit tbd">–</span>';
+    if (p === actual) return '<span class="wc-hit exact">exact</span>';
+    const pr = p.split('-'), ar = actual.split('-');
+    const ps = Math.sign(pr[0]-pr[1]), as = Math.sign(ar[0]-ar[1]);
+    return ps === as
+      ? '<span class="wc-hit result">result</span>'
+      : '<span class="wc-hit wrong">wrong</span>';
+  }
+
+  const tb = document.getElementById('wc-tbody-r2');
+  m.forEach(function(r) {
+    const key = r[1]+' vs '+r[2];
+    const p = pred[key] || (Math.round(r[3])+'-'+Math.round(r[4]));
+    const actual = r[5];
+    tb.innerHTML +=
+      '<tr>' +
+      '<td class="wc-date">'+r[0]+'</td>' +
+      '<td>'+r[1]+' <span style="color:#ccc">vs</span> '+r[2]+'</td>' +
+      '<td class="wc-score">'+p+'</td>' +
+      '<td class="wc-xg">'+r[3].toFixed(2)+' / '+r[4].toFixed(2)+'</td>' +
+      '<td class="wc-actual">'+(actual||'–')+'</td>' +
+      '<td>'+outcome(p, actual||'')+'</td>' +
+      '</tr>';
+  });
+})();
+</script>
 
 ### Group Stage 3
 

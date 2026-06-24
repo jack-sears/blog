@@ -405,7 +405,7 @@ Are win probabilities within 20% of each other?
  - -  → Yes: predict 1-0
  - -  → No: predict 0-0 or 1-1, whichever's closer to prediction.
  - → No (clear favourite): Does model predict 3-0 or higher?
- - -  → Yes: drop to 2-0
+ - -  → Yes: drop to 2-0 
  - -  → No: drop predicted goals by 1 (2-1 → 1-0, 2-0 → 1-0)
 
 With this set of logic the idea is to target the low-scoring games we have missed out on thus far. Given the final round I think a lot of teams will be set up very defensively with their tournaments on the line so I don't see why low-scoring shouldn't continue to happen. With that being said here are my picks:

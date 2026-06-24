@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2026-06-19T16:54:00-04:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">Jack’s Blog</title><subtitle>A blog where I post about the projects and ideas I have been working on relating to football analytics.</subtitle><entry><title type="html">The Quantification and Analysis of Second Balls in Football Part 1</title><link href="http://localhost:4000/blog/notes/2026/06/19/quantifyingSB.html" rel="alternate" type="text/html" title="The Quantification and Analysis of Second Balls in Football Part 1" /><published>2026-06-19T00:00:00-04:00</published><updated>2026-06-19T00:00:00-04:00</updated><id>http://localhost:4000/blog/notes/2026/06/19/quantifyingSB</id><content type="html" xml:base="http://localhost:4000/blog/notes/2026/06/19/quantifyingSB.html">&lt;p&gt;The evaluation of in-game actions of football players and how they affect the outcome
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2026-06-24T12:08:27-04:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">Jack’s Blog</title><subtitle>A blog where I post about the projects and ideas I have been working on relating to football analytics.</subtitle><entry><title type="html">The Quantification and Analysis of Second Balls in Football Part 1</title><link href="http://localhost:4000/blog/notes/2026/06/19/quantifyingSB.html" rel="alternate" type="text/html" title="The Quantification and Analysis of Second Balls in Football Part 1" /><published>2026-06-19T00:00:00-04:00</published><updated>2026-06-19T00:00:00-04:00</updated><id>http://localhost:4000/blog/notes/2026/06/19/quantifyingSB</id><content type="html" xml:base="http://localhost:4000/blog/notes/2026/06/19/quantifyingSB.html">&lt;p&gt;The evaluation of in-game actions of football players and how they affect the outcome
 of a game is an important part of football analytics &lt;a href=&quot;https://link.springer.com/book/10.1007/978-3-658-21177-6&quot;&gt;(Link, 2018)&lt;/a&gt;. Unlike traditional
 statistics that focus on goals and assists, evaluating other actions that players perform
 looks deeper into the nuances of player behaviour and decision-making.&lt;/p&gt;
@@ -796,7 +796,7 @@ or analyzing the value of winning second balls and how to do so successfully. Th
 
 &lt;h3 id=&quot;group-stage-2&quot;&gt;Group Stage 2&lt;/h3&gt;
 
-&lt;p&gt;Updated June 19&lt;/p&gt;
+&lt;p&gt;Updated June 24&lt;/p&gt;
 
 &lt;p&gt;Only change I’ve made is a few 3-0 games bumped to 4-0. Purely based on strong teams playing weaker and the estimated xG being above 3 for the stronger team.&lt;/p&gt;
 
@@ -838,26 +838,26 @@ or analyzing the value of winning second balls and how to do so successfully. Th
     [&quot;Jun 18&quot;,&quot;Switzerland&quot;,&quot;Bosnia &amp; Herzegovina&quot;,2.01,0.55,&quot;4-1&quot;],
     [&quot;Jun 18&quot;,&quot;Canada&quot;,&quot;Qatar&quot;,2.36,0.29,&quot;6-0&quot;],
     [&quot;Jun 19&quot;,&quot;Mexico&quot;,&quot;South Korea&quot;,1.73,0.67,&quot;1-0&quot;],
-    [&quot;Jun 19&quot;,&quot;USA&quot;,&quot;Australia&quot;,1.83,0.71,null],
-    [&quot;Jun 19&quot;,&quot;Scotland&quot;,&quot;Morocco&quot;,0.76,1.58,null],
-    [&quot;Jun 20&quot;,&quot;Brazil&quot;,&quot;Haiti&quot;,3.69,0.15,null],
-    [&quot;Jun 20&quot;,&quot;Turkey&quot;,&quot;Paraguay&quot;,1.41,0.92,null],
-    [&quot;Jun 20&quot;,&quot;Netherlands&quot;,&quot;Sweden&quot;,2.02,0.64,null],
-    [&quot;Jun 20&quot;,&quot;Germany&quot;,&quot;Ivory Coast&quot;,2.17,0.60,null],
-    [&quot;Jun 21&quot;,&quot;Ecuador&quot;,&quot;Curaçao&quot;,2.74,0.24,null],
-    [&quot;Jun 21&quot;,&quot;Tunisia&quot;,&quot;Japan&quot;,0.59,1.80,null],
-    [&quot;Jun 21&quot;,&quot;Spain&quot;,&quot;Saudi Arabia&quot;,3.12,0.15,null],
-    [&quot;Jun 21&quot;,&quot;Belgium&quot;,&quot;Iran&quot;,2.30,0.40,null],
-    [&quot;Jun 21&quot;,&quot;Uruguay&quot;,&quot;Cape Verde&quot;,2.23,0.43,null],
-    [&quot;Jun 22&quot;,&quot;New Zealand&quot;,&quot;Egypt&quot;,0.63,1.77,null],
-    [&quot;Jun 22&quot;,&quot;Argentina&quot;,&quot;Austria&quot;,2.01,0.61,null],
-    [&quot;Jun 22&quot;,&quot;France&quot;,&quot;Iraq&quot;,3.12,0.15,null],
-    [&quot;Jun 23&quot;,&quot;Norway&quot;,&quot;Senegal&quot;,1.60,1.02,null],
-    [&quot;Jun 23&quot;,&quot;Jordan&quot;,&quot;Algeria&quot;,0.51,2.15,null],
-    [&quot;Jun 23&quot;,&quot;Portugal&quot;,&quot;Uzbekistan&quot;,2.87,0.32,null],
-    [&quot;Jun 23&quot;,&quot;England&quot;,&quot;Ghana&quot;,2.57,0.36,null],
-    [&quot;Jun 23&quot;,&quot;Panama&quot;,&quot;Croatia&quot;,0.50,2.07,null],
-    [&quot;Jun 24&quot;,&quot;Colombia&quot;,&quot;DR Congo&quot;,2.03,0.41,null],
+    [&quot;Jun 19&quot;,&quot;USA&quot;,&quot;Australia&quot;,1.83,0.71,&quot;2-0&quot;],
+    [&quot;Jun 19&quot;,&quot;Scotland&quot;,&quot;Morocco&quot;,0.76,1.58,&quot;0-1&quot;],
+    [&quot;Jun 20&quot;,&quot;Brazil&quot;,&quot;Haiti&quot;,3.69,0.15,&quot;3-0&quot;],
+    [&quot;Jun 20&quot;,&quot;Turkey&quot;,&quot;Paraguay&quot;,1.41,0.92,&quot;0-1&quot;],
+    [&quot;Jun 20&quot;,&quot;Netherlands&quot;,&quot;Sweden&quot;,2.02,0.64,&quot;5-1&quot;],
+    [&quot;Jun 20&quot;,&quot;Germany&quot;,&quot;Ivory Coast&quot;,2.17,0.60,&quot;2-1&quot;],
+    [&quot;Jun 21&quot;,&quot;Ecuador&quot;,&quot;Curaçao&quot;,2.74,0.24,&quot;0-0&quot;],
+    [&quot;Jun 21&quot;,&quot;Tunisia&quot;,&quot;Japan&quot;,0.59,1.80,&quot;0-4&quot;],
+    [&quot;Jun 21&quot;,&quot;Spain&quot;,&quot;Saudi Arabia&quot;,3.12,0.15,&quot;4-0&quot;],
+    [&quot;Jun 21&quot;,&quot;Belgium&quot;,&quot;Iran&quot;,2.30,0.40,&quot;0-0&quot;],
+    [&quot;Jun 21&quot;,&quot;Uruguay&quot;,&quot;Cape Verde&quot;,2.23,0.43,&quot;2-2&quot;],
+    [&quot;Jun 22&quot;,&quot;New Zealand&quot;,&quot;Egypt&quot;,0.63,1.77,&quot;1-3&quot;],
+    [&quot;Jun 22&quot;,&quot;Argentina&quot;,&quot;Austria&quot;,2.01,0.61,&quot;2-0&quot;],
+    [&quot;Jun 22&quot;,&quot;France&quot;,&quot;Iraq&quot;,3.12,0.15,&quot;3-0&quot;],
+    [&quot;Jun 23&quot;,&quot;Norway&quot;,&quot;Senegal&quot;,1.60,1.02,&quot;3-2&quot;],
+    [&quot;Jun 23&quot;,&quot;Jordan&quot;,&quot;Algeria&quot;,0.51,2.15,&quot;1-2&quot;],
+    [&quot;Jun 23&quot;,&quot;Portugal&quot;,&quot;Uzbekistan&quot;,2.87,0.32,&quot;5-0&quot;],
+    [&quot;Jun 23&quot;,&quot;England&quot;,&quot;Ghana&quot;,2.57,0.36,&quot;0-0&quot;],
+    [&quot;Jun 23&quot;,&quot;Panama&quot;,&quot;Croatia&quot;,0.50,2.07,&quot;0-1&quot;],
+    [&quot;Jun 24&quot;,&quot;Colombia&quot;,&quot;DR Congo&quot;,2.03,0.41,&quot;1-0&quot;],
   ];
 
   const pred = {
@@ -915,33 +915,161 @@ or analyzing the value of winning second balls and how to do so successfully. Th
 })();
 &lt;/script&gt;
 
+&lt;p&gt;After round 2, a few notes. The model has predicted 29/48 games, increasing accuracy to around 60%. I can’t be mad at this and it is probably performing a bit better than I expected. Unfortunately, my idea of bumping some 3-0 games up to 4-0 has backfired because I bumped the wrong 3-0’s up and left the ones that actually went 4-0 as 3-0. I should have probably either bumped all to 4-0 or left all at 3-0, to try and collect as many exact scores as possible.&lt;/p&gt;
+
+&lt;p&gt;Where the model has dissapointed is in exact scores. I have only got 3 exact scores so far, which means I am missing out on a lot of points. The tournament has seen nineteen 4+ goal games and I have only predicted 3. There were also a combined twelve 0 or 1 goal games where I predicted none. The model predicted thirty-one 3 goal games and only six occurred. 2 goal games were predicted fourteen times and actually happened eleven times. It clear we are predicting 3 goal games far too often and neglecting low scoring games. I think due to variance its much harder to predict high scoring games, so for round 3 we should focus our efforts on predicting more of the low-scoring outcomes.&lt;/p&gt;
+
 &lt;h3 id=&quot;group-stage-3&quot;&gt;Group Stage 3&lt;/h3&gt;
 
-&lt;p&gt;TBP&lt;/p&gt;
+&lt;p&gt;Updated June 24&lt;/p&gt;
+
+&lt;p&gt;So now what? Going into the final group stage games I have created a decision tree to help make my predictions. I will go back to the model predictions in the knockouts.&lt;/p&gt;
+
+&lt;p&gt;Are win probabilities within 20% of each other?&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;→ Yes: does one team have a clear incentive?&lt;/li&gt;
+  &lt;li&gt;
+    &lt;ul&gt;
+      &lt;li&gt;→ Yes: predict 1-0&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;ul&gt;
+      &lt;li&gt;→ No: predict 0-0 or 1-1, whichever’s closer to prediction.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;→ No (clear favourite): Does model predict 3-0 or higher?&lt;/li&gt;
+  &lt;li&gt;
+    &lt;ul&gt;
+      &lt;li&gt;→ Yes: drop to 2-0&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;ul&gt;
+      &lt;li&gt;→ No: drop predicted goals by 1 (2-1 → 1-0, 2-0 → 1-0)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;With this set of logic the idea is to target the low-scoring games we have missed out on thus far. Given the final round I think a lot of teams will be set up very defensively with their tournaments on the line so I don’t see why low-scoring shouldn’t continue to happen. With that being said here are my picks:&lt;/p&gt;
+
+&lt;style&gt;
+.wc-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.wc-table th { text-align: left; font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #888; padding: 6px 10px; border-bottom: 1px solid #e8e8e8; }
+.wc-table td { padding: 8px 10px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
+.wc-table tr:last-child td { border-bottom: none; }
+.wc-table tr:hover td { background: #fafafa; }
+.wc-score { font-weight: 600; font-size: 15px; font-family: monospace; white-space: nowrap; }
+.wc-actual { font-family: monospace; font-size: 14px; white-space: nowrap; }
+.wc-xg { font-size: 12px; color: #999; font-family: monospace; white-space: nowrap; }
+.wc-date { font-size: 11px; color: #aaa; white-space: nowrap; }
+.wc-hit { font-size: 11px; padding: 1px 6px; border-radius: 3px; white-space: nowrap; }
+.wc-hit.exact  { background: #edf7ee; color: #2d7a35; }
+.wc-hit.result { background: #fdf3e3; color: #a06010; }
+.wc-hit.wrong  { background: #fdf0f0; color: #a03030; }
+.wc-hit.tbd    { color: #ccc; }
+&lt;/style&gt;
+
+&lt;table class=&quot;wc-table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Date&lt;/th&gt;
+      &lt;th&gt;Match&lt;/th&gt;
+      &lt;th&gt;Predicted&lt;/th&gt;
+      &lt;th&gt;xG&lt;/th&gt;
+      &lt;th&gt;Actual&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody id=&quot;wc-tbody-r3&quot;&gt;&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;script&gt;
+(function() {
+  const m = [
+    [&quot;Jun 24&quot;,&quot;Bosnia &amp; Herzegovina&quot;,&quot;Qatar&quot;,2.65,0.47,&quot;&quot;],
+    [&quot;Jun 24&quot;,&quot;Switzerland&quot;,&quot;Canada&quot;,1.44,1.05,&quot;&quot;],
+    [&quot;Jun 24&quot;,&quot;Scotland&quot;,&quot;Brazil&quot;,0.33,2.47,&quot;&quot;],
+    [&quot;Jun 24&quot;,&quot;Morocco&quot;,&quot;Haiti&quot;,2.94,0.21,&quot;&quot;],
+    [&quot;Jun 25&quot;,&quot;Czech Republic&quot;,&quot;Mexico&quot;,0.87,1.71,&quot;&quot;],
+    [&quot;Jun 25&quot;,&quot;South Africa&quot;,&quot;South Korea&quot;,0.57,2.00,&quot;&quot;],
+    [&quot;Jun 25&quot;,&quot;Curaçao&quot;,&quot;Ivory Coast&quot;,0.20,3.05,&quot;&quot;],
+    [&quot;Jun 25&quot;,&quot;Ecuador&quot;,&quot;Germany&quot;,0.93,1.93,&quot;&quot;],
+    [&quot;Jun 25&quot;,&quot;Japan&quot;,&quot;Sweden&quot;,2.00,0.87,&quot;&quot;],
+    [&quot;Jun 25&quot;,&quot;Tunisia&quot;,&quot;Netherlands&quot;,0.16,3.17,&quot;&quot;],
+    [&quot;Jun 26&quot;,&quot;Paraguay&quot;,&quot;Australia&quot;,1.14,0.84,&quot;&quot;],
+    [&quot;Jun 26&quot;,&quot;Turkey&quot;,&quot;USA&quot;,1.01,1.89,&quot;&quot;],
+    [&quot;Jun 26&quot;,&quot;Norway&quot;,&quot;France&quot;,0.78,2.18,&quot;&quot;],
+    [&quot;Jun 26&quot;,&quot;Senegal&quot;,&quot;Iraq&quot;,2.93,0.29,&quot;&quot;],
+    [&quot;Jun 27&quot;,&quot;Cape Verde&quot;,&quot;Saudi Arabia&quot;,1.39,1.17,&quot;&quot;],
+    [&quot;Jun 27&quot;,&quot;Uruguay&quot;,&quot;Spain&quot;,0.49,2.23,&quot;&quot;],
+    [&quot;Jun 27&quot;,&quot;New Zealand&quot;,&quot;Belgium&quot;,0.23,2.95,&quot;&quot;],
+    [&quot;Jun 27&quot;,&quot;Egypt&quot;,&quot;Iran&quot;,1.26,0.84,&quot;&quot;],
+    [&quot;Jun 27&quot;,&quot;Croatia&quot;,&quot;Ghana&quot;,1.81,0.58,&quot;&quot;],
+    [&quot;Jun 27&quot;,&quot;Panama&quot;,&quot;England&quot;,0.24,3.13,&quot;&quot;],
+    [&quot;Jun 27&quot;,&quot;Colombia&quot;,&quot;Portugal&quot;,0.82,1.73,&quot;&quot;],
+    [&quot;Jun 27&quot;,&quot;DR Congo&quot;,&quot;Uzbekistan&quot;,1.87,0.81,&quot;&quot;],
+    [&quot;Jun 28&quot;,&quot;Algeria&quot;,&quot;Austria&quot;,0.89,1.22,&quot;&quot;],
+    [&quot;Jun 28&quot;,&quot;Jordan&quot;,&quot;Argentina&quot;,0.24,2.86,&quot;&quot;],
+  ];
+
+  const pred = {
+    &quot;Bosnia &amp; Herzegovina vs Qatar&quot;: &quot;2-0&quot;,
+    &quot;Switzerland vs Canada&quot;: &quot;1-1&quot;,
+    &quot;Scotland vs Brazil&quot;: &quot;0-1&quot;,
+    &quot;Morocco vs Haiti&quot;: &quot;2-0&quot;,
+    &quot;Czech Republic vs Mexico&quot;: &quot;0-1&quot;,
+    &quot;South Africa vs South Korea&quot;: &quot;0-1&quot;,
+    &quot;Curaçao vs Ivory Coast&quot;: &quot;0-2&quot;,
+    &quot;Ecuador vs Germany&quot;: &quot;0-1&quot;,
+    &quot;Japan vs Sweden&quot;: &quot;1-0&quot;,
+    &quot;Tunisia vs Netherlands&quot;: &quot;0-2&quot;,
+    &quot;Paraguay vs Australia&quot;: &quot;1-1&quot;,
+    &quot;Turkey vs USA&quot;: &quot;0-1&quot;,
+    &quot;Norway vs France&quot;: &quot;0-1&quot;,
+    &quot;Senegal vs Iraq&quot;: &quot;2-0&quot;,
+    &quot;Cape Verde vs Saudi Arabia&quot;: &quot;1-1&quot;,
+    &quot;Uruguay vs Spain&quot;: &quot;0-1&quot;,
+    &quot;New Zealand vs Belgium&quot;: &quot;0-2&quot;,
+    &quot;Egypt vs Iran&quot;: &quot;0-1&quot;,
+    &quot;Croatia vs Ghana&quot;: &quot;1-0&quot;,
+    &quot;Panama vs England&quot;: &quot;0-2&quot;,
+    &quot;Colombia vs Portugal&quot;: &quot;0-1&quot;,
+    &quot;DR Congo vs Uzbekistan&quot;: &quot;1-0&quot;,
+    &quot;Algeria vs Austria&quot;: &quot;1-1&quot;,
+    &quot;Jordan vs Argentina&quot;: &quot;0-2&quot;,
+  };
+
+  function outcome(p, actual) {
+    if (!actual) return &apos;&lt;span class=&quot;wc-hit tbd&quot;&gt;–&lt;/span&gt;&apos;;
+    if (p === actual) return &apos;&lt;span class=&quot;wc-hit exact&quot;&gt;exact&lt;/span&gt;&apos;;
+    const pr = p.split(&apos;-&apos;), ar = actual.split(&apos;-&apos;);
+    const ps = Math.sign(pr[0]-pr[1]), as = Math.sign(ar[0]-ar[1]);
+    return ps === as
+      ? &apos;&lt;span class=&quot;wc-hit result&quot;&gt;result&lt;/span&gt;&apos;
+      : &apos;&lt;span class=&quot;wc-hit wrong&quot;&gt;wrong&lt;/span&gt;&apos;;
+  }
+
+  const tb = document.getElementById(&apos;wc-tbody-r3&apos;);
+  m.forEach(function(r) {
+    const key = r[1]+&apos; vs &apos;+r[2];
+    const p = pred[key] || (Math.round(r[3])+&apos;-&apos;+Math.round(r[4]));
+    const actual = r[5];
+    tb.innerHTML +=
+      &apos;&lt;tr&gt;&apos; +
+      &apos;&lt;td class=&quot;wc-date&quot;&gt;&apos;+r[0]+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;td&gt;&apos;+r[1]+&apos; &lt;span style=&quot;color:#ccc&quot;&gt;vs&lt;/span&gt; &apos;+r[2]+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;td class=&quot;wc-score&quot;&gt;&apos;+p+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;td class=&quot;wc-xg&quot;&gt;&apos;+r[3].toFixed(2)+&apos; / &apos;+r[4].toFixed(2)+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;td class=&quot;wc-actual&quot;&gt;&apos;+(actual||&apos;–&apos;)+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;td&gt;&apos;+outcome(p, actual||&apos;&apos;)+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;/tr&gt;&apos;;
+  });
+})();
+&lt;/script&gt;
 
 &lt;h2 id=&quot;wrap-up&quot;&gt;Wrap Up&lt;/h2&gt;
 
 &lt;p&gt;Updated June 12, 2026&lt;/p&gt;
 
-&lt;p&gt;I don’t have much to say right now other than GO CANADA, and hopefully these predictions can serve me well. I will at the least update this post at the end of every groupstage round, but hopefully more often than that. Anyways I appreciate those who made it this far and best of luck to you and your team you will be cheering on this World Cup!&lt;/p&gt;</content><author><name></name></author><category term="notes" /><summary type="html"></summary></entry><entry><title type="html">Welcome to Jekyll!</title><link href="http://localhost:4000/blog/jekyll/update/2026/05/06/example.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2026-05-06T12:42:24-04:00</published><updated>2026-05-06T12:42:24-04:00</updated><id>http://localhost:4000/blog/jekyll/update/2026/05/06/example</id><content type="html" xml:base="http://localhost:4000/blog/jekyll/update/2026/05/06/example.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
-
-&lt;p&gt;Jekyll requires blog post files to be named according to the following format:&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YEAR-MONTH-DAY-title.MARKUP&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Where &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YEAR&lt;/code&gt; is a four-digit number, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MONTH&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DAY&lt;/code&gt; are both two-digit numbers, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MARKUP&lt;/code&gt; is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
-
-&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;Tom&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &apos;Hi, Tom&apos; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.</summary></entry><entry><title type="html">Analyzing Second Ball Wins</title><link href="http://localhost:4000/blog/notes/2026/05/06/analyzingSB.html" rel="alternate" type="text/html" title="Analyzing Second Ball Wins" /><published>2026-05-06T00:00:00-04:00</published><updated>2026-05-06T00:00:00-04:00</updated><id>http://localhost:4000/blog/notes/2026/05/06/analyzingSB</id><content type="html" xml:base="http://localhost:4000/blog/notes/2026/05/06/analyzingSB.html">&lt;p&gt;Brief introduction goes here&lt;/p&gt;
-
-&lt;h2 id=&quot;background&quot;&gt;Background&lt;/h2&gt;
-&lt;p&gt;Here we talk about Hang’s work and other industry work&lt;/p&gt;
-
-&lt;h2 id=&quot;updated-definitions-and-methodology&quot;&gt;Updated Definitions and Methodology&lt;/h2&gt;</content><author><name></name></author><category term="notes" /><summary type="html">Brief introduction goes here</summary></entry></feed>
+&lt;p&gt;I don’t have much to say right now other than GO CANADA, and hopefully these predictions can serve me well. I will at the least update this post at the end of every groupstage round, but hopefully more often than that. Anyways I appreciate those who made it this far and best of luck to you and your team you will be cheering on this World Cup!&lt;/p&gt;</content><author><name></name></author><category term="notes" /><summary type="html"></summary></entry></feed>

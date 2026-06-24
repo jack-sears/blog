@@ -271,7 +271,7 @@ For matchday 2 I'll be nudging λ upward selectively for mismatched fixtures rat
 
 ### Group Stage 2
 
-Updated June 19
+Updated June 24
 
 Only change I've made is a few 3-0 games bumped to 4-0. Purely based on strong teams playing weaker and the estimated xG being above 3 for the stronger team.
 
@@ -313,26 +313,26 @@ Only change I've made is a few 3-0 games bumped to 4-0. Purely based on strong t
     ["Jun 18","Switzerland","Bosnia & Herzegovina",2.01,0.55,"4-1"],
     ["Jun 18","Canada","Qatar",2.36,0.29,"6-0"],
     ["Jun 19","Mexico","South Korea",1.73,0.67,"1-0"],
-    ["Jun 19","USA","Australia",1.83,0.71,null],
-    ["Jun 19","Scotland","Morocco",0.76,1.58,null],
-    ["Jun 20","Brazil","Haiti",3.69,0.15,null],
-    ["Jun 20","Turkey","Paraguay",1.41,0.92,null],
-    ["Jun 20","Netherlands","Sweden",2.02,0.64,null],
-    ["Jun 20","Germany","Ivory Coast",2.17,0.60,null],
-    ["Jun 21","Ecuador","Curaçao",2.74,0.24,null],
-    ["Jun 21","Tunisia","Japan",0.59,1.80,null],
-    ["Jun 21","Spain","Saudi Arabia",3.12,0.15,null],
-    ["Jun 21","Belgium","Iran",2.30,0.40,null],
-    ["Jun 21","Uruguay","Cape Verde",2.23,0.43,null],
-    ["Jun 22","New Zealand","Egypt",0.63,1.77,null],
-    ["Jun 22","Argentina","Austria",2.01,0.61,null],
-    ["Jun 22","France","Iraq",3.12,0.15,null],
-    ["Jun 23","Norway","Senegal",1.60,1.02,null],
-    ["Jun 23","Jordan","Algeria",0.51,2.15,null],
-    ["Jun 23","Portugal","Uzbekistan",2.87,0.32,null],
-    ["Jun 23","England","Ghana",2.57,0.36,null],
-    ["Jun 23","Panama","Croatia",0.50,2.07,null],
-    ["Jun 24","Colombia","DR Congo",2.03,0.41,null],
+    ["Jun 19","USA","Australia",1.83,0.71,"2-0"],
+    ["Jun 19","Scotland","Morocco",0.76,1.58,"0-1"],
+    ["Jun 20","Brazil","Haiti",3.69,0.15,"3-0"],
+    ["Jun 20","Turkey","Paraguay",1.41,0.92,"0-1"],
+    ["Jun 20","Netherlands","Sweden",2.02,0.64,"5-1"],
+    ["Jun 20","Germany","Ivory Coast",2.17,0.60,"2-1"],
+    ["Jun 21","Ecuador","Curaçao",2.74,0.24,"0-0"],
+    ["Jun 21","Tunisia","Japan",0.59,1.80,"0-4"],
+    ["Jun 21","Spain","Saudi Arabia",3.12,0.15,"4-0"],
+    ["Jun 21","Belgium","Iran",2.30,0.40,"0-0"],
+    ["Jun 21","Uruguay","Cape Verde",2.23,0.43,"2-2"],
+    ["Jun 22","New Zealand","Egypt",0.63,1.77,"1-3"],
+    ["Jun 22","Argentina","Austria",2.01,0.61,"2-0"],
+    ["Jun 22","France","Iraq",3.12,0.15,"3-0"],
+    ["Jun 23","Norway","Senegal",1.60,1.02,"3-2"],
+    ["Jun 23","Jordan","Algeria",0.51,2.15,"1-2"],
+    ["Jun 23","Portugal","Uzbekistan",2.87,0.32,"5-0"],
+    ["Jun 23","England","Ghana",2.57,0.36,"0-0"],
+    ["Jun 23","Panama","Croatia",0.50,2.07,"0-1"],
+    ["Jun 24","Colombia","DR Congo",2.03,0.41,"1-0"],
   ];
 
   const pred = {
@@ -390,9 +390,140 @@ Only change I've made is a few 3-0 games bumped to 4-0. Purely based on strong t
 })();
 </script>
 
+After round 2, a few notes. The model has predicted 29/48 games, increasing accuracy to around 60%. I can't be mad at this and it is probably performing a bit better than I expected. Unfortunately, my idea of bumping some 3-0 games up to 4-0 has backfired because I bumped the wrong 3-0's up and left the ones that actually went 4-0 as 3-0. I should have probably either bumped all to 4-0 or left all at 3-0, to try and collect as many exact scores as possible.
+
+Where the model has dissapointed is in exact scores. I have only got 3 exact scores so far, which means I am missing out on a lot of points. The tournament has seen nineteen 4+ goal games and I have only predicted 3. There were also a combined twelve 0 or 1 goal games where I predicted none. The model predicted thirty-one 3 goal games and only six occurred. 2 goal games were predicted fourteen times and actually happened eleven times. It clear we are predicting 3 goal games far too often and neglecting low scoring games. I think due to variance its much harder to predict high scoring games, so for round 3 we should focus our efforts on predicting more of the low-scoring outcomes.
+
 ### Group Stage 3
 
-TBP
+Updated June 24
+
+So now what? Going into the final group stage games I have created a decision tree to help make my predictions. I will go back to the model predictions in the knockouts.
+
+Are win probabilities within 20% of each other?
+ - → Yes: does one team have a clear incentive?
+ - -  → Yes: predict 1-0
+ - -  → No: predict 0-0 or 1-1, whichever's closer to prediction.
+ - → No (clear favourite): Does model predict 3-0 or higher?
+ - -  → Yes: drop to 2-0
+ - -  → No: drop predicted goals by 1 (2-1 → 1-0, 2-0 → 1-0)
+
+With this set of logic the idea is to target the low-scoring games we have missed out on thus far. Given the final round I think a lot of teams will be set up very defensively with their tournaments on the line so I don't see why low-scoring shouldn't continue to happen. With that being said here are my picks:
+
+<style>
+.wc-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.wc-table th { text-align: left; font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #888; padding: 6px 10px; border-bottom: 1px solid #e8e8e8; }
+.wc-table td { padding: 8px 10px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
+.wc-table tr:last-child td { border-bottom: none; }
+.wc-table tr:hover td { background: #fafafa; }
+.wc-score { font-weight: 600; font-size: 15px; font-family: monospace; white-space: nowrap; }
+.wc-actual { font-family: monospace; font-size: 14px; white-space: nowrap; }
+.wc-xg { font-size: 12px; color: #999; font-family: monospace; white-space: nowrap; }
+.wc-date { font-size: 11px; color: #aaa; white-space: nowrap; }
+.wc-hit { font-size: 11px; padding: 1px 6px; border-radius: 3px; white-space: nowrap; }
+.wc-hit.exact  { background: #edf7ee; color: #2d7a35; }
+.wc-hit.result { background: #fdf3e3; color: #a06010; }
+.wc-hit.wrong  { background: #fdf0f0; color: #a03030; }
+.wc-hit.tbd    { color: #ccc; }
+</style>
+
+<table class="wc-table">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Match</th>
+      <th>Predicted</th>
+      <th>xG</th>
+      <th>Actual</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="wc-tbody-r3"></tbody>
+</table>
+
+<script>
+(function() {
+  const m = [
+    ["Jun 24","Bosnia & Herzegovina","Qatar",2.65,0.47,""],
+    ["Jun 24","Switzerland","Canada",1.44,1.05,""],
+    ["Jun 24","Scotland","Brazil",0.33,2.47,""],
+    ["Jun 24","Morocco","Haiti",2.94,0.21,""],
+    ["Jun 25","Czech Republic","Mexico",0.87,1.71,""],
+    ["Jun 25","South Africa","South Korea",0.57,2.00,""],
+    ["Jun 25","Curaçao","Ivory Coast",0.20,3.05,""],
+    ["Jun 25","Ecuador","Germany",0.93,1.93,""],
+    ["Jun 25","Japan","Sweden",2.00,0.87,""],
+    ["Jun 25","Tunisia","Netherlands",0.16,3.17,""],
+    ["Jun 26","Paraguay","Australia",1.14,0.84,""],
+    ["Jun 26","Turkey","USA",1.01,1.89,""],
+    ["Jun 26","Norway","France",0.78,2.18,""],
+    ["Jun 26","Senegal","Iraq",2.93,0.29,""],
+    ["Jun 27","Cape Verde","Saudi Arabia",1.39,1.17,""],
+    ["Jun 27","Uruguay","Spain",0.49,2.23,""],
+    ["Jun 27","New Zealand","Belgium",0.23,2.95,""],
+    ["Jun 27","Egypt","Iran",1.26,0.84,""],
+    ["Jun 27","Croatia","Ghana",1.81,0.58,""],
+    ["Jun 27","Panama","England",0.24,3.13,""],
+    ["Jun 27","Colombia","Portugal",0.82,1.73,""],
+    ["Jun 27","DR Congo","Uzbekistan",1.87,0.81,""],
+    ["Jun 28","Algeria","Austria",0.89,1.22,""],
+    ["Jun 28","Jordan","Argentina",0.24,2.86,""],
+  ];
+
+  const pred = {
+    "Bosnia & Herzegovina vs Qatar": "2-0",
+    "Switzerland vs Canada": "1-1",
+    "Scotland vs Brazil": "0-1",
+    "Morocco vs Haiti": "2-0",
+    "Czech Republic vs Mexico": "0-1",
+    "South Africa vs South Korea": "0-1",
+    "Curaçao vs Ivory Coast": "0-2",
+    "Ecuador vs Germany": "0-1",
+    "Japan vs Sweden": "1-0",
+    "Tunisia vs Netherlands": "0-2",
+    "Paraguay vs Australia": "1-1",
+    "Turkey vs USA": "0-1",
+    "Norway vs France": "0-1",
+    "Senegal vs Iraq": "2-0",
+    "Cape Verde vs Saudi Arabia": "1-1",
+    "Uruguay vs Spain": "0-1",
+    "New Zealand vs Belgium": "0-2",
+    "Egypt vs Iran": "0-1",
+    "Croatia vs Ghana": "1-0",
+    "Panama vs England": "0-2",
+    "Colombia vs Portugal": "0-1",
+    "DR Congo vs Uzbekistan": "1-0",
+    "Algeria vs Austria": "1-1",
+    "Jordan vs Argentina": "0-2",
+  };
+
+  function outcome(p, actual) {
+    if (!actual) return '<span class="wc-hit tbd">–</span>';
+    if (p === actual) return '<span class="wc-hit exact">exact</span>';
+    const pr = p.split('-'), ar = actual.split('-');
+    const ps = Math.sign(pr[0]-pr[1]), as = Math.sign(ar[0]-ar[1]);
+    return ps === as
+      ? '<span class="wc-hit result">result</span>'
+      : '<span class="wc-hit wrong">wrong</span>';
+  }
+
+  const tb = document.getElementById('wc-tbody-r3');
+  m.forEach(function(r) {
+    const key = r[1]+' vs '+r[2];
+    const p = pred[key] || (Math.round(r[3])+'-'+Math.round(r[4]));
+    const actual = r[5];
+    tb.innerHTML +=
+      '<tr>' +
+      '<td class="wc-date">'+r[0]+'</td>' +
+      '<td>'+r[1]+' <span style="color:#ccc">vs</span> '+r[2]+'</td>' +
+      '<td class="wc-score">'+p+'</td>' +
+      '<td class="wc-xg">'+r[3].toFixed(2)+' / '+r[4].toFixed(2)+'</td>' +
+      '<td class="wc-actual">'+(actual||'–')+'</td>' +
+      '<td>'+outcome(p, actual||'')+'</td>' +
+      '</tr>';
+  });
+})();
+</script>
 
 [superbru]: https://www.superbru.com/
 [historical]: https://www.footballhistory.org/world-cup/statistics.html

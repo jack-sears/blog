@@ -444,30 +444,30 @@ With this set of logic the idea is to target the low-scoring games we have misse
 <script>
 (function() {
   const m = [
-    ["Jun 24","Bosnia & Herzegovina","Qatar",2.65,0.47,""],
-    ["Jun 24","Switzerland","Canada",1.44,1.05,""],
-    ["Jun 24","Scotland","Brazil",0.33,2.47,""],
-    ["Jun 24","Morocco","Haiti",2.94,0.21,""],
-    ["Jun 25","Czech Republic","Mexico",0.87,1.71,""],
-    ["Jun 25","South Africa","South Korea",0.57,2.00,""],
-    ["Jun 25","Curaçao","Ivory Coast",0.20,3.05,""],
-    ["Jun 25","Ecuador","Germany",0.93,1.93,""],
-    ["Jun 25","Japan","Sweden",2.00,0.87,""],
-    ["Jun 25","Tunisia","Netherlands",0.16,3.17,""],
-    ["Jun 26","Paraguay","Australia",1.14,0.84,""],
-    ["Jun 26","Turkey","USA",1.01,1.89,""],
-    ["Jun 26","Norway","France",0.78,2.18,""],
-    ["Jun 26","Senegal","Iraq",2.93,0.29,""],
-    ["Jun 27","Cape Verde","Saudi Arabia",1.39,1.17,""],
-    ["Jun 27","Uruguay","Spain",0.49,2.23,""],
-    ["Jun 27","New Zealand","Belgium",0.23,2.95,""],
-    ["Jun 27","Egypt","Iran",1.26,0.84,""],
-    ["Jun 27","Croatia","Ghana",1.81,0.58,""],
-    ["Jun 27","Panama","England",0.24,3.13,""],
-    ["Jun 27","Colombia","Portugal",0.82,1.73,""],
-    ["Jun 27","DR Congo","Uzbekistan",1.87,0.81,""],
-    ["Jun 28","Algeria","Austria",0.89,1.22,""],
-    ["Jun 28","Jordan","Argentina",0.24,2.86,""],
+    ["Jun 24","Bosnia & Herzegovina","Qatar",2.65,0.47,"3-1"],
+    ["Jun 24","Switzerland","Canada",1.44,1.05,"2-1"],
+    ["Jun 24","Scotland","Brazil",0.33,2.47,"0-3"],
+    ["Jun 24","Morocco","Haiti",2.94,0.21,"4-2"],
+    ["Jun 25","Czech Republic","Mexico",0.87,1.71,"0-3"],
+    ["Jun 25","South Africa","South Korea",0.57,2.00,"1-0"],
+    ["Jun 25","Curaçao","Ivory Coast",0.20,3.05,"0-2"],
+    ["Jun 25","Ecuador","Germany",0.93,1.93,"2-1"],
+    ["Jun 25","Japan","Sweden",2.00,0.87,"1-1"],
+    ["Jun 25","Tunisia","Netherlands",0.16,3.17,"1-3"],
+    ["Jun 26","Paraguay","Australia",1.14,0.84,"0-0"],
+    ["Jun 26","Turkey","USA",1.01,1.89,"3-2"],
+    ["Jun 26","Norway","France",0.78,2.18,"1-4"],
+    ["Jun 26","Senegal","Iraq",2.93,0.29,"5-0"],
+    ["Jun 27","Cape Verde","Saudi Arabia",1.39,1.17,"0-0"],
+    ["Jun 27","Uruguay","Spain",0.49,2.23,"0-1"],
+    ["Jun 27","New Zealand","Belgium",0.23,2.95,"1-5"],
+    ["Jun 27","Egypt","Iran",1.26,0.84,"1-1"],
+    ["Jun 27","Croatia","Ghana",1.81,0.58,"2-1"],
+    ["Jun 27","Panama","England",0.24,3.13,"0-2"],
+    ["Jun 27","Colombia","Portugal",0.82,1.73,"0-0"],
+    ["Jun 27","DR Congo","Uzbekistan",1.87,0.81,"3-1"],
+    ["Jun 28","Algeria","Austria",0.89,1.22,"3-3"],
+    ["Jun 28","Jordan","Argentina",0.24,2.86,"1-3"],
   ];
 
   const pred = {
@@ -511,6 +511,91 @@ With this set of logic the idea is to target the low-scoring games we have misse
   m.forEach(function(r) {
     const key = r[1]+' vs '+r[2];
     const p = pred[key] || (Math.round(r[3])+'-'+Math.round(r[4]));
+    const actual = r[5];
+    tb.innerHTML +=
+      '<tr>' +
+      '<td class="wc-date">'+r[0]+'</td>' +
+      '<td>'+r[1]+' <span style="color:#ccc">vs</span> '+r[2]+'</td>' +
+      '<td class="wc-score">'+p+'</td>' +
+      '<td class="wc-xg">'+r[3].toFixed(2)+' / '+r[4].toFixed(2)+'</td>' +
+      '<td class="wc-actual">'+(actual||'–')+'</td>' +
+      '<td>'+outcome(p, actual||'')+'</td>' +
+      '</tr>';
+  });
+})();
+</script>
+
+### Round of 32
+
+Updated June 29
+
+Round of 32 up next. I ended up going 17/24 correct outcomes with 3 exact last round. The method of predicting low scoring, got us a good return but not much different that the model in round 2. Because of this and the fact that knockouts begin, I am going to go back to using the model predictions as is. We will reassess after the round of 32. In the league I am playing in I currently in 67/411. So not great but not terrible either. Last round shot us up a bunch so hopefully we will conintue to climb. Anyways here are my predictions.
+
+<style>
+.wc-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.wc-table th { text-align: left; font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #888; padding: 6px 10px; border-bottom: 1px solid #e8e8e8; }
+.wc-table td { padding: 8px 10px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
+.wc-table tr:last-child td { border-bottom: none; }
+.wc-table tr:hover td { background: #fafafa; }
+.wc-score { font-weight: 600; font-size: 15px; font-family: monospace; white-space: nowrap; }
+.wc-actual { font-family: monospace; font-size: 14px; white-space: nowrap; }
+.wc-xg { font-size: 12px; color: #999; font-family: monospace; white-space: nowrap; }
+.wc-date { font-size: 11px; color: #aaa; white-space: nowrap; }
+.wc-hit { font-size: 11px; padding: 1px 6px; border-radius: 3px; white-space: nowrap; }
+.wc-hit.exact  { background: #edf7ee; color: #2d7a35; }
+.wc-hit.result { background: #fdf3e3; color: #a06010; }
+.wc-hit.wrong  { background: #fdf0f0; color: #a03030; }
+.wc-hit.tbd    { color: #ccc; }
+</style>
+
+<table class="wc-table">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Match</th>
+      <th>Predicted</th>
+      <th>xG</th>
+      <th>Actual</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="wc-tbody-r16"></tbody>
+</table>
+
+<script>
+(function() {
+  const m = [
+    ["Jun 28","South Africa","Canada",0.54,1.85,""],
+    ["Jun 29","Brazil","Japan",1.98,0.65,""],
+    ["Jun 29","Germany","Paraguay",2.58,0.35,""],
+    ["Jun 30","Netherlands","Morocco",1.52,0.91,""],
+    ["Jun 30","Ivory Coast","Norway",0.96,1.76,""],
+    ["Jun 30","France","Sweden",2.91,0.33,""],
+    ["Jul 1","Mexico","Ecuador",1.30,0.78,""],
+    ["Jul 1","England","DR Congo",2.50,0.24,""],
+    ["Jul 1","Belgium","Senegal",1.47,0.87,""],
+    ["Jul 2","USA","Bosnia & Herzegovina",2.43,0.36,""],
+    ["Jul 2","Spain","Austria",2.42,0.26,""],
+    ["Jul 2","Portugal","Croatia",1.77,0.67,""],
+    ["Jul 3","Switzerland","Algeria",1.79,0.78,""],
+    ["Jul 3","Australia","Egypt",0.89,1.19,""],
+    ["Jul 3","Argentina","Cape Verde",2.91,0.17,""],
+    ["Jul 4","Colombia","Ghana",1.92,0.45,""],
+  ];
+
+  function outcome(p, actual) {
+    if (!actual) return '<span class="wc-hit tbd">–</span>';
+    if (p === actual) return '<span class="wc-hit exact">exact</span>';
+    const pr = p.split('-'), ar = actual.split('-');
+    const ps = Math.sign(pr[0]-pr[1]), as = Math.sign(ar[0]-ar[1]);
+    return ps === as
+      ? '<span class="wc-hit result">result</span>'
+      : '<span class="wc-hit wrong">wrong</span>';
+  }
+
+  const tb = document.getElementById('wc-tbody-r16');
+  m.forEach(function(r) {
+    const p = Math.round(r[3])+'-'+Math.round(r[4]);
     const actual = r[5];
     tb.innerHTML +=
       '<tr>' +

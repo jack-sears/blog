@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2026-06-24T12:08:27-04:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">Jack’s Blog</title><subtitle>A blog where I post about the projects and ideas I have been working on relating to football analytics.</subtitle><entry><title type="html">The Quantification and Analysis of Second Balls in Football Part 1</title><link href="http://localhost:4000/blog/notes/2026/06/19/quantifyingSB.html" rel="alternate" type="text/html" title="The Quantification and Analysis of Second Balls in Football Part 1" /><published>2026-06-19T00:00:00-04:00</published><updated>2026-06-19T00:00:00-04:00</updated><id>http://localhost:4000/blog/notes/2026/06/19/quantifyingSB</id><content type="html" xml:base="http://localhost:4000/blog/notes/2026/06/19/quantifyingSB.html">&lt;p&gt;The evaluation of in-game actions of football players and how they affect the outcome
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2026-06-29T11:51:16-04:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">Jack’s Blog</title><subtitle>A blog where I post about the projects and ideas I have been working on relating to football analytics.</subtitle><entry><title type="html">The Quantification and Analysis of Second Balls in Football Part 1</title><link href="http://localhost:4000/blog/notes/2026/06/19/quantifyingSB.html" rel="alternate" type="text/html" title="The Quantification and Analysis of Second Balls in Football Part 1" /><published>2026-06-19T00:00:00-04:00</published><updated>2026-06-19T00:00:00-04:00</updated><id>http://localhost:4000/blog/notes/2026/06/19/quantifyingSB</id><content type="html" xml:base="http://localhost:4000/blog/notes/2026/06/19/quantifyingSB.html">&lt;p&gt;The evaluation of in-game actions of football players and how they affect the outcome
 of a game is an important part of football analytics &lt;a href=&quot;https://link.springer.com/book/10.1007/978-3-658-21177-6&quot;&gt;(Link, 2018)&lt;/a&gt;. Unlike traditional
 statistics that focus on goals and assists, evaluating other actions that players perform
 looks deeper into the nuances of player behaviour and decision-making.&lt;/p&gt;
@@ -987,30 +987,30 @@ or analyzing the value of winning second balls and how to do so successfully. Th
 &lt;script&gt;
 (function() {
   const m = [
-    [&quot;Jun 24&quot;,&quot;Bosnia &amp; Herzegovina&quot;,&quot;Qatar&quot;,2.65,0.47,&quot;&quot;],
-    [&quot;Jun 24&quot;,&quot;Switzerland&quot;,&quot;Canada&quot;,1.44,1.05,&quot;&quot;],
-    [&quot;Jun 24&quot;,&quot;Scotland&quot;,&quot;Brazil&quot;,0.33,2.47,&quot;&quot;],
-    [&quot;Jun 24&quot;,&quot;Morocco&quot;,&quot;Haiti&quot;,2.94,0.21,&quot;&quot;],
-    [&quot;Jun 25&quot;,&quot;Czech Republic&quot;,&quot;Mexico&quot;,0.87,1.71,&quot;&quot;],
-    [&quot;Jun 25&quot;,&quot;South Africa&quot;,&quot;South Korea&quot;,0.57,2.00,&quot;&quot;],
-    [&quot;Jun 25&quot;,&quot;Curaçao&quot;,&quot;Ivory Coast&quot;,0.20,3.05,&quot;&quot;],
-    [&quot;Jun 25&quot;,&quot;Ecuador&quot;,&quot;Germany&quot;,0.93,1.93,&quot;&quot;],
-    [&quot;Jun 25&quot;,&quot;Japan&quot;,&quot;Sweden&quot;,2.00,0.87,&quot;&quot;],
-    [&quot;Jun 25&quot;,&quot;Tunisia&quot;,&quot;Netherlands&quot;,0.16,3.17,&quot;&quot;],
-    [&quot;Jun 26&quot;,&quot;Paraguay&quot;,&quot;Australia&quot;,1.14,0.84,&quot;&quot;],
-    [&quot;Jun 26&quot;,&quot;Turkey&quot;,&quot;USA&quot;,1.01,1.89,&quot;&quot;],
-    [&quot;Jun 26&quot;,&quot;Norway&quot;,&quot;France&quot;,0.78,2.18,&quot;&quot;],
-    [&quot;Jun 26&quot;,&quot;Senegal&quot;,&quot;Iraq&quot;,2.93,0.29,&quot;&quot;],
-    [&quot;Jun 27&quot;,&quot;Cape Verde&quot;,&quot;Saudi Arabia&quot;,1.39,1.17,&quot;&quot;],
-    [&quot;Jun 27&quot;,&quot;Uruguay&quot;,&quot;Spain&quot;,0.49,2.23,&quot;&quot;],
-    [&quot;Jun 27&quot;,&quot;New Zealand&quot;,&quot;Belgium&quot;,0.23,2.95,&quot;&quot;],
-    [&quot;Jun 27&quot;,&quot;Egypt&quot;,&quot;Iran&quot;,1.26,0.84,&quot;&quot;],
-    [&quot;Jun 27&quot;,&quot;Croatia&quot;,&quot;Ghana&quot;,1.81,0.58,&quot;&quot;],
-    [&quot;Jun 27&quot;,&quot;Panama&quot;,&quot;England&quot;,0.24,3.13,&quot;&quot;],
-    [&quot;Jun 27&quot;,&quot;Colombia&quot;,&quot;Portugal&quot;,0.82,1.73,&quot;&quot;],
-    [&quot;Jun 27&quot;,&quot;DR Congo&quot;,&quot;Uzbekistan&quot;,1.87,0.81,&quot;&quot;],
-    [&quot;Jun 28&quot;,&quot;Algeria&quot;,&quot;Austria&quot;,0.89,1.22,&quot;&quot;],
-    [&quot;Jun 28&quot;,&quot;Jordan&quot;,&quot;Argentina&quot;,0.24,2.86,&quot;&quot;],
+    [&quot;Jun 24&quot;,&quot;Bosnia &amp; Herzegovina&quot;,&quot;Qatar&quot;,2.65,0.47,&quot;3-1&quot;],
+    [&quot;Jun 24&quot;,&quot;Switzerland&quot;,&quot;Canada&quot;,1.44,1.05,&quot;2-1&quot;],
+    [&quot;Jun 24&quot;,&quot;Scotland&quot;,&quot;Brazil&quot;,0.33,2.47,&quot;0-3&quot;],
+    [&quot;Jun 24&quot;,&quot;Morocco&quot;,&quot;Haiti&quot;,2.94,0.21,&quot;4-2&quot;],
+    [&quot;Jun 25&quot;,&quot;Czech Republic&quot;,&quot;Mexico&quot;,0.87,1.71,&quot;0-3&quot;],
+    [&quot;Jun 25&quot;,&quot;South Africa&quot;,&quot;South Korea&quot;,0.57,2.00,&quot;1-0&quot;],
+    [&quot;Jun 25&quot;,&quot;Curaçao&quot;,&quot;Ivory Coast&quot;,0.20,3.05,&quot;0-2&quot;],
+    [&quot;Jun 25&quot;,&quot;Ecuador&quot;,&quot;Germany&quot;,0.93,1.93,&quot;2-1&quot;],
+    [&quot;Jun 25&quot;,&quot;Japan&quot;,&quot;Sweden&quot;,2.00,0.87,&quot;1-1&quot;],
+    [&quot;Jun 25&quot;,&quot;Tunisia&quot;,&quot;Netherlands&quot;,0.16,3.17,&quot;1-3&quot;],
+    [&quot;Jun 26&quot;,&quot;Paraguay&quot;,&quot;Australia&quot;,1.14,0.84,&quot;0-0&quot;],
+    [&quot;Jun 26&quot;,&quot;Turkey&quot;,&quot;USA&quot;,1.01,1.89,&quot;3-2&quot;],
+    [&quot;Jun 26&quot;,&quot;Norway&quot;,&quot;France&quot;,0.78,2.18,&quot;1-4&quot;],
+    [&quot;Jun 26&quot;,&quot;Senegal&quot;,&quot;Iraq&quot;,2.93,0.29,&quot;5-0&quot;],
+    [&quot;Jun 27&quot;,&quot;Cape Verde&quot;,&quot;Saudi Arabia&quot;,1.39,1.17,&quot;0-0&quot;],
+    [&quot;Jun 27&quot;,&quot;Uruguay&quot;,&quot;Spain&quot;,0.49,2.23,&quot;0-1&quot;],
+    [&quot;Jun 27&quot;,&quot;New Zealand&quot;,&quot;Belgium&quot;,0.23,2.95,&quot;1-5&quot;],
+    [&quot;Jun 27&quot;,&quot;Egypt&quot;,&quot;Iran&quot;,1.26,0.84,&quot;1-1&quot;],
+    [&quot;Jun 27&quot;,&quot;Croatia&quot;,&quot;Ghana&quot;,1.81,0.58,&quot;2-1&quot;],
+    [&quot;Jun 27&quot;,&quot;Panama&quot;,&quot;England&quot;,0.24,3.13,&quot;0-2&quot;],
+    [&quot;Jun 27&quot;,&quot;Colombia&quot;,&quot;Portugal&quot;,0.82,1.73,&quot;0-0&quot;],
+    [&quot;Jun 27&quot;,&quot;DR Congo&quot;,&quot;Uzbekistan&quot;,1.87,0.81,&quot;3-1&quot;],
+    [&quot;Jun 28&quot;,&quot;Algeria&quot;,&quot;Austria&quot;,0.89,1.22,&quot;3-3&quot;],
+    [&quot;Jun 28&quot;,&quot;Jordan&quot;,&quot;Argentina&quot;,0.24,2.86,&quot;1-3&quot;],
   ];
 
   const pred = {
@@ -1054,6 +1054,91 @@ or analyzing the value of winning second balls and how to do so successfully. Th
   m.forEach(function(r) {
     const key = r[1]+&apos; vs &apos;+r[2];
     const p = pred[key] || (Math.round(r[3])+&apos;-&apos;+Math.round(r[4]));
+    const actual = r[5];
+    tb.innerHTML +=
+      &apos;&lt;tr&gt;&apos; +
+      &apos;&lt;td class=&quot;wc-date&quot;&gt;&apos;+r[0]+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;td&gt;&apos;+r[1]+&apos; &lt;span style=&quot;color:#ccc&quot;&gt;vs&lt;/span&gt; &apos;+r[2]+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;td class=&quot;wc-score&quot;&gt;&apos;+p+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;td class=&quot;wc-xg&quot;&gt;&apos;+r[3].toFixed(2)+&apos; / &apos;+r[4].toFixed(2)+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;td class=&quot;wc-actual&quot;&gt;&apos;+(actual||&apos;–&apos;)+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;td&gt;&apos;+outcome(p, actual||&apos;&apos;)+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;/tr&gt;&apos;;
+  });
+})();
+&lt;/script&gt;
+
+&lt;h3 id=&quot;round-of-32&quot;&gt;Round of 32&lt;/h3&gt;
+
+&lt;p&gt;Updated June 29&lt;/p&gt;
+
+&lt;p&gt;Round of 32 up next. I ended up going 17/24 correct outcomes with 3 exact last round. The method of predicting low scoring, got us a good return but not much different that the model in round 2. Because of this and the fact that knockouts begin, I am going to go back to using the model predictions as is. We will reassess after the round of 32. In the league I am playing in I currently in 67/411. So not great but not terrible either. Last round shot us up a bunch so hopefully we will conintue to climb. Anyways here are my predictions.&lt;/p&gt;
+
+&lt;style&gt;
+.wc-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.wc-table th { text-align: left; font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #888; padding: 6px 10px; border-bottom: 1px solid #e8e8e8; }
+.wc-table td { padding: 8px 10px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
+.wc-table tr:last-child td { border-bottom: none; }
+.wc-table tr:hover td { background: #fafafa; }
+.wc-score { font-weight: 600; font-size: 15px; font-family: monospace; white-space: nowrap; }
+.wc-actual { font-family: monospace; font-size: 14px; white-space: nowrap; }
+.wc-xg { font-size: 12px; color: #999; font-family: monospace; white-space: nowrap; }
+.wc-date { font-size: 11px; color: #aaa; white-space: nowrap; }
+.wc-hit { font-size: 11px; padding: 1px 6px; border-radius: 3px; white-space: nowrap; }
+.wc-hit.exact  { background: #edf7ee; color: #2d7a35; }
+.wc-hit.result { background: #fdf3e3; color: #a06010; }
+.wc-hit.wrong  { background: #fdf0f0; color: #a03030; }
+.wc-hit.tbd    { color: #ccc; }
+&lt;/style&gt;
+
+&lt;table class=&quot;wc-table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Date&lt;/th&gt;
+      &lt;th&gt;Match&lt;/th&gt;
+      &lt;th&gt;Predicted&lt;/th&gt;
+      &lt;th&gt;xG&lt;/th&gt;
+      &lt;th&gt;Actual&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody id=&quot;wc-tbody-r16&quot;&gt;&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;script&gt;
+(function() {
+  const m = [
+    [&quot;Jun 28&quot;,&quot;South Africa&quot;,&quot;Canada&quot;,0.54,1.85,&quot;&quot;],
+    [&quot;Jun 29&quot;,&quot;Brazil&quot;,&quot;Japan&quot;,1.98,0.65,&quot;&quot;],
+    [&quot;Jun 29&quot;,&quot;Germany&quot;,&quot;Paraguay&quot;,2.58,0.35,&quot;&quot;],
+    [&quot;Jun 30&quot;,&quot;Netherlands&quot;,&quot;Morocco&quot;,1.52,0.91,&quot;&quot;],
+    [&quot;Jun 30&quot;,&quot;Ivory Coast&quot;,&quot;Norway&quot;,0.96,1.76,&quot;&quot;],
+    [&quot;Jun 30&quot;,&quot;France&quot;,&quot;Sweden&quot;,2.91,0.33,&quot;&quot;],
+    [&quot;Jul 1&quot;,&quot;Mexico&quot;,&quot;Ecuador&quot;,1.30,0.78,&quot;&quot;],
+    [&quot;Jul 1&quot;,&quot;England&quot;,&quot;DR Congo&quot;,2.50,0.24,&quot;&quot;],
+    [&quot;Jul 1&quot;,&quot;Belgium&quot;,&quot;Senegal&quot;,1.47,0.87,&quot;&quot;],
+    [&quot;Jul 2&quot;,&quot;USA&quot;,&quot;Bosnia &amp; Herzegovina&quot;,2.43,0.36,&quot;&quot;],
+    [&quot;Jul 2&quot;,&quot;Spain&quot;,&quot;Austria&quot;,2.42,0.26,&quot;&quot;],
+    [&quot;Jul 2&quot;,&quot;Portugal&quot;,&quot;Croatia&quot;,1.77,0.67,&quot;&quot;],
+    [&quot;Jul 3&quot;,&quot;Switzerland&quot;,&quot;Algeria&quot;,1.79,0.78,&quot;&quot;],
+    [&quot;Jul 3&quot;,&quot;Australia&quot;,&quot;Egypt&quot;,0.89,1.19,&quot;&quot;],
+    [&quot;Jul 3&quot;,&quot;Argentina&quot;,&quot;Cape Verde&quot;,2.91,0.17,&quot;&quot;],
+    [&quot;Jul 4&quot;,&quot;Colombia&quot;,&quot;Ghana&quot;,1.92,0.45,&quot;&quot;],
+  ];
+
+  function outcome(p, actual) {
+    if (!actual) return &apos;&lt;span class=&quot;wc-hit tbd&quot;&gt;–&lt;/span&gt;&apos;;
+    if (p === actual) return &apos;&lt;span class=&quot;wc-hit exact&quot;&gt;exact&lt;/span&gt;&apos;;
+    const pr = p.split(&apos;-&apos;), ar = actual.split(&apos;-&apos;);
+    const ps = Math.sign(pr[0]-pr[1]), as = Math.sign(ar[0]-ar[1]);
+    return ps === as
+      ? &apos;&lt;span class=&quot;wc-hit result&quot;&gt;result&lt;/span&gt;&apos;
+      : &apos;&lt;span class=&quot;wc-hit wrong&quot;&gt;wrong&lt;/span&gt;&apos;;
+  }
+
+  const tb = document.getElementById(&apos;wc-tbody-r16&apos;);
+  m.forEach(function(r) {
+    const p = Math.round(r[3])+&apos;-&apos;+Math.round(r[4]);
     const actual = r[5];
     tb.innerHTML +=
       &apos;&lt;tr&gt;&apos; +

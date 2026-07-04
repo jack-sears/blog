@@ -565,22 +565,22 @@ Round of 32 up next. I ended up going 17/24 correct outcomes with 3 exact last r
 <script>
 (function() {
   const m = [
-    ["Jun 28","South Africa","Canada",0.54,1.85,""],
-    ["Jun 29","Brazil","Japan",1.98,0.65,""],
-    ["Jun 29","Germany","Paraguay",2.58,0.35,""],
-    ["Jun 30","Netherlands","Morocco",1.52,0.91,""],
-    ["Jun 30","Ivory Coast","Norway",0.96,1.76,""],
-    ["Jun 30","France","Sweden",2.91,0.33,""],
-    ["Jul 1","Mexico","Ecuador",1.30,0.78,""],
-    ["Jul 1","England","DR Congo",2.50,0.24,""],
-    ["Jul 1","Belgium","Senegal",1.47,0.87,""],
-    ["Jul 2","USA","Bosnia & Herzegovina",2.43,0.36,""],
-    ["Jul 2","Spain","Austria",2.42,0.26,""],
-    ["Jul 2","Portugal","Croatia",1.77,0.67,""],
-    ["Jul 3","Switzerland","Algeria",1.79,0.78,""],
-    ["Jul 3","Australia","Egypt",0.89,1.19,""],
-    ["Jul 3","Argentina","Cape Verde",2.91,0.17,""],
-    ["Jul 4","Colombia","Ghana",1.92,0.45,""],
+    ["Jun 28","South Africa","Canada",0.54,1.85,"1-2"],
+    ["Jun 29","Brazil","Japan",1.98,0.65,"2-1"],
+    ["Jun 29","Germany","Paraguay",2.58,0.35,"1-1"],
+    ["Jun 30","Netherlands","Morocco",1.52,0.91,"1-1"],
+    ["Jun 30","Ivory Coast","Norway",0.96,1.76,"1-2"],
+    ["Jun 30","France","Sweden",2.91,0.33,"3-0"],
+    ["Jul 1","Mexico","Ecuador",1.30,0.78,"2-0"],
+    ["Jul 1","England","DR Congo",2.50,0.24,"2-1"],
+    ["Jul 1","Belgium","Senegal",1.47,0.87,"3-2"],
+    ["Jul 2","USA","Bosnia & Herzegovina",2.43,0.36,"2-0"],
+    ["Jul 2","Spain","Austria",2.42,0.26,"3-0"],
+    ["Jul 2","Portugal","Croatia",1.77,0.67,"2-1"],
+    ["Jul 3","Switzerland","Algeria",1.79,0.78,"2-0"],
+    ["Jul 3","Australia","Egypt",0.89,1.19,"1-1"],
+    ["Jul 3","Argentina","Cape Verde",2.91,0.17,"3-2"],
+    ["Jul 4","Colombia","Ghana",1.92,0.45,"1-0"],
   ];
 
   function outcome(p, actual) {
@@ -610,6 +610,104 @@ Round of 32 up next. I ended up going 17/24 correct outcomes with 3 exact last r
 })();
 </script>
 
+We continue to climb getting up to around 30th in my office pool. Best round yet with 68% accuracy and 37.5% exact scorelines. I'll chalk it up that we were just due for some good fortune, but we will leave the model as is going into the next round and see how it holds. 
+
+### Round of 16
+
+Updated July 4
+
+Nothing new here, model predictions are as follows:
+
+<style>
+.wc-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.wc-table th { text-align: left; font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #888; padding: 6px 10px; border-bottom: 1px solid #e8e8e8; }
+.wc-table td { padding: 8px 10px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
+.wc-table tr:last-child td { border-bottom: none; }
+.wc-table tr:hover td { background: #fafafa; }
+.wc-score { font-weight: 600; font-size: 15px; font-family: monospace; white-space: nowrap; }
+.wc-actual { font-family: monospace; font-size: 14px; white-space: nowrap; }
+.wc-xg { font-size: 12px; color: #999; font-family: monospace; white-space: nowrap; }
+.wc-date { font-size: 11px; color: #aaa; white-space: nowrap; }
+.wc-hit { font-size: 11px; padding: 1px 6px; border-radius: 3px; white-space: nowrap; }
+.wc-hit.exact  { background: #edf7ee; color: #2d7a35; }
+.wc-hit.result { background: #fdf3e3; color: #a06010; }
+.wc-hit.wrong  { background: #fdf0f0; color: #a03030; }
+.wc-hit.tbd    { color: #ccc; }
+</style>
+
+<table class="wc-table">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Match</th>
+      <th>Predicted</th>
+      <th>xG</th>
+      <th>Actual</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="wc-tbody-r16b"></tbody>
+</table>
+
+<script>
+(function() {
+  const m = [
+    ["Jul 4","Canada","Morocco",0.68,1.72,""],
+    ["Jul 4","Paraguay","France",0.18,2.80,""],
+    ["Jul 5","Brazil","Norway",2.02,0.85,""],
+    ["Jul 6","Mexico","England",1.00,1.27,""],
+    ["Jul 6","Portugal","Spain",0.86,1.84,""],
+    ["Jul 7","USA","Belgium",1.37,1.47,""],
+    ["Jul 7","Argentina","Egypt",2.26,0.32,""],
+    ["Jul 7","Switzerland","Colombia",0.92,1.43,""],
+  ];
+
+  const pred = {
+    "Canada vs Morocco": "1-2",
+    "Paraguay vs France": "0-3",
+    "Brazil vs Norway": "2-1",
+    "Mexico vs England": "1-1",
+    "Portugal vs Spain": "1-2",
+    "USA vs Belgium": "1-1",
+    "Argentina vs Egypt": "2-0",
+    "Switzerland vs Colombia": "1-1",
+  };
+
+  function outcome(p, actual) {
+    if (!actual) return '<span class="wc-hit tbd">–</span>';
+    if (p === actual) return '<span class="wc-hit exact">exact</span>';
+    const pr = p.split('-'), ar = actual.split('-');
+    const ps = Math.sign(pr[0]-pr[1]), as = Math.sign(ar[0]-ar[1]);
+    return ps === as
+      ? '<span class="wc-hit result">result</span>'
+      : '<span class="wc-hit wrong">wrong</span>';
+  }
+
+  const tb = document.getElementById('wc-tbody-r16b');
+  m.forEach(function(r) {
+    const key = r[1]+' vs '+r[2];
+    const p = pred[key] || (Math.round(r[3])+'-'+Math.round(r[4]));
+    const actual = r[5];
+    tb.innerHTML +=
+      '<tr>' +
+      '<td class="wc-date">'+r[0]+'</td>' +
+      '<td>'+r[1]+' <span style="color:#ccc">vs</span> '+r[2]+'</td>' +
+      '<td class="wc-score">'+p+'</td>' +
+      '<td class="wc-xg">'+r[3].toFixed(2)+' / '+r[4].toFixed(2)+'</td>' +
+      '<td class="wc-actual">'+(actual||'–')+'</td>' +
+      '<td>'+outcome(p, actual||'')+'</td>' +
+      '</tr>';
+  });
+})();
+</script>
+
+## Wrap Up
+
+Updated June 12, 2026
+
+I don't have much to say right now other than GO CANADA, and hopefully these predictions can serve me well. I will at the least update this post at the end of every groupstage round, but hopefully more often than that. Anyways I appreciate those who made it this far and best of luck to you and your team you will be cheering on this World Cup! 
+
+
 [superbru]: https://www.superbru.com/
 [historical]: https://www.footballhistory.org/world-cup/statistics.html
 [historical2022]: https://www.thesoccerworldcups.com/statistics/wc_by_wc.php
@@ -619,9 +717,3 @@ Round of 32 up next. I ended up going 17/24 correct outcomes with 3 exact last r
 [brent]: https://mathworld.wolfram.com/BrentsMethod.html
 [1x2]: https://help.smarkets.com/hc/en-gb/articles/214108649-What-is-1X2-betting
 [overunder]: https://www.cbssports.com/betting/news/over-under-betting/
-
-## Wrap Up
-
-Updated June 12, 2026
-
-I don't have much to say right now other than GO CANADA, and hopefully these predictions can serve me well. I will at the least update this post at the end of every groupstage round, but hopefully more often than that. Anyways I appreciate those who made it this far and best of luck to you and your team you will be cheering on this World Cup! 

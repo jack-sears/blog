@@ -1,4 +1,203 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2026-06-29T11:51:16-04:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">Jack’s Blog</title><subtitle>A blog where I post about the projects and ideas I have been working on relating to football analytics.</subtitle><entry><title type="html">The Quantification and Analysis of Second Balls in Football Part 1</title><link href="http://localhost:4000/blog/notes/2026/06/19/quantifyingSB.html" rel="alternate" type="text/html" title="The Quantification and Analysis of Second Balls in Football Part 1" /><published>2026-06-19T00:00:00-04:00</published><updated>2026-06-19T00:00:00-04:00</updated><id>http://localhost:4000/blog/notes/2026/06/19/quantifyingSB</id><content type="html" xml:base="http://localhost:4000/blog/notes/2026/06/19/quantifyingSB.html">&lt;p&gt;The evaluation of in-game actions of football players and how they affect the outcome
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2026-07-09T14:11:22-04:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">Jack’s Blog</title><subtitle>A blog where I post about the projects and ideas I have been working on relating to football analytics.</subtitle><entry><title type="html">The Quantification and Analysis of Second Balls in Football Part 2</title><link href="http://localhost:4000/blog/notes/2026/06/25/analyzingSB.html" rel="alternate" type="text/html" title="The Quantification and Analysis of Second Balls in Football Part 2" /><published>2026-06-25T00:00:00-04:00</published><updated>2026-06-25T00:00:00-04:00</updated><id>http://localhost:4000/blog/notes/2026/06/25/analyzingSB</id><content type="html" xml:base="http://localhost:4000/blog/notes/2026/06/25/analyzingSB.html">&lt;p&gt;In [part 1][part1], we looked into building upon [Hang’s] framework for extracting second ball wins from data and incorporated our own ideas such as high-order balls to create player and team statistics and heatmaps. Feel free to give it a read but if you havn’t all you need to know for this post is the two following points.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;We have built the means to extract second balls from data.&lt;/li&gt;
+  &lt;li&gt;We look at the resulting possession following a second ball win, “the second ball possession”, which ends with a change in possession, stoppage in play, or a shot on target.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;On that note, let’s get into the analysis.&lt;/p&gt;
+
+&lt;h2 id=&quot;model-overview&quot;&gt;Model Overview&lt;/h2&gt;
+
+&lt;p&gt;A model is created to estimate the attacking value from winning a second ball. It is called Expected Second Ball Value (xSBV) and is split into three components.&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Location Prediction: where the ball is most likely to land.&lt;/li&gt;
+  &lt;li&gt;Win Probability: probability each team will win a second ball.&lt;/li&gt;
+  &lt;li&gt;Gain Difference: probability of scoring from a second ball win&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;And the model can be described below:&lt;/p&gt;
+
+\[\text{xSBV} = \underbrace{P(L)}_{\text{Location Probability}} \times \underbrace{P(W \mid L, \mathbf{X})}_{\text{Win Probability}} \times \underbrace{\Delta_{i,j}P(G_H \mid W)}_{\text{Gain Difference}}\]
+
+&lt;p&gt;where:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;$L$ is the predicted location of the second ball,&lt;/li&gt;
+  &lt;li&gt;$W$ denotes the winning team (binary outcome: $W = 1$ for Team A, $W = 0$ for Team B),&lt;/li&gt;
+  &lt;li&gt;$\mathbf{X}$ represents contextual features (e.g., player positions, duel type),&lt;/li&gt;
+  &lt;li&gt;$\Delta_{i,j}P(G_H \mid W)$ is the difference in probability of a goal occurring within H transitions after a second ball win, $W$, from location $i$ to $j$.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;pitch-discretization&quot;&gt;Pitch Discretization&lt;/h3&gt;
+
+&lt;p&gt;To simplify modelling, the pitch is partitioned into a 4x6 grid. Using this grid we can get meaningful distinction between defensive, midfield, and attacking areas, as well as central and wide.&lt;/p&gt;
+
+&lt;p&gt;PICTURE DisCRET herE&lt;/p&gt;
+
+&lt;h3 id=&quot;data-set-and-visualizaton&quot;&gt;Data Set and Visualizaton&lt;/h3&gt;
+
+&lt;p&gt;For the following analysis we use event data from the 2015/2016 English Premier League which can be found &lt;a href=&quot;https://github.com/statsbomb/open-data&quot;&gt;here&lt;/a&gt;, the StatsBomb open data github repo.&lt;/p&gt;
+
+&lt;p&gt;The distribution of second balls and where they occur can provide us with some insight about characteristics of second balls.&lt;/p&gt;
+
+&lt;p&gt;VISUAL SECOND BALLS&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Second balls in the defensive third are low when compared to other thirds.&lt;/li&gt;
+  &lt;li&gt;The middle third dominates the locations of second balls.&lt;/li&gt;
+  &lt;li&gt;Second balls are less likely to occur in wide areas.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;features&quot;&gt;Features&lt;/h3&gt;
+
+&lt;p&gt;Thirteen features were created to capture the spatial and contextual dynamics of second balls. These components were taken from the event  data&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Feature Name&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;pass_start_x, pass_start_y&lt;/td&gt;
+      &lt;td&gt;x and y coordinates of the starting location of the initial long ball.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;pass_end_x, pass_end_y&lt;/td&gt;
+      &lt;td&gt;x and y coordinates of the ending location of the initial long ball.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;pass_distance&lt;/td&gt;
+      &lt;td&gt;Length of the initial long ball.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;pass_angle&lt;/td&gt;
+      &lt;td&gt;Angle in radians of the initial long ball to the goal.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;dx, dy&lt;/td&gt;
+      &lt;td&gt;Change in x and y coordinates of the start and end location of the initial long ball.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;dist_to_centre&lt;/td&gt;
+      &lt;td&gt;Distance of the end location of the initial long ball to the centre of the field.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;is_defensive, is_midfield, is_attacking&lt;/td&gt;
+      &lt;td&gt;Boolean flags to indicate what third of the field the end location of the long ball occurs in.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;is_contested&lt;/td&gt;
+      &lt;td&gt;Boolean flag to indicate if the initial long ball is met with a duel, e.g. ADBA, ADAA, ADAB, or ADBB.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;second_x, second_y&lt;/td&gt;
+      &lt;td&gt;x and y coordinates of the second ball location.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;has_transition&lt;/td&gt;
+      &lt;td&gt;Boolean flag to indicate if there is a transition period in the second ball win or not.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;location-prediction&quot;&gt;Location Prediction&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Objective:&lt;/strong&gt; Predict the zonal location of where a second ball occurs given a list of features.&lt;/p&gt;
+
+&lt;h3 id=&quot;model-formulation&quot;&gt;Model Formulation&lt;/h3&gt;
+
+&lt;p&gt;Let $p_0$ be the initial duel location and $X_{context}$ be a list of features. The second ball location, $L$, is modelled as a stochastic outcome:&lt;/p&gt;
+
+\[P(L_z \mid p_0, X_{context})\]
+
+&lt;p&gt;where $L_z$ is the corresponding zone that location $L$ belongs to and $X_{context} = {\text{pass_start_x, pass_start_y, pass_distance, pass_angle, dx, dy, dist_to_centre, is_defensive, is_midfield, is_attacking, is_contested}}$&lt;/p&gt;
+
+&lt;h3 id=&quot;modelling-techniques&quot;&gt;Modelling Techniques&lt;/h3&gt;
+
+&lt;p&gt;The location prediction task is a multi-class classification problem [(48)][multi-class], where the goal is to predict the pitch zone where the ball is most likely to land after a contested aerial action or clearance. Each instance is assigned a class label based on the observed ball destination. To model this, the primary technique used is Extreme Gradient Boosting (XGBoost), a powerful gradient-boosted decision tree algorithm [(49)][xgboost]. Due to the multi-class nature of the task, the model is trained using softmax objective with log-loss as the optimization criterion. Model performance is evaluated using top-k accuracy metrics [(50)][topk], specifically top-1 and top-3, to assess how often the true location falls within the top predicted zones.&lt;/p&gt;
+
+&lt;h2 id=&quot;second-ball-winning-team-prediction&quot;&gt;Second Ball Winning Team Prediction&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Objective:&lt;/strong&gt; Estimate the probability that a given team wins the second ball at location L.&lt;/p&gt;
+
+&lt;h3 id=&quot;model-formulation-1&quot;&gt;Model Formulation&lt;/h3&gt;
+
+&lt;p&gt;A binary classifier predicts:&lt;/p&gt;
+
+\[P(W = Team_A \mid L, X_{context})\]
+
+&lt;p&gt;where $W$ denotes a second ball win and $X_{context} = {\text{pass_start_x, pass_start_y, pass_distance, pass_angle, dist_to_centre, is_defensive, is_midfield, is_attacking, is_contested, second_x, second_y, has_transition}}$&lt;/p&gt;
+
+&lt;h3 id=&quot;modelling-techniques-1&quot;&gt;Modelling Techniques&lt;/h3&gt;
+
+&lt;p&gt;The task of predicting which team will win a second ball is formulated as a binary classification problem [[52]][binary-classification], where the model must determine whether the team initiating the long ball or the opposing team will gain possession following the contest. Three machine learning models are used to address this problem: XGBoost, Random Forest, and Logistic Regression. Random Forest is an ensemble method that combines multiple decision trees to reach a single result, offering resistance to overfitting, especially when the feature space is large and noisy [[53]][random-forest]. Logistic Regression provides a simple and interpretable model, relying on a linear combination of input features passed through a sigmoid function to estimate the probability of each class [[54]][logistic-regression]. Comparing these models allows for an evaluation of accuracy and how each handles second balls differently.&lt;/p&gt;
+
+&lt;h2 id=&quot;gain&quot;&gt;Gain&lt;/h2&gt;
+
+&lt;p&gt;To quantify the probability that a goal occurs in the possession after a second ball win, a Markov chain model called gain is proposed. This approach is similar to [25][], [24][], and [32][], but adjusted to my problem, which captures both immediate and transitional danger of second balls. This is basically my attempt at using expected threat.&lt;/p&gt;
+
+&lt;h3 id=&quot;markov-chains-for-possession-transitions&quot;&gt;Markov Chains for Possession Transitions&lt;/h3&gt;
+
+&lt;p&gt;A Markov chain is a probabilistic model that represents a system transitioning between discrete states, where the probability of moving to the next state depends only on the current state and not the sequence of events that precedes it [[55]][cite-markov]. The assumption that the next state depends only on the current state, known as the Markov property, is a simplification that enables efficient modelling of second ball possessions. In reality, past actions may influence future outcomes, but this assumption is reasonable in a soccer context. For instance, there are many ways a team might advance the ball into the attacking third. However, once the ball is in the attacking third, the likelihood of scoring or losing possession is mainly determined by the current position and state of play, rather than the actions that led there. Absorbing states are such that once transitioned into, they cannot be left. In my context, there are two absorbing states: a goal and the end-of-possession. Transitions represent the movement of the ball between states. A transition matrix is constructed using observed transitions from the data, and convergence is used to estimate the long-term trends of the absorbing states.&lt;/p&gt;
+
+\[P = \begin{bmatrix}
+p_{z_0, z_0} &amp;amp; p_{z_0, z_1} &amp;amp; \cdots &amp;amp; p_{z_0, z_{23}} &amp;amp; p_{z_0, z_g} &amp;amp; p_{z_0, z_{eop}} \\
+p_{z_1, z_0} &amp;amp; p_{z_1, z_1} &amp;amp; \cdots &amp;amp; p_{z_1, z_{23}} &amp;amp; p_{z_1, z_g} &amp;amp; p_{z_1, z_{eop}} \\
+\vdots &amp;amp; \vdots &amp;amp; \ddots &amp;amp; \vdots &amp;amp; \vdots &amp;amp; \vdots \\
+p_{z_{23}, z_0} &amp;amp; p_{z_{23}, z_1} &amp;amp; \cdots &amp;amp; p_{z_{23}, z_{23}} &amp;amp; p_{z_{23}, z_g} &amp;amp; p_{z_{23}, z_{eop}} \\
+0 &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0 &amp;amp; 1 &amp;amp; 0 \\
+0 &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0 &amp;amp; 0 &amp;amp; 1
+\end{bmatrix} \tag{3.5}\]
+
+&lt;p&gt;The Markov chain framework is well-suited to this problem due to its interpretability, simplicity, and ability to capture the stochastic nature of ball progression in soccer. Formally, the possession evolution is modelled as a Markov process where:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Transient States&lt;/strong&gt;: The 24 grid zones ${z_1, \ldots, z_{24}}$&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Absorbing States&lt;/strong&gt;: Goal and End-of-Possession ${z_g, z_{eop}}$&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Transitions&lt;/strong&gt;: Probabilities $P(z_j \mid z_i, W)$ are estimated from historical data, conditioned on the winning team $W$.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;convergence-of-the-transition-matrix&quot;&gt;Convergence of the Transition Matrix&lt;/h3&gt;
+
+&lt;p&gt;Each multiplication of the transition matrix $P$ by itself represents an additional step in the possession sequence. Specifically, $P^n$ describes the probabilities of reaching any given state after $n$ transitions [[56]][cite-convergence]. For second ball possessions, the probability of a possession eventually reaching one of the absorbing states is of interest. By repeatedly multiplying the matrix by itself, these probabilities change and eventually stabilize. This process is known as &lt;em&gt;convergence&lt;/em&gt;. In practice, the matrix is repeatedly multiplied by itself until there is a small enough state difference between iterations. The difference threshold value is arbitrarily chosen, and in this work 0.025 is used. Convergence allows for the long-term distribution of second ball possessions to be determined.&lt;/p&gt;
+
+&lt;h3 id=&quot;model-formulation-2&quot;&gt;Model Formulation&lt;/h3&gt;
+
+&lt;h4 id=&quot;horizon-limited-markov-chain&quot;&gt;Horizon-Limited Markov Chain&lt;/h4&gt;
+
+&lt;p&gt;Let $\mathbf{P_t} \in \mathbb{R}^{24 \times 24}$ denote the probability transition matrix between transient states, and let $\mathbf{P_g} \in \mathbb{R}^{24 \times 1}$ denote the column vector of transition probabilities from each transient state into the absorbing state “Goal”. For a fixed horizon $H$, the cumulative probability of absorption in the Goal state within $H$ steps, or &lt;em&gt;gain&lt;/em&gt;, is&lt;/p&gt;
+
+\[P(G_H) = \left(\sum_{h=1}^{H} P_t^h\right) P_g \tag{3.6}\]
+
+&lt;p&gt;Where:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;$\mathbf{P_t^h}$ gives the distribution of transient states after exactly $h$ steps.&lt;/li&gt;
+  &lt;li&gt;multiplying by $\mathbf{P_g}$ projects these distributions onto the probability of transitioning to Goal.&lt;/li&gt;
+  &lt;li&gt;summing over $h$ accounts for scoring at any step up to horizon $H$.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;gain-difference&quot;&gt;Gain Difference&lt;/h4&gt;
+
+&lt;p&gt;The &lt;em&gt;gain difference&lt;/em&gt; $\Delta_{i,j}P(G_H)$ is defined as the difference between the cumulative probability of scoring a goal within $H$ steps of zones:&lt;/p&gt;
+
+\[\Delta_{i,j}P(G_H) = P(G_H)[j] - P(G_H)[i] \tag{3.7}\]
+
+&lt;p&gt;where $P(G_H)[n]$ is the $n$th element of $P(G_H)$, i.e., the probability of scoring within $H$ steps when starting in zone $z_n$.&lt;/p&gt;
+
+&lt;h4 id=&quot;expected-gain&quot;&gt;Expected Gain&lt;/h4&gt;
+
+&lt;p&gt;Let $\mathbf{P_{first}} \in \mathbb{R}^{24 \times 24}$ be the empirical distribution of the &lt;em&gt;first successful team action&lt;/em&gt; destination conditioned on the start zone. Multiplying the first-action matrix with the expected scoring value and then subtracting the probability of scoring in $H$ steps from starting zone $z_i$ gives the expected gain for the first action following a second ball win.&lt;/p&gt;
+
+\[xP(G_H, z_i) = P_{first} P(G_H) - P(G_H)[i] \tag{3.8}\]
+
+&lt;p&gt;Comparing expected gain to the actual gain players receive from second ball wins provides insight into which players underperform or overperform relative to expectations.&lt;/p&gt;
+
+&lt;h2 id=&quot;results&quot;&gt;Results&lt;/h2&gt;</content><author><name></name></author><category term="notes" /><summary type="html">In [part 1][part1], we looked into building upon [Hang’s] framework for extracting second ball wins from data and incorporated our own ideas such as high-order balls to create player and team statistics and heatmaps. Feel free to give it a read but if you havn’t all you need to know for this post is the two following points.</summary></entry><entry><title type="html">The Quantification and Analysis of Second Balls in Football Part 1</title><link href="http://localhost:4000/blog/notes/2026/06/19/quantifyingSB.html" rel="alternate" type="text/html" title="The Quantification and Analysis of Second Balls in Football Part 1" /><published>2026-06-19T00:00:00-04:00</published><updated>2026-06-19T00:00:00-04:00</updated><id>http://localhost:4000/blog/notes/2026/06/19/quantifyingSB</id><content type="html" xml:base="http://localhost:4000/blog/notes/2026/06/19/quantifyingSB.html">&lt;p&gt;The evaluation of in-game actions of football players and how they affect the outcome
 of a game is an important part of football analytics &lt;a href=&quot;https://link.springer.com/book/10.1007/978-3-658-21177-6&quot;&gt;(Link, 2018)&lt;/a&gt;. Unlike traditional
 statistics that focus on goals and assists, evaluating other actions that players perform
 looks deeper into the nuances of player behaviour and decision-making.&lt;/p&gt;
@@ -717,7 +916,6 @@ or analyzing the value of winning second balls and how to do so successfully. Th
 &lt;table class=&quot;wc-table&quot;&gt;
   &lt;thead&gt;
     &lt;tr&gt;
-      &lt;th&gt;Date&lt;/th&gt;
       &lt;th&gt;Match&lt;/th&gt;
       &lt;th&gt;Predicted&lt;/th&gt;
       &lt;th&gt;xG&lt;/th&gt;
@@ -773,7 +971,6 @@ or analyzing the value of winning second balls and how to do so successfully. Th
     const pred = Math.round(lh)+&apos;-&apos;+Math.round(la);
     tb.innerHTML +=
       &apos;&lt;tr&gt;&apos; +
-      &apos;&lt;td class=&quot;wc-date&quot;&gt;&apos;+r[0]+&apos;&lt;/td&gt;&apos; +
       &apos;&lt;td&gt;&apos;+r[1]+&apos; &lt;span style=&quot;color:#ccc&quot;&gt;vs&lt;/span&gt; &apos;+r[2]+&apos;&lt;/td&gt;&apos; +
       &apos;&lt;td class=&quot;wc-score&quot;&gt;&apos;+pred+&apos;&lt;/td&gt;&apos; +
       &apos;&lt;td class=&quot;wc-xg&quot;&gt;&apos;+lh.toFixed(2)+&apos; / &apos;+la.toFixed(2)+&apos;&lt;/td&gt;&apos; +
@@ -820,7 +1017,6 @@ or analyzing the value of winning second balls and how to do so successfully. Th
 &lt;table class=&quot;wc-table&quot;&gt;
   &lt;thead&gt;
     &lt;tr&gt;
-      &lt;th&gt;Date&lt;/th&gt;
       &lt;th&gt;Match&lt;/th&gt;
       &lt;th&gt;Predicted&lt;/th&gt;
       &lt;th&gt;xG&lt;/th&gt;
@@ -904,7 +1100,6 @@ or analyzing the value of winning second balls and how to do so successfully. Th
     const actual = r[5];
     tb.innerHTML +=
       &apos;&lt;tr&gt;&apos; +
-      &apos;&lt;td class=&quot;wc-date&quot;&gt;&apos;+r[0]+&apos;&lt;/td&gt;&apos; +
       &apos;&lt;td&gt;&apos;+r[1]+&apos; &lt;span style=&quot;color:#ccc&quot;&gt;vs&lt;/span&gt; &apos;+r[2]+&apos;&lt;/td&gt;&apos; +
       &apos;&lt;td class=&quot;wc-score&quot;&gt;&apos;+p+&apos;&lt;/td&gt;&apos; +
       &apos;&lt;td class=&quot;wc-xg&quot;&gt;&apos;+r[3].toFixed(2)+&apos; / &apos;+r[4].toFixed(2)+&apos;&lt;/td&gt;&apos; +
@@ -973,7 +1168,6 @@ or analyzing the value of winning second balls and how to do so successfully. Th
 &lt;table class=&quot;wc-table&quot;&gt;
   &lt;thead&gt;
     &lt;tr&gt;
-      &lt;th&gt;Date&lt;/th&gt;
       &lt;th&gt;Match&lt;/th&gt;
       &lt;th&gt;Predicted&lt;/th&gt;
       &lt;th&gt;xG&lt;/th&gt;
@@ -1057,7 +1251,6 @@ or analyzing the value of winning second balls and how to do so successfully. Th
     const actual = r[5];
     tb.innerHTML +=
       &apos;&lt;tr&gt;&apos; +
-      &apos;&lt;td class=&quot;wc-date&quot;&gt;&apos;+r[0]+&apos;&lt;/td&gt;&apos; +
       &apos;&lt;td&gt;&apos;+r[1]+&apos; &lt;span style=&quot;color:#ccc&quot;&gt;vs&lt;/span&gt; &apos;+r[2]+&apos;&lt;/td&gt;&apos; +
       &apos;&lt;td class=&quot;wc-score&quot;&gt;&apos;+p+&apos;&lt;/td&gt;&apos; +
       &apos;&lt;td class=&quot;wc-xg&quot;&gt;&apos;+r[3].toFixed(2)+&apos; / &apos;+r[4].toFixed(2)+&apos;&lt;/td&gt;&apos; +
@@ -1094,7 +1287,6 @@ or analyzing the value of winning second balls and how to do so successfully. Th
 &lt;table class=&quot;wc-table&quot;&gt;
   &lt;thead&gt;
     &lt;tr&gt;
-      &lt;th&gt;Date&lt;/th&gt;
       &lt;th&gt;Match&lt;/th&gt;
       &lt;th&gt;Predicted&lt;/th&gt;
       &lt;th&gt;xG&lt;/th&gt;
@@ -1108,22 +1300,22 @@ or analyzing the value of winning second balls and how to do so successfully. Th
 &lt;script&gt;
 (function() {
   const m = [
-    [&quot;Jun 28&quot;,&quot;South Africa&quot;,&quot;Canada&quot;,0.54,1.85,&quot;&quot;],
-    [&quot;Jun 29&quot;,&quot;Brazil&quot;,&quot;Japan&quot;,1.98,0.65,&quot;&quot;],
-    [&quot;Jun 29&quot;,&quot;Germany&quot;,&quot;Paraguay&quot;,2.58,0.35,&quot;&quot;],
-    [&quot;Jun 30&quot;,&quot;Netherlands&quot;,&quot;Morocco&quot;,1.52,0.91,&quot;&quot;],
-    [&quot;Jun 30&quot;,&quot;Ivory Coast&quot;,&quot;Norway&quot;,0.96,1.76,&quot;&quot;],
-    [&quot;Jun 30&quot;,&quot;France&quot;,&quot;Sweden&quot;,2.91,0.33,&quot;&quot;],
-    [&quot;Jul 1&quot;,&quot;Mexico&quot;,&quot;Ecuador&quot;,1.30,0.78,&quot;&quot;],
-    [&quot;Jul 1&quot;,&quot;England&quot;,&quot;DR Congo&quot;,2.50,0.24,&quot;&quot;],
-    [&quot;Jul 1&quot;,&quot;Belgium&quot;,&quot;Senegal&quot;,1.47,0.87,&quot;&quot;],
-    [&quot;Jul 2&quot;,&quot;USA&quot;,&quot;Bosnia &amp; Herzegovina&quot;,2.43,0.36,&quot;&quot;],
-    [&quot;Jul 2&quot;,&quot;Spain&quot;,&quot;Austria&quot;,2.42,0.26,&quot;&quot;],
-    [&quot;Jul 2&quot;,&quot;Portugal&quot;,&quot;Croatia&quot;,1.77,0.67,&quot;&quot;],
-    [&quot;Jul 3&quot;,&quot;Switzerland&quot;,&quot;Algeria&quot;,1.79,0.78,&quot;&quot;],
-    [&quot;Jul 3&quot;,&quot;Australia&quot;,&quot;Egypt&quot;,0.89,1.19,&quot;&quot;],
-    [&quot;Jul 3&quot;,&quot;Argentina&quot;,&quot;Cape Verde&quot;,2.91,0.17,&quot;&quot;],
-    [&quot;Jul 4&quot;,&quot;Colombia&quot;,&quot;Ghana&quot;,1.92,0.45,&quot;&quot;],
+    [&quot;Jun 28&quot;,&quot;South Africa&quot;,&quot;Canada&quot;,0.54,1.85,&quot;1-2&quot;],
+    [&quot;Jun 29&quot;,&quot;Brazil&quot;,&quot;Japan&quot;,1.98,0.65,&quot;2-1&quot;],
+    [&quot;Jun 29&quot;,&quot;Germany&quot;,&quot;Paraguay&quot;,2.58,0.35,&quot;1-1&quot;],
+    [&quot;Jun 30&quot;,&quot;Netherlands&quot;,&quot;Morocco&quot;,1.52,0.91,&quot;1-1&quot;],
+    [&quot;Jun 30&quot;,&quot;Ivory Coast&quot;,&quot;Norway&quot;,0.96,1.76,&quot;1-2&quot;],
+    [&quot;Jun 30&quot;,&quot;France&quot;,&quot;Sweden&quot;,2.91,0.33,&quot;3-0&quot;],
+    [&quot;Jul 1&quot;,&quot;Mexico&quot;,&quot;Ecuador&quot;,1.30,0.78,&quot;2-0&quot;],
+    [&quot;Jul 1&quot;,&quot;England&quot;,&quot;DR Congo&quot;,2.50,0.24,&quot;2-1&quot;],
+    [&quot;Jul 1&quot;,&quot;Belgium&quot;,&quot;Senegal&quot;,1.47,0.87,&quot;3-2&quot;],
+    [&quot;Jul 2&quot;,&quot;USA&quot;,&quot;Bosnia &amp; Herzegovina&quot;,2.43,0.36,&quot;2-0&quot;],
+    [&quot;Jul 2&quot;,&quot;Spain&quot;,&quot;Austria&quot;,2.42,0.26,&quot;3-0&quot;],
+    [&quot;Jul 2&quot;,&quot;Portugal&quot;,&quot;Croatia&quot;,1.77,0.67,&quot;2-1&quot;],
+    [&quot;Jul 3&quot;,&quot;Switzerland&quot;,&quot;Algeria&quot;,1.79,0.78,&quot;2-0&quot;],
+    [&quot;Jul 3&quot;,&quot;Australia&quot;,&quot;Egypt&quot;,0.89,1.19,&quot;1-1&quot;],
+    [&quot;Jul 3&quot;,&quot;Argentina&quot;,&quot;Cape Verde&quot;,2.91,0.17,&quot;3-2&quot;],
+    [&quot;Jul 4&quot;,&quot;Colombia&quot;,&quot;Ghana&quot;,1.92,0.45,&quot;1-0&quot;],
   ];
 
   function outcome(p, actual) {
@@ -1142,7 +1334,176 @@ or analyzing the value of winning second balls and how to do so successfully. Th
     const actual = r[5];
     tb.innerHTML +=
       &apos;&lt;tr&gt;&apos; +
-      &apos;&lt;td class=&quot;wc-date&quot;&gt;&apos;+r[0]+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;td&gt;&apos;+r[1]+&apos; &lt;span style=&quot;color:#ccc&quot;&gt;vs&lt;/span&gt; &apos;+r[2]+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;td class=&quot;wc-score&quot;&gt;&apos;+p+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;td class=&quot;wc-xg&quot;&gt;&apos;+r[3].toFixed(2)+&apos; / &apos;+r[4].toFixed(2)+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;td class=&quot;wc-actual&quot;&gt;&apos;+(actual||&apos;–&apos;)+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;td&gt;&apos;+outcome(p, actual||&apos;&apos;)+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;/tr&gt;&apos;;
+  });
+})();
+&lt;/script&gt;
+
+&lt;p&gt;We continue to climb getting up to around 30th in my office pool. Best round yet with 68% accuracy and 37.5% exact scorelines. I’ll chalk it up that we were just due for some good fortune, but we will leave the model as is going into the next round and see how it holds.&lt;/p&gt;
+
+&lt;h3 id=&quot;round-of-16&quot;&gt;Round of 16&lt;/h3&gt;
+
+&lt;p&gt;Updated July 4&lt;/p&gt;
+
+&lt;p&gt;Nothing new here, model predictions are as follows:&lt;/p&gt;
+
+&lt;style&gt;
+.wc-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.wc-table th { text-align: left; font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #888; padding: 6px 10px; border-bottom: 1px solid #e8e8e8; }
+.wc-table td { padding: 8px 10px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
+.wc-table tr:last-child td { border-bottom: none; }
+.wc-table tr:hover td { background: #fafafa; }
+.wc-score { font-weight: 600; font-size: 15px; font-family: monospace; white-space: nowrap; }
+.wc-actual { font-family: monospace; font-size: 14px; white-space: nowrap; }
+.wc-xg { font-size: 12px; color: #999; font-family: monospace; white-space: nowrap; }
+.wc-date { font-size: 11px; color: #aaa; white-space: nowrap; }
+.wc-hit { font-size: 11px; padding: 1px 6px; border-radius: 3px; white-space: nowrap; }
+.wc-hit.exact  { background: #edf7ee; color: #2d7a35; }
+.wc-hit.result { background: #fdf3e3; color: #a06010; }
+.wc-hit.wrong  { background: #fdf0f0; color: #a03030; }
+.wc-hit.tbd    { color: #ccc; }
+&lt;/style&gt;
+
+&lt;table class=&quot;wc-table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Match&lt;/th&gt;
+      &lt;th&gt;Predicted&lt;/th&gt;
+      &lt;th&gt;xG&lt;/th&gt;
+      &lt;th&gt;Actual&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody id=&quot;wc-tbody-r16b&quot;&gt;&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;script&gt;
+(function() {
+  const m = [
+    [&quot;Jul 4&quot;,&quot;Canada&quot;,&quot;Morocco&quot;,0.68,1.72,&quot;0-3&quot;],
+    [&quot;Jul 4&quot;,&quot;Paraguay&quot;,&quot;France&quot;,0.18,2.80,&quot;0-1&quot;],
+    [&quot;Jul 5&quot;,&quot;Brazil&quot;,&quot;Norway&quot;,2.02,0.85,&quot;1-2&quot;],
+    [&quot;Jul 6&quot;,&quot;Mexico&quot;,&quot;England&quot;,1.00,1.27,&quot;2-3&quot;],
+    [&quot;Jul 6&quot;,&quot;Portugal&quot;,&quot;Spain&quot;,0.86,1.84,&quot;0-1&quot;],
+    [&quot;Jul 7&quot;,&quot;USA&quot;,&quot;Belgium&quot;,1.37,1.47,&quot;1-4&quot;],
+    [&quot;Jul 7&quot;,&quot;Argentina&quot;,&quot;Egypt&quot;,2.26,0.32,&quot;3-2&quot;],
+    [&quot;Jul 7&quot;,&quot;Switzerland&quot;,&quot;Colombia&quot;,0.92,1.43,&quot;0-0&quot;],
+  ];
+
+  const pred = {
+    &quot;Canada vs Morocco&quot;: &quot;1-2&quot;,
+    &quot;Paraguay vs France&quot;: &quot;0-3&quot;,
+    &quot;Brazil vs Norway&quot;: &quot;2-1&quot;,
+    &quot;Mexico vs England&quot;: &quot;1-1&quot;,
+    &quot;Portugal vs Spain&quot;: &quot;1-2&quot;,
+    &quot;USA vs Belgium&quot;: &quot;1-1&quot;,
+    &quot;Argentina vs Egypt&quot;: &quot;2-0&quot;,
+    &quot;Switzerland vs Colombia&quot;: &quot;1-1&quot;,
+  };
+
+  function outcome(p, actual) {
+    if (!actual) return &apos;&lt;span class=&quot;wc-hit tbd&quot;&gt;–&lt;/span&gt;&apos;;
+    if (p === actual) return &apos;&lt;span class=&quot;wc-hit exact&quot;&gt;exact&lt;/span&gt;&apos;;
+    const pr = p.split(&apos;-&apos;), ar = actual.split(&apos;-&apos;);
+    const ps = Math.sign(pr[0]-pr[1]), as = Math.sign(ar[0]-ar[1]);
+    return ps === as
+      ? &apos;&lt;span class=&quot;wc-hit result&quot;&gt;result&lt;/span&gt;&apos;
+      : &apos;&lt;span class=&quot;wc-hit wrong&quot;&gt;wrong&lt;/span&gt;&apos;;
+  }
+
+  const tb = document.getElementById(&apos;wc-tbody-r16b&apos;);
+  m.forEach(function(r) {
+    const key = r[1]+&apos; vs &apos;+r[2];
+    const p = pred[key] || (Math.round(r[3])+&apos;-&apos;+Math.round(r[4]));
+    const actual = r[5];
+    tb.innerHTML +=
+      &apos;&lt;tr&gt;&apos; +
+      &apos;&lt;td&gt;&apos;+r[1]+&apos; &lt;span style=&quot;color:#ccc&quot;&gt;vs&lt;/span&gt; &apos;+r[2]+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;td class=&quot;wc-score&quot;&gt;&apos;+p+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;td class=&quot;wc-xg&quot;&gt;&apos;+r[3].toFixed(2)+&apos; / &apos;+r[4].toFixed(2)+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;td class=&quot;wc-actual&quot;&gt;&apos;+(actual||&apos;–&apos;)+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;td&gt;&apos;+outcome(p, actual||&apos;&apos;)+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;/tr&gt;&apos;;
+  });
+})();
+&lt;/script&gt;
+
+&lt;h3 id=&quot;quarter-finals&quot;&gt;Quarter Finals&lt;/h3&gt;
+
+&lt;p&gt;Updated July 9&lt;/p&gt;
+
+&lt;p&gt;No exact scores for the round of 16. The model had England and Belgium tying which personally I would’ve picked wins for both, but other than that some pretty unpredictable scorelines.&lt;/p&gt;
+
+&lt;p&gt;The most common scorelines are 1-0 with 14, 1-1 with 12, 2-1 with 11, 2-0 with 9, and 0-0 with 8. The model has the favorites winning 2-1 in every game of the quarterfinals. Although personally I would go with 1-0 for some games given it’s late in the world cup and teams will probably tend to start favoring defense, I think picking the same score for every match gives me a good chance of getting exact scores, especially since 2-1 is common. Part of me wants to go 1-0 for each, but I will put some faith in the model and let it try and prove itself once again.&lt;/p&gt;
+
+&lt;style&gt;
+.wc-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.wc-table th { text-align: left; font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #888; padding: 6px 10px; border-bottom: 1px solid #e8e8e8; }
+.wc-table td { padding: 8px 10px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
+.wc-table tr:last-child td { border-bottom: none; }
+.wc-table tr:hover td { background: #fafafa; }
+.wc-score { font-weight: 600; font-size: 15px; font-family: monospace; white-space: nowrap; }
+.wc-actual { font-family: monospace; font-size: 14px; white-space: nowrap; }
+.wc-xg { font-size: 12px; color: #999; font-family: monospace; white-space: nowrap; }
+.wc-date { font-size: 11px; color: #aaa; white-space: nowrap; }
+.wc-hit { font-size: 11px; padding: 1px 6px; border-radius: 3px; white-space: nowrap; }
+.wc-hit.exact  { background: #edf7ee; color: #2d7a35; }
+.wc-hit.result { background: #fdf3e3; color: #a06010; }
+.wc-hit.wrong  { background: #fdf0f0; color: #a03030; }
+.wc-hit.tbd    { color: #ccc; }
+&lt;/style&gt;
+
+&lt;table class=&quot;wc-table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Match&lt;/th&gt;
+      &lt;th&gt;Predicted&lt;/th&gt;
+      &lt;th&gt;xG&lt;/th&gt;
+      &lt;th&gt;Actual&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody id=&quot;wc-tbody-qf&quot;&gt;&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;script&gt;
+(function() {
+  const m = [
+    [&quot;Jul 9&quot;,&quot;France&quot;,&quot;Morocco&quot;,2.06,0.51,&quot;&quot;],
+    [&quot;Jul 10&quot;,&quot;Spain&quot;,&quot;Belgium&quot;,2.17,0.65,&quot;&quot;],
+    [&quot;Jul 11&quot;,&quot;Norway&quot;,&quot;England&quot;,0.88,1.98,&quot;&quot;],
+    [&quot;Jul 12&quot;,&quot;Argentina&quot;,&quot;Switzerland&quot;,1.83,0.56,&quot;&quot;],
+  ];
+
+  const pred = {
+    &quot;France vs Morocco&quot;: &quot;2-1&quot;,
+    &quot;Spain vs Belgium&quot;: &quot;2-1&quot;,
+    &quot;Norway vs England&quot;: &quot;1-2&quot;,
+    &quot;Argentina vs Switzerland&quot;: &quot;2-1&quot;,
+  };
+
+  function outcome(p, actual) {
+    if (!actual) return &apos;&lt;span class=&quot;wc-hit tbd&quot;&gt;–&lt;/span&gt;&apos;;
+    if (p === actual) return &apos;&lt;span class=&quot;wc-hit exact&quot;&gt;exact&lt;/span&gt;&apos;;
+    const pr = p.split(&apos;-&apos;), ar = actual.split(&apos;-&apos;);
+    const ps = Math.sign(pr[0]-pr[1]), as = Math.sign(ar[0]-ar[1]);
+    return ps === as
+      ? &apos;&lt;span class=&quot;wc-hit result&quot;&gt;result&lt;/span&gt;&apos;
+      : &apos;&lt;span class=&quot;wc-hit wrong&quot;&gt;wrong&lt;/span&gt;&apos;;
+  }
+
+  const tb = document.getElementById(&apos;wc-tbody-qf&apos;);
+  m.forEach(function(r) {
+    const key = r[1]+&apos; vs &apos;+r[2];
+    const p = pred[key] || (Math.round(r[3])+&apos;-&apos;+Math.round(r[4]));
+    const actual = r[5];
+    tb.innerHTML +=
+      &apos;&lt;tr&gt;&apos; +
       &apos;&lt;td&gt;&apos;+r[1]+&apos; &lt;span style=&quot;color:#ccc&quot;&gt;vs&lt;/span&gt; &apos;+r[2]+&apos;&lt;/td&gt;&apos; +
       &apos;&lt;td class=&quot;wc-score&quot;&gt;&apos;+p+&apos;&lt;/td&gt;&apos; +
       &apos;&lt;td class=&quot;wc-xg&quot;&gt;&apos;+r[3].toFixed(2)+&apos; / &apos;+r[4].toFixed(2)+&apos;&lt;/td&gt;&apos; +
@@ -1157,4 +1518,20 @@ or analyzing the value of winning second balls and how to do so successfully. Th
 
 &lt;p&gt;Updated June 12, 2026&lt;/p&gt;
 
-&lt;p&gt;I don’t have much to say right now other than GO CANADA, and hopefully these predictions can serve me well. I will at the least update this post at the end of every groupstage round, but hopefully more often than that. Anyways I appreciate those who made it this far and best of luck to you and your team you will be cheering on this World Cup!&lt;/p&gt;</content><author><name></name></author><category term="notes" /><summary type="html"></summary></entry></feed>
+&lt;p&gt;I don’t have much to say right now other than GO CANADA, and hopefully these predictions can serve me well. I will at the least update this post at the end of every groupstage round, but hopefully more often than that. Anyways I appreciate those who made it this far and best of luck to you and your team you will be cheering on this World Cup!&lt;/p&gt;</content><author><name></name></author><category term="notes" /><summary type="html"></summary></entry><entry><title type="html">Welcome to Jekyll!</title><link href="http://localhost:4000/blog/jekyll/update/2026/05/06/example.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2026-05-06T12:42:24-04:00</published><updated>2026-05-06T12:42:24-04:00</updated><id>http://localhost:4000/blog/jekyll/update/2026/05/06/example</id><content type="html" xml:base="http://localhost:4000/blog/jekyll/update/2026/05/06/example.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+
+&lt;p&gt;Jekyll requires blog post files to be named according to the following format:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YEAR-MONTH-DAY-title.MARKUP&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Where &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YEAR&lt;/code&gt; is a four-digit number, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MONTH&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DAY&lt;/code&gt; are both two-digit numbers, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MARKUP&lt;/code&gt; is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+
+&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;Tom&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &apos;Hi, Tom&apos; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.</summary></entry></feed>

@@ -192,7 +192,6 @@ Last updated: June 19, 2026
 <table class="wc-table">
   <thead>
     <tr>
-      <th>Date</th>
       <th>Match</th>
       <th>Predicted</th>
       <th>xG</th>
@@ -248,7 +247,6 @@ Last updated: June 19, 2026
     const pred = Math.round(lh)+'-'+Math.round(la);
     tb.innerHTML +=
       '<tr>' +
-      '<td class="wc-date">'+r[0]+'</td>' +
       '<td>'+r[1]+' <span style="color:#ccc">vs</span> '+r[2]+'</td>' +
       '<td class="wc-score">'+pred+'</td>' +
       '<td class="wc-xg">'+lh.toFixed(2)+' / '+la.toFixed(2)+'</td>' +
@@ -295,7 +293,6 @@ Only change I've made is a few 3-0 games bumped to 4-0. Purely based on strong t
 <table class="wc-table">
   <thead>
     <tr>
-      <th>Date</th>
       <th>Match</th>
       <th>Predicted</th>
       <th>xG</th>
@@ -379,7 +376,6 @@ Only change I've made is a few 3-0 games bumped to 4-0. Purely based on strong t
     const actual = r[5];
     tb.innerHTML +=
       '<tr>' +
-      '<td class="wc-date">'+r[0]+'</td>' +
       '<td>'+r[1]+' <span style="color:#ccc">vs</span> '+r[2]+'</td>' +
       '<td class="wc-score">'+p+'</td>' +
       '<td class="wc-xg">'+r[3].toFixed(2)+' / '+r[4].toFixed(2)+'</td>' +
@@ -430,7 +426,6 @@ With this set of logic the idea is to target the low-scoring games we have misse
 <table class="wc-table">
   <thead>
     <tr>
-      <th>Date</th>
       <th>Match</th>
       <th>Predicted</th>
       <th>xG</th>
@@ -514,7 +509,6 @@ With this set of logic the idea is to target the low-scoring games we have misse
     const actual = r[5];
     tb.innerHTML +=
       '<tr>' +
-      '<td class="wc-date">'+r[0]+'</td>' +
       '<td>'+r[1]+' <span style="color:#ccc">vs</span> '+r[2]+'</td>' +
       '<td class="wc-score">'+p+'</td>' +
       '<td class="wc-xg">'+r[3].toFixed(2)+' / '+r[4].toFixed(2)+'</td>' +
@@ -551,7 +545,6 @@ Round of 32 up next. I ended up going 17/24 correct outcomes with 3 exact last r
 <table class="wc-table">
   <thead>
     <tr>
-      <th>Date</th>
       <th>Match</th>
       <th>Predicted</th>
       <th>xG</th>
@@ -599,7 +592,6 @@ Round of 32 up next. I ended up going 17/24 correct outcomes with 3 exact last r
     const actual = r[5];
     tb.innerHTML +=
       '<tr>' +
-      '<td class="wc-date">'+r[0]+'</td>' +
       '<td>'+r[1]+' <span style="color:#ccc">vs</span> '+r[2]+'</td>' +
       '<td class="wc-score">'+p+'</td>' +
       '<td class="wc-xg">'+r[3].toFixed(2)+' / '+r[4].toFixed(2)+'</td>' +
@@ -638,7 +630,6 @@ Nothing new here, model predictions are as follows:
 <table class="wc-table">
   <thead>
     <tr>
-      <th>Date</th>
       <th>Match</th>
       <th>Predicted</th>
       <th>xG</th>
@@ -652,14 +643,14 @@ Nothing new here, model predictions are as follows:
 <script>
 (function() {
   const m = [
-    ["Jul 4","Canada","Morocco",0.68,1.72,""],
-    ["Jul 4","Paraguay","France",0.18,2.80,""],
-    ["Jul 5","Brazil","Norway",2.02,0.85,""],
-    ["Jul 6","Mexico","England",1.00,1.27,""],
-    ["Jul 6","Portugal","Spain",0.86,1.84,""],
-    ["Jul 7","USA","Belgium",1.37,1.47,""],
-    ["Jul 7","Argentina","Egypt",2.26,0.32,""],
-    ["Jul 7","Switzerland","Colombia",0.92,1.43,""],
+    ["Jul 4","Canada","Morocco",0.68,1.72,"0-3"],
+    ["Jul 4","Paraguay","France",0.18,2.80,"0-1"],
+    ["Jul 5","Brazil","Norway",2.02,0.85,"1-2"],
+    ["Jul 6","Mexico","England",1.00,1.27,"2-3"],
+    ["Jul 6","Portugal","Spain",0.86,1.84,"0-1"],
+    ["Jul 7","USA","Belgium",1.37,1.47,"1-4"],
+    ["Jul 7","Argentina","Egypt",2.26,0.32,"3-2"],
+    ["Jul 7","Switzerland","Colombia",0.92,1.43,"0-0"],
   ];
 
   const pred = {
@@ -690,7 +681,87 @@ Nothing new here, model predictions are as follows:
     const actual = r[5];
     tb.innerHTML +=
       '<tr>' +
-      '<td class="wc-date">'+r[0]+'</td>' +
+      '<td>'+r[1]+' <span style="color:#ccc">vs</span> '+r[2]+'</td>' +
+      '<td class="wc-score">'+p+'</td>' +
+      '<td class="wc-xg">'+r[3].toFixed(2)+' / '+r[4].toFixed(2)+'</td>' +
+      '<td class="wc-actual">'+(actual||'–')+'</td>' +
+      '<td>'+outcome(p, actual||'')+'</td>' +
+      '</tr>';
+  });
+})();
+</script>
+
+### Quarter Finals
+
+Updated July 9
+
+No exact scores for the round of 16. The model had England and Belgium tying which personally I would've picked wins for both, but other than that some pretty unpredictable scorelines.
+
+The most common scorelines are 1-0 with 14, 1-1 with 12, 2-1 with 11, 2-0 with 9, and 0-0 with 8. The model has the favorites winning 2-1 in every game of the quarterfinals. Although personally I would go with 1-0 for some games given it's late in the world cup and teams will probably tend to start favoring defense, I think picking the same score for every match gives me a good chance of getting exact scores, especially since 2-1 is common. Part of me wants to go 1-0 for each, but I will put some faith in the model and let it try and prove itself once again.
+
+<style>
+.wc-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.wc-table th { text-align: left; font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #888; padding: 6px 10px; border-bottom: 1px solid #e8e8e8; }
+.wc-table td { padding: 8px 10px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
+.wc-table tr:last-child td { border-bottom: none; }
+.wc-table tr:hover td { background: #fafafa; }
+.wc-score { font-weight: 600; font-size: 15px; font-family: monospace; white-space: nowrap; }
+.wc-actual { font-family: monospace; font-size: 14px; white-space: nowrap; }
+.wc-xg { font-size: 12px; color: #999; font-family: monospace; white-space: nowrap; }
+.wc-date { font-size: 11px; color: #aaa; white-space: nowrap; }
+.wc-hit { font-size: 11px; padding: 1px 6px; border-radius: 3px; white-space: nowrap; }
+.wc-hit.exact  { background: #edf7ee; color: #2d7a35; }
+.wc-hit.result { background: #fdf3e3; color: #a06010; }
+.wc-hit.wrong  { background: #fdf0f0; color: #a03030; }
+.wc-hit.tbd    { color: #ccc; }
+</style>
+
+<table class="wc-table">
+  <thead>
+    <tr>
+      <th>Match</th>
+      <th>Predicted</th>
+      <th>xG</th>
+      <th>Actual</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="wc-tbody-qf"></tbody>
+</table>
+
+<script>
+(function() {
+  const m = [
+    ["Jul 9","France","Morocco",2.06,0.51,""],
+    ["Jul 10","Spain","Belgium",2.17,0.65,""],
+    ["Jul 11","Norway","England",0.88,1.98,""],
+    ["Jul 12","Argentina","Switzerland",1.83,0.56,""],
+  ];
+
+  const pred = {
+    "France vs Morocco": "2-1",
+    "Spain vs Belgium": "2-1",
+    "Norway vs England": "1-2",
+    "Argentina vs Switzerland": "2-1",
+  };
+
+  function outcome(p, actual) {
+    if (!actual) return '<span class="wc-hit tbd">–</span>';
+    if (p === actual) return '<span class="wc-hit exact">exact</span>';
+    const pr = p.split('-'), ar = actual.split('-');
+    const ps = Math.sign(pr[0]-pr[1]), as = Math.sign(ar[0]-ar[1]);
+    return ps === as
+      ? '<span class="wc-hit result">result</span>'
+      : '<span class="wc-hit wrong">wrong</span>';
+  }
+
+  const tb = document.getElementById('wc-tbody-qf');
+  m.forEach(function(r) {
+    const key = r[1]+' vs '+r[2];
+    const p = pred[key] || (Math.round(r[3])+'-'+Math.round(r[4]));
+    const actual = r[5];
+    tb.innerHTML +=
+      '<tr>' +
       '<td>'+r[1]+' <span style="color:#ccc">vs</span> '+r[2]+'</td>' +
       '<td class="wc-score">'+p+'</td>' +
       '<td class="wc-xg">'+r[3].toFixed(2)+' / '+r[4].toFixed(2)+'</td>' +

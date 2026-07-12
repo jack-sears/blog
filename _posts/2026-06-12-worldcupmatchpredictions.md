@@ -732,10 +732,10 @@ The most common scorelines are 1-0 with 14, 1-1 with 12, 2-1 with 11, 2-0 with 9
 <script>
 (function() {
   const m = [
-    ["Jul 9","France","Morocco",2.06,0.51,""],
-    ["Jul 10","Spain","Belgium",2.17,0.65,""],
-    ["Jul 11","Norway","England",0.88,1.98,""],
-    ["Jul 12","Argentina","Switzerland",1.83,0.56,""],
+    ["Jul 9","France","Morocco",2.06,0.51,"2-0"],
+    ["Jul 10","Spain","Belgium",2.17,0.65,"2-1"],
+    ["Jul 11","Norway","England",0.88,1.98,"1-2"],
+    ["Jul 12","Argentina","Switzerland",1.83,0.56,"3-1"],
   ];
 
   const pred = {
@@ -765,6 +765,64 @@ The most common scorelines are 1-0 with 14, 1-1 with 12, 2-1 with 11, 2-0 with 9
       '<td>'+r[1]+' <span style="color:#ccc">vs</span> '+r[2]+'</td>' +
       '<td class="wc-score">'+p+'</td>' +
       '<td class="wc-xg">'+r[3].toFixed(2)+' / '+r[4].toFixed(2)+'</td>' +
+      '<td class="wc-actual">'+(actual||'–')+'</td>' +
+      '<td>'+outcome(p, actual||'')+'</td>' +
+      '</tr>';
+  });
+})();
+</script>
+
+### Semi Finals
+
+Updated July 12
+
+Not bad quarter finals. 2 exact and 2 close. I am currently sitting around 30th out of 250 in the office league. Trusting the model paid off, I think picking the same score for every game at this point is a good strategy. However, I will still follow the model for the semis. Both are close games and I think the only way to really make up any serious ground is to get exact for both.
+
+<table class="wc-table">
+  <thead>
+    <tr>
+      <th>Match</th>
+      <th>Predicted</th>
+      <th>xG</th>
+      <th>Actual</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="wc-tbody-sf"></tbody>
+</table>
+
+<script>
+(function() {
+  const m = [
+    ["France","Spain",1.56,1.12,""],
+    ["England","Argentina",1.26,1.07,""],
+  ];
+
+  const pred = {
+    "France vs Spain": "2-1",
+    "England vs Argentina": "1-1",
+  };
+
+  function outcome(p, actual) {
+    if (!actual) return '<span class="wc-hit tbd">–</span>';
+    if (p === actual) return '<span class="wc-hit exact">exact</span>';
+    const pr = p.split('-'), ar = actual.split('-');
+    const ps = Math.sign(pr[0]-pr[1]), as = Math.sign(ar[0]-ar[1]);
+    return ps === as
+      ? '<span class="wc-hit result">result</span>'
+      : '<span class="wc-hit wrong">wrong</span>';
+  }
+
+  const tb = document.getElementById('wc-tbody-sf');
+  m.forEach(function(r) {
+    const key = r[0]+' vs '+r[1];
+    const p = pred[key] || (Math.round(r[2])+'-'+Math.round(r[3]));
+    const actual = r[4];
+    tb.innerHTML +=
+      '<tr>' +
+      '<td>'+r[0]+' <span style="color:#ccc">vs</span> '+r[1]+'</td>' +
+      '<td class="wc-score">'+p+'</td>' +
+      '<td class="wc-xg">'+r[2].toFixed(2)+' / '+r[3].toFixed(2)+'</td>' +
       '<td class="wc-actual">'+(actual||'–')+'</td>' +
       '<td>'+outcome(p, actual||'')+'</td>' +
       '</tr>';

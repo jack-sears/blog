@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2026-07-09T14:11:22-04:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">Jack’s Blog</title><subtitle>A blog where I post about the projects and ideas I have been working on relating to football analytics.</subtitle><entry><title type="html">The Quantification and Analysis of Second Balls in Football Part 2</title><link href="http://localhost:4000/blog/notes/2026/06/25/analyzingSB.html" rel="alternate" type="text/html" title="The Quantification and Analysis of Second Balls in Football Part 2" /><published>2026-06-25T00:00:00-04:00</published><updated>2026-06-25T00:00:00-04:00</updated><id>http://localhost:4000/blog/notes/2026/06/25/analyzingSB</id><content type="html" xml:base="http://localhost:4000/blog/notes/2026/06/25/analyzingSB.html">&lt;p&gt;In [part 1][part1], we looked into building upon [Hang’s] framework for extracting second ball wins from data and incorporated our own ideas such as high-order balls to create player and team statistics and heatmaps. Feel free to give it a read but if you havn’t all you need to know for this post is the two following points.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2026-07-12T16:15:15-04:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">Jack’s Blog</title><subtitle>A blog where I post about the projects and ideas I have been working on relating to football analytics.</subtitle><entry><title type="html">The Quantification and Analysis of Second Balls in Football Part 2</title><link href="http://localhost:4000/blog/notes/2026/06/25/analyzingSB.html" rel="alternate" type="text/html" title="The Quantification and Analysis of Second Balls in Football Part 2" /><published>2026-06-25T00:00:00-04:00</published><updated>2026-06-25T00:00:00-04:00</updated><id>http://localhost:4000/blog/notes/2026/06/25/analyzingSB</id><content type="html" xml:base="http://localhost:4000/blog/notes/2026/06/25/analyzingSB.html">&lt;p&gt;In [part 1][part1], we looked into building upon [Hang’s] framework for extracting second ball wins from data and incorporated our own ideas such as high-order balls to create player and team statistics and heatmaps. Feel free to give it a read but if you havn’t all you need to know for this post is the two following points.&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;We have built the means to extract second balls from data.&lt;/li&gt;
@@ -1474,10 +1474,10 @@ or analyzing the value of winning second balls and how to do so successfully. Th
 &lt;script&gt;
 (function() {
   const m = [
-    [&quot;Jul 9&quot;,&quot;France&quot;,&quot;Morocco&quot;,2.06,0.51,&quot;&quot;],
-    [&quot;Jul 10&quot;,&quot;Spain&quot;,&quot;Belgium&quot;,2.17,0.65,&quot;&quot;],
-    [&quot;Jul 11&quot;,&quot;Norway&quot;,&quot;England&quot;,0.88,1.98,&quot;&quot;],
-    [&quot;Jul 12&quot;,&quot;Argentina&quot;,&quot;Switzerland&quot;,1.83,0.56,&quot;&quot;],
+    [&quot;Jul 9&quot;,&quot;France&quot;,&quot;Morocco&quot;,2.06,0.51,&quot;2-0&quot;],
+    [&quot;Jul 10&quot;,&quot;Spain&quot;,&quot;Belgium&quot;,2.17,0.65,&quot;2-1&quot;],
+    [&quot;Jul 11&quot;,&quot;Norway&quot;,&quot;England&quot;,0.88,1.98,&quot;1-2&quot;],
+    [&quot;Jul 12&quot;,&quot;Argentina&quot;,&quot;Switzerland&quot;,1.83,0.56,&quot;3-1&quot;],
   ];
 
   const pred = {
@@ -1507,6 +1507,64 @@ or analyzing the value of winning second balls and how to do so successfully. Th
       &apos;&lt;td&gt;&apos;+r[1]+&apos; &lt;span style=&quot;color:#ccc&quot;&gt;vs&lt;/span&gt; &apos;+r[2]+&apos;&lt;/td&gt;&apos; +
       &apos;&lt;td class=&quot;wc-score&quot;&gt;&apos;+p+&apos;&lt;/td&gt;&apos; +
       &apos;&lt;td class=&quot;wc-xg&quot;&gt;&apos;+r[3].toFixed(2)+&apos; / &apos;+r[4].toFixed(2)+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;td class=&quot;wc-actual&quot;&gt;&apos;+(actual||&apos;–&apos;)+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;td&gt;&apos;+outcome(p, actual||&apos;&apos;)+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;/tr&gt;&apos;;
+  });
+})();
+&lt;/script&gt;
+
+&lt;h3 id=&quot;semi-finals&quot;&gt;Semi Finals&lt;/h3&gt;
+
+&lt;p&gt;Updated July 12&lt;/p&gt;
+
+&lt;p&gt;Not bad quarter finals. 2 exact and 2 close. I am currently sitting around 30th out of 250 in the office league. Trusting the model paid off, I think picking the same score for every game at this point is a good strategy. However, I will still follow the model for the semis. Both are close games and I think the only way to really make up any serious ground is to get exact for both.&lt;/p&gt;
+
+&lt;table class=&quot;wc-table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Match&lt;/th&gt;
+      &lt;th&gt;Predicted&lt;/th&gt;
+      &lt;th&gt;xG&lt;/th&gt;
+      &lt;th&gt;Actual&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody id=&quot;wc-tbody-sf&quot;&gt;&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;script&gt;
+(function() {
+  const m = [
+    [&quot;France&quot;,&quot;Spain&quot;,1.56,1.12,&quot;&quot;],
+    [&quot;England&quot;,&quot;Argentina&quot;,1.26,1.07,&quot;&quot;],
+  ];
+
+  const pred = {
+    &quot;France vs Spain&quot;: &quot;2-1&quot;,
+    &quot;England vs Argentina&quot;: &quot;1-1&quot;,
+  };
+
+  function outcome(p, actual) {
+    if (!actual) return &apos;&lt;span class=&quot;wc-hit tbd&quot;&gt;–&lt;/span&gt;&apos;;
+    if (p === actual) return &apos;&lt;span class=&quot;wc-hit exact&quot;&gt;exact&lt;/span&gt;&apos;;
+    const pr = p.split(&apos;-&apos;), ar = actual.split(&apos;-&apos;);
+    const ps = Math.sign(pr[0]-pr[1]), as = Math.sign(ar[0]-ar[1]);
+    return ps === as
+      ? &apos;&lt;span class=&quot;wc-hit result&quot;&gt;result&lt;/span&gt;&apos;
+      : &apos;&lt;span class=&quot;wc-hit wrong&quot;&gt;wrong&lt;/span&gt;&apos;;
+  }
+
+  const tb = document.getElementById(&apos;wc-tbody-sf&apos;);
+  m.forEach(function(r) {
+    const key = r[0]+&apos; vs &apos;+r[1];
+    const p = pred[key] || (Math.round(r[2])+&apos;-&apos;+Math.round(r[3]));
+    const actual = r[4];
+    tb.innerHTML +=
+      &apos;&lt;tr&gt;&apos; +
+      &apos;&lt;td&gt;&apos;+r[0]+&apos; &lt;span style=&quot;color:#ccc&quot;&gt;vs&lt;/span&gt; &apos;+r[1]+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;td class=&quot;wc-score&quot;&gt;&apos;+p+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;td class=&quot;wc-xg&quot;&gt;&apos;+r[2].toFixed(2)+&apos; / &apos;+r[3].toFixed(2)+&apos;&lt;/td&gt;&apos; +
       &apos;&lt;td class=&quot;wc-actual&quot;&gt;&apos;+(actual||&apos;–&apos;)+&apos;&lt;/td&gt;&apos; +
       &apos;&lt;td&gt;&apos;+outcome(p, actual||&apos;&apos;)+&apos;&lt;/td&gt;&apos; +
       &apos;&lt;/tr&gt;&apos;;

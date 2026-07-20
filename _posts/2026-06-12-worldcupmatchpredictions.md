@@ -846,7 +846,7 @@ Was slacking a bit and forgot to update. Previous round was rough, as neither of
       <th></th>
     </tr>
   </thead>
-  <tbody id="wc-tbody-sf"></tbody>
+  <tbody id="wc-tbody-f"></tbody>
 </table>
 
 <script>
@@ -871,7 +871,7 @@ Was slacking a bit and forgot to update. Previous round was rough, as neither of
       : '<span class="wc-hit wrong">wrong</span>';
   }
 
-  const tb = document.getElementById('wc-tbody-sf');
+  const tb = document.getElementById('wc-tbody-f');
   m.forEach(function(r) {
     const key = r[0]+' vs '+r[1];
     const p = pred[key] || (Math.round(r[2])+'-'+Math.round(r[3]));
@@ -900,13 +900,13 @@ Updated July 20, 2026
 
 Well the world cup is finished, congrats to Spain, and every other team that created history and special moments for their countries.
 
-I ended up finishing 42/408 in my office league, narrowly cracking the top 10%. A few takeaways/lessons/ideas to learn from and hopefully improve upon next time.
+I ended up finishing 42/408 in my office league, narrowly missing the top 10%. 104 games predicted, 21 results correct, 30 close scores, and 14 exact scores. A prediction success rate of 63%. A few takeaways/lessons/ideas to learn from and hopefully improve upon next time.
 
 - Use a method of comparison. I should have made my predictions for each game as an avid football fan, seeing how my predictions would have stacked up vs the model.
-- Compare the results of the model to other common approaches. Does this model actually meaningfully improve predictions, or would I have had better success predicting the most common scoreline historically for each favorite team.
-- In a game scenario like this office pool, are there oppurtunites to sytematically hedge my prediction to try and make ground. I.e if the model had two teams with relatively close odds, and one team was heavily being chosen to win more than the other, picking the less common choice may statistically have given me advantage.
+- Compare the results of the model to other common approaches. Does this model actually meaningfully improve predictions, or would I have had better success predicting the most common scoreline historically for every game?
+- In a game scenario like this office pool, are there oppurtunites to sytematically hedge my prediction to try and make ground? I.e if the model had two teams with relatively close odds, and one team was heavily being chosen to win more than the other, picking the less common choice may statistically have given me advantage.
 
-Overall, this was a fun experience and I am glad I did it. Although I know it was not thourougly thought through or planned. It is nice to have seen it through from start to end, and more importantly it has piqued my interest in continuing to do more predictions and learning how to improve them. Thanks for following along! 
+Overall, this was a fun experience and I am glad I did it. Although I know it was not thourougly thought through or planned, it is nice to have seen it through from start to end, and more importantly it has piqued my interest in continuing to do more predictions and learning how to improve them. Thanks for following along! 
 
  Jack Sears
 

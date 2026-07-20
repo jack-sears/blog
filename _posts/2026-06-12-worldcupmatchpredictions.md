@@ -794,8 +794,8 @@ Not bad quarter finals. 2 exact and 2 close. I am currently sitting around 30th 
 <script>
 (function() {
   const m = [
-    ["France","Spain",1.56,1.12,""],
-    ["England","Argentina",1.26,1.07,""],
+    ["France","Spain",1.56,1.12,"0-2"],
+    ["England","Argentina",1.26,1.07,"1-2"],
   ];
 
   const pred = {
@@ -830,11 +830,85 @@ Not bad quarter finals. 2 exact and 2 close. I am currently sitting around 30th 
 })();
 </script>
 
+## Final  
+
+Updated July 20
+
+Was slacking a bit and forgot to update. Previous round was rough, as neither of the bookies favorites made the final. Not much I think can be done at this stage as there's only 2 games and the team's are so close we shall just let it play out.
+
+<table class="wc-table">
+  <thead>
+    <tr>
+      <th>Match</th>
+      <th>Predicted</th>
+      <th>xG</th>
+      <th>Actual</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="wc-tbody-sf"></tbody>
+</table>
+
+<script>
+(function() {
+  const m = [
+    ["France","England",2.32,1.09,"4-6"],
+    ["Spain","Argentina",1.44,0.92,"1-0"],
+  ];
+
+  const pred = {
+    "France vs England": "3-2",
+    "England vs Argentina": "1-1",
+  };
+
+  function outcome(p, actual) {
+    if (!actual) return '<span class="wc-hit tbd">–</span>';
+    if (p === actual) return '<span class="wc-hit exact">exact</span>';
+    const pr = p.split('-'), ar = actual.split('-');
+    const ps = Math.sign(pr[0]-pr[1]), as = Math.sign(ar[0]-ar[1]);
+    return ps === as
+      ? '<span class="wc-hit result">result</span>'
+      : '<span class="wc-hit wrong">wrong</span>';
+  }
+
+  const tb = document.getElementById('wc-tbody-sf');
+  m.forEach(function(r) {
+    const key = r[0]+' vs '+r[1];
+    const p = pred[key] || (Math.round(r[2])+'-'+Math.round(r[3]));
+    const actual = r[4];
+    tb.innerHTML +=
+      '<tr>' +
+      '<td>'+r[0]+' <span style="color:#ccc">vs</span> '+r[1]+'</td>' +
+      '<td class="wc-score">'+p+'</td>' +
+      '<td class="wc-xg">'+r[2].toFixed(2)+' / '+r[3].toFixed(2)+'</td>' +
+      '<td class="wc-actual">'+(actual||'–')+'</td>' +
+      '<td>'+outcome(p, actual||'')+'</td>' +
+      '</tr>';
+  });
+})();
+</script>
+
+I increased the England France scoring predictions from 2-1 France, to 3-2, as I figured the third place match would be high scoring, but truly the unthinkable happened haha. Also pure domination from Spain and I had them myself down as 1-0 win but obviously took the models prediction.
+
 ## Wrap Up
 
 Updated June 12, 2026
 
 I don't have much to say right now other than GO CANADA, and hopefully these predictions can serve me well. I will at the least update this post at the end of every groupstage round, but hopefully more often than that. Anyways I appreciate those who made it this far and best of luck to you and your team you will be cheering on this World Cup! 
+
+Updated July 20, 2026
+
+Well the world cup is finished, congrats to Spain, and every other team that created history and special moments for their countries.
+
+I ended up finishing 42/408 in my office league, narrowly cracking the top 10%. A few takeaways/lessons/ideas to learn from and hopefully improve upon next time.
+
+- Use a method of comparison. I should have made my predictions for each game as an avid football fan, seeing how my predictions would have stacked up vs the model.
+- Compare the results of the model to other common approaches. Does this model actually meaningfully improve predictions, or would I have had better success predicting the most common scoreline historically for each favorite team.
+- In a game scenario like this office pool, are there oppurtunites to sytematically hedge my prediction to try and make ground. I.e if the model had two teams with relatively close odds, and one team was heavily being chosen to win more than the other, picking the less common choice may statistically have given me advantage.
+
+Overall, this was a fun experience and I am glad I did it. Although I know it was not thourougly thought through or planned. It is nice to have seen it through from start to end, and more importantly it has piqued my interest in continuing to do more predictions and learning how to improve them. Thanks for following along! 
+
+ Jack Sears
 
 
 [superbru]: https://www.superbru.com/

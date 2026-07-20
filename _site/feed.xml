@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2026-07-12T16:15:15-04:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">Jack’s Blog</title><subtitle>A blog where I post about the projects and ideas I have been working on relating to football analytics.</subtitle><entry><title type="html">The Quantification and Analysis of Second Balls in Football Part 2</title><link href="http://localhost:4000/blog/notes/2026/06/25/analyzingSB.html" rel="alternate" type="text/html" title="The Quantification and Analysis of Second Balls in Football Part 2" /><published>2026-06-25T00:00:00-04:00</published><updated>2026-06-25T00:00:00-04:00</updated><id>http://localhost:4000/blog/notes/2026/06/25/analyzingSB</id><content type="html" xml:base="http://localhost:4000/blog/notes/2026/06/25/analyzingSB.html">&lt;p&gt;In [part 1][part1], we looked into building upon [Hang’s] framework for extracting second ball wins from data and incorporated our own ideas such as high-order balls to create player and team statistics and heatmaps. Feel free to give it a read but if you havn’t all you need to know for this post is the two following points.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2026-07-13T15:05:16-04:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">Jack’s Blog</title><subtitle>A blog where I post about the projects and ideas I have been working on relating to football analytics.</subtitle><entry><title type="html">The Quantification and Analysis of Second Balls in Football Part 2</title><link href="http://localhost:4000/blog/notes/2026/06/25/analyzingSB.html" rel="alternate" type="text/html" title="The Quantification and Analysis of Second Balls in Football Part 2" /><published>2026-06-25T00:00:00-04:00</published><updated>2026-06-25T00:00:00-04:00</updated><id>http://localhost:4000/blog/notes/2026/06/25/analyzingSB</id><content type="html" xml:base="http://localhost:4000/blog/notes/2026/06/25/analyzingSB.html">&lt;p&gt;In [part 1][part1], we looked into building upon [Hang’s] framework for extracting second ball wins from data and incorporated our own ideas such as high-order balls to create player and team statistics and heatmaps. Feel free to give it a read but if you havn’t all you need to know for this post is the two following points.&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;We have built the means to extract second balls from data.&lt;/li&gt;
@@ -197,7 +197,64 @@ p_{z_{23}, z_0} &amp;amp; p_{z_{23}, z_1} &amp;amp; \cdots &amp;amp; p_{z_{23}, 
 
 &lt;p&gt;Comparing expected gain to the actual gain players receive from second ball wins provides insight into which players underperform or overperform relative to expectations.&lt;/p&gt;
 
-&lt;h2 id=&quot;results&quot;&gt;Results&lt;/h2&gt;</content><author><name></name></author><category term="notes" /><summary type="html">In [part 1][part1], we looked into building upon [Hang’s] framework for extracting second ball wins from data and incorporated our own ideas such as high-order balls to create player and team statistics and heatmaps. Feel free to give it a read but if you havn’t all you need to know for this post is the two following points.</summary></entry><entry><title type="html">The Quantification and Analysis of Second Balls in Football Part 1</title><link href="http://localhost:4000/blog/notes/2026/06/19/quantifyingSB.html" rel="alternate" type="text/html" title="The Quantification and Analysis of Second Balls in Football Part 1" /><published>2026-06-19T00:00:00-04:00</published><updated>2026-06-19T00:00:00-04:00</updated><id>http://localhost:4000/blog/notes/2026/06/19/quantifyingSB</id><content type="html" xml:base="http://localhost:4000/blog/notes/2026/06/19/quantifyingSB.html">&lt;p&gt;The evaluation of in-game actions of football players and how they affect the outcome
+&lt;h2 id=&quot;component-performance&quot;&gt;Component Performance&lt;/h2&gt;
+
+&lt;p&gt;After training the components using the above methodology, we evaluate the accuracy and performance of each.&lt;/p&gt;
+
+&lt;h3 id=&quot;location-prediction-1&quot;&gt;Location Prediction&lt;/h3&gt;
+
+&lt;p&gt;Rather than relying solely on the top-1 predicted location for second balls, this work
+adopts a top-3 prediction strategy. In the context of soccer, the landing zone of a second
+ball is uncertain due to chaotic nature. By considering the three most probable zones, a
+more realistic representation of how the model is thinking and where it is predicting the
+second balls to land is captured. Additionally, top-3 evaluation reduces the harshness
+of strict classification accuracy and better reflects the model’s value in practical settings
+where anticipating a region, rather than a single zone, can inform decision-making.&lt;/p&gt;
+
+&lt;p&gt;ACCURACY TABLE&lt;/p&gt;
+
+&lt;p&gt;The location prediction component achieved a 23.8% top-1 and
+60.2% top-3 accuracy. While these numbers indicate low prediction accuracy, they are notable given the complexity and novelty of the task. A naive baseline approach, simply predicting the most common zones, only has an accuracy of 10.6% top-1 and 28.5% top-3 accuracy. Significantly outperforming the naive baseline suggests the model is not random and has some ability to learn spatial patterns. Despite room for improvement, these results mark an important step forward in quantifying and modelling second ball outcomes in football.&lt;/p&gt;
+
+&lt;h3 id=&quot;winning-team-prediction&quot;&gt;Winning Team Prediction&lt;/h3&gt;
+
+&lt;p&gt;To evaluate the performance of the team winning prediction component, three core met
+rics are reported: accuracy, log loss, and the area under the receiver operating character
+istic curve (AUC-ROC). AUC-ROC offers a more nuanced evaluation by measuring the
+model’s ability to distinguish between positive and negative classes [63]. An AUC-ROC
+score of 0.5 indicates random performance, whereas a score closer to 1.0 reflects strong
+discriminatory power. Log loss and accuracy are once again included to further help
+analyze the model performance.&lt;/p&gt;
+
+&lt;p&gt;TABLE ACCURACY&lt;/p&gt;
+
+&lt;p&gt;In Table 4.2, it is shown that although all three models perform similarly before and
+after ablation, XGBoost is marginally the best. It is more important that the naive
+baseline of always predicting team B as the winner of the second ball is outperformed.
+With a slightly imbalanced dataset, predicting team B every time results in an accuracy
+of 0.585, significantly lower than the best accuracy of 0.722. Another important note is
+the AUC-ROC scores of the final models. All models are upwards of 0.75, with the best
+being 0.799. These scores provide a good indication that the models are reliable and
+meaningfully confident at discerning between winning and losing outcomes&lt;/p&gt;
+
+&lt;h3 id=&quot;gain-1&quot;&gt;Gain&lt;/h3&gt;
+
+&lt;h4 id=&quot;visualizing-convergence&quot;&gt;Visualizing Convergence&lt;/h4&gt;
+
+&lt;p&gt;To get an intuition for how the long-term distribution of second ball possessions emerge,
+the heat maps of the absorbing states can be observed. Figure 4.9 shows the probability
+of the possession ending after 20 transitions. There is a clear pattern that the closer the
+team in possession gets to the opponent’s goal, the more likely the possession will end.
+Again, this is trivial, but now we have evidence to back up the claim. Figure 4.9 also
+shows the probability of a goal after 20 transitions. Again, there is a clear pattern that
+the closer the team in possession gets to the opponent’s goal, the more likely they are to
+score.&lt;/p&gt;
+
+&lt;p&gt;HEAT MAPS&lt;/p&gt;
+
+&lt;h2 id=&quot;player-analysis&quot;&gt;Player Analysis&lt;/h2&gt;
+
+&lt;h2 id=&quot;team-analysis&quot;&gt;Team Analysis&lt;/h2&gt;</content><author><name></name></author><category term="notes" /><summary type="html">In [part 1][part1], we looked into building upon [Hang’s] framework for extracting second ball wins from data and incorporated our own ideas such as high-order balls to create player and team statistics and heatmaps. Feel free to give it a read but if you havn’t all you need to know for this post is the two following points.</summary></entry><entry><title type="html">The Quantification and Analysis of Second Balls in Football Part 1</title><link href="http://localhost:4000/blog/notes/2026/06/19/quantifyingSB.html" rel="alternate" type="text/html" title="The Quantification and Analysis of Second Balls in Football Part 1" /><published>2026-06-19T00:00:00-04:00</published><updated>2026-06-19T00:00:00-04:00</updated><id>http://localhost:4000/blog/notes/2026/06/19/quantifyingSB</id><content type="html" xml:base="http://localhost:4000/blog/notes/2026/06/19/quantifyingSB.html">&lt;p&gt;The evaluation of in-game actions of football players and how they affect the outcome
 of a game is an important part of football analytics &lt;a href=&quot;https://link.springer.com/book/10.1007/978-3-658-21177-6&quot;&gt;(Link, 2018)&lt;/a&gt;. Unlike traditional
 statistics that focus on goals and assists, evaluating other actions that players perform
 looks deeper into the nuances of player behaviour and decision-making.&lt;/p&gt;

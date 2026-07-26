@@ -300,7 +300,7 @@ At the opposite end, Victor Wanyama and Glenn Whelan post near-zero averages, an
 
 ![gain-player](https://jack-sears.github.io/blog/assets/images/gain_player.png)
 
-Even without accounting for defensive contribution, Table 4.5 shows the importance
+Even without accounting for defensive contribution, the table above shows the importance
 of defensive midfielders. Victor Wanyama and Glenn Whelan both have entered the top
 5 comparatively, while the rest have similar scores. So by using part of the full metric,
 the zonal value of player’s second ball wins can be seen.

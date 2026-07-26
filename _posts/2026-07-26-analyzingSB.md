@@ -329,7 +329,7 @@ to understand the spatial relationships of second ball win locations. As compone
 performance is improved, a similar location distribution is expected, but with higher
 prediction accuracy.
 
-![team-tactic](https://jack-sears.github.io/blog/assets/images/tactic.png)
+![team-tactic](https://jack-sears.github.io/blog/assets/images/tactics.png)
 
 However, from the above figure, it can be shown that a long ball from
 zone 12 to 16 is most likely to fall into zones 13 and 14. It is also noted that zone 17

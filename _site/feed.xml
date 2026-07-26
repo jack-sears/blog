@@ -1,11 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2026-07-13T15:05:16-04:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">Jack’s Blog</title><subtitle>A blog where I post about the projects and ideas I have been working on relating to football analytics.</subtitle><entry><title type="html">The Quantification and Analysis of Second Balls in Football Part 2</title><link href="http://localhost:4000/blog/notes/2026/06/25/analyzingSB.html" rel="alternate" type="text/html" title="The Quantification and Analysis of Second Balls in Football Part 2" /><published>2026-06-25T00:00:00-04:00</published><updated>2026-06-25T00:00:00-04:00</updated><id>http://localhost:4000/blog/notes/2026/06/25/analyzingSB</id><content type="html" xml:base="http://localhost:4000/blog/notes/2026/06/25/analyzingSB.html">&lt;p&gt;In [part 1][part1], we looked into building upon [Hang’s] framework for extracting second ball wins from data and incorporated our own ideas such as high-order balls to create player and team statistics and heatmaps. Feel free to give it a read but if you havn’t all you need to know for this post is the two following points.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2026-07-26T15:42:38-04:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">Jack’s Blog</title><subtitle>A blog where I post about the projects and ideas I have been working on relating to football analytics.</subtitle><entry><title type="html">The Quantification and Analysis of Second Balls in Football Part 2</title><link href="http://localhost:4000/blog/notes/2026/07/26/analyzingSB.html" rel="alternate" type="text/html" title="The Quantification and Analysis of Second Balls in Football Part 2" /><published>2026-07-26T00:00:00-04:00</published><updated>2026-07-26T00:00:00-04:00</updated><id>http://localhost:4000/blog/notes/2026/07/26/analyzingSB</id><content type="html" xml:base="http://localhost:4000/blog/notes/2026/07/26/analyzingSB.html">&lt;p&gt;In &lt;a href=&quot;https://jack-sears.github.io/blog/notes/2026/06/19/quantifyingSB.html&quot;&gt;part 1&lt;/a&gt;, we looked into building upon &lt;a href=&quot;https://lchunhang.medium.com/quantifying-second-ball-wins-d626ac56f108&quot;&gt;Hang’s&lt;/a&gt; framework for extracting second ball wins from data and incorporated our own ideas such as high-order balls to create player and team statistics and heatmaps. Feel free to give it a read but if you haven’t, all you need to know for this post is the two following points.&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;We have built the means to extract second balls from data.&lt;/li&gt;
   &lt;li&gt;We look at the resulting possession following a second ball win, “the second ball possession”, which ends with a change in possession, stoppage in play, or a shot on target.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;On that note, let’s get into the analysis.&lt;/p&gt;
+&lt;p&gt;Also, both the work done in part 1 and 2, have been taken directly from my master’s thesis. I just have shortened it significantly into (hopefully) a quicker and easier read. There’s a much deeper analysis into the accuracy of every component in the model. Feel free to take a look &lt;a href=&quot;https://ontariotechu.scholaris.ca/items/a899d89d-bfc1-4ce0-b2f3-2c1e36bf6742&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The goal of this work, is to create a methodology to give insight into the value of second ball wins, beyond just the number and location of them that occur. We do this by predicting where they occur and the attacking value they add to the second ball winning team.&lt;/p&gt;
+
+&lt;p&gt;On that note, let’s get into the model and analysis.&lt;/p&gt;
 
 &lt;h2 id=&quot;model-overview&quot;&gt;Model Overview&lt;/h2&gt;
 
@@ -33,15 +37,15 @@
 
 &lt;p&gt;To simplify modelling, the pitch is partitioned into a 4x6 grid. Using this grid we can get meaningful distinction between defensive, midfield, and attacking areas, as well as central and wide.&lt;/p&gt;
 
-&lt;p&gt;PICTURE DisCRET herE&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/pitch_discretized.png&quot; alt=&quot;Pitch Discretization&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;data-set-and-visualizaton&quot;&gt;Data Set and Visualizaton&lt;/h3&gt;
 
-&lt;p&gt;For the following analysis we use event data from the 2015/2016 English Premier League which can be found &lt;a href=&quot;https://github.com/statsbomb/open-data&quot;&gt;here&lt;/a&gt;, the StatsBomb open data github repo.&lt;/p&gt;
+&lt;p&gt;For the following analysis I use event data from the 2015/2016 English Premier League which can be found &lt;a href=&quot;https://github.com/statsbomb/open-data&quot;&gt;here&lt;/a&gt;, the StatsBomb open data github repo. It is event data and although tracking data would most likely improve the results of this work, the StatsBomb repo is all I had access too.&lt;/p&gt;
 
 &lt;p&gt;The distribution of second balls and where they occur can provide us with some insight about characteristics of second balls.&lt;/p&gt;
 
-&lt;p&gt;VISUAL SECOND BALLS&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/second_ball_hm.png&quot; alt=&quot;sb heatmap&quot; /&gt;&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;Second balls in the defensive third are low when compared to other thirds.&lt;/li&gt;
@@ -91,7 +95,7 @@
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;is_contested&lt;/td&gt;
-      &lt;td&gt;Boolean flag to indicate if the initial long ball is met with a duel, e.g. ADBA, ADAA, ADAB, or ADBB.&lt;/td&gt;
+      &lt;td&gt;Boolean flag to indicate if the initial long ball is met with a duel, e.g. ADBA, ADAA, ADAB, or ADBB (see &lt;a href=&quot;https://jack-sears.github.io/blog/notes/2026/06/19/quantifyingSB.html&quot;&gt;previous post&lt;/a&gt;).&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;second_x, second_y&lt;/td&gt;
@@ -114,11 +118,17 @@
 
 \[P(L_z \mid p_0, X_{context})\]
 
-&lt;p&gt;where $L_z$ is the corresponding zone that location $L$ belongs to and $X_{context} = {\text{pass_start_x, pass_start_y, pass_distance, pass_angle, dx, dy, dist_to_centre, is_defensive, is_midfield, is_attacking, is_contested}}$&lt;/p&gt;
+&lt;p&gt;where $L_z$ is the corresponding zone that location $L$ belongs to and&lt;/p&gt;
+
+\[\begin{aligned}
+X_{context} = \{&amp;amp;\text{pass_start_x, pass_start_y, pass_distance, pass_angle,} \\
+&amp;amp;\text{dx, dy, dist_to_centre, is_defensive, is_midfield,} \\
+&amp;amp;\text{is_attacking, is_contested}\}
+\end{aligned}\]
 
 &lt;h3 id=&quot;modelling-techniques&quot;&gt;Modelling Techniques&lt;/h3&gt;
 
-&lt;p&gt;The location prediction task is a multi-class classification problem [(48)][multi-class], where the goal is to predict the pitch zone where the ball is most likely to land after a contested aerial action or clearance. Each instance is assigned a class label based on the observed ball destination. To model this, the primary technique used is Extreme Gradient Boosting (XGBoost), a powerful gradient-boosted decision tree algorithm [(49)][xgboost]. Due to the multi-class nature of the task, the model is trained using softmax objective with log-loss as the optimization criterion. Model performance is evaluated using top-k accuracy metrics [(50)][topk], specifically top-1 and top-3, to assess how often the true location falls within the top predicted zones.&lt;/p&gt;
+&lt;p&gt;The location prediction task is a multi-class classification problem &lt;a href=&quot;https://www.appliedaicourse.com/blog/multiclass-classification-in-machine-learning/&quot;&gt;(Singh, 2024)&lt;/a&gt;, where the goal is to predict the pitch zone where the ball is most likely to land after a contested aerial action or clearance. Each instance is assigned a class label based on the observed ball destination. To model this, Extreme Gradient Boosting (XGBoost), a powerful gradient-boosted decision tree algorithm &lt;a href=&quot;https://dl.acm.org/doi/10.1145/2939672.2939785&quot;&gt;(Chen &amp;amp; Guestrin, 2016)&lt;/a&gt; is used. Due to the multi-class nature of the task, the model is trained using softmax objective with log-loss as the optimization criterion. Model performance is evaluated using top-k accuracy metrics &lt;a href=&quot;https://www.sciencedirect.com/science/article/abs/pii/S0031320325000019&quot;&gt;(Ghosh et al., 2025)&lt;/a&gt;, specifically top-1 and top-3, to assess how often the true location falls within the top predicted zones.&lt;/p&gt;
 
 &lt;h2 id=&quot;second-ball-winning-team-prediction&quot;&gt;Second Ball Winning Team Prediction&lt;/h2&gt;
 
@@ -130,19 +140,25 @@
 
 \[P(W = Team_A \mid L, X_{context})\]
 
-&lt;p&gt;where $W$ denotes a second ball win and $X_{context} = {\text{pass_start_x, pass_start_y, pass_distance, pass_angle, dist_to_centre, is_defensive, is_midfield, is_attacking, is_contested, second_x, second_y, has_transition}}$&lt;/p&gt;
+&lt;p&gt;where $W$ denotes a second ball win and&lt;/p&gt;
+
+\[\begin{aligned}
+X_{context} = \{&amp;amp;\text{pass_start_x, pass_start_y, pass_distance, pass_angle,} \\
+&amp;amp;\text{dist_to_centre, is_defensive, is_midfield, is_attacking,} \\
+&amp;amp;\text{is_contested, second_x, second_y, has_transition}\}
+\end{aligned}\]
 
 &lt;h3 id=&quot;modelling-techniques-1&quot;&gt;Modelling Techniques&lt;/h3&gt;
 
-&lt;p&gt;The task of predicting which team will win a second ball is formulated as a binary classification problem [[52]][binary-classification], where the model must determine whether the team initiating the long ball or the opposing team will gain possession following the contest. Three machine learning models are used to address this problem: XGBoost, Random Forest, and Logistic Regression. Random Forest is an ensemble method that combines multiple decision trees to reach a single result, offering resistance to overfitting, especially when the feature space is large and noisy [[53]][random-forest]. Logistic Regression provides a simple and interpretable model, relying on a linear combination of input features passed through a sigmoid function to estimate the probability of each class [[54]][logistic-regression]. Comparing these models allows for an evaluation of accuracy and how each handles second balls differently.&lt;/p&gt;
+&lt;p&gt;The task of predicting which team will win a second ball is formulated as a binary classification problem &lt;a href=&quot;https://www.learndatasci.com/glossary/binary-classification/&quot;&gt;(Karabiber, n.d)&lt;/a&gt;, where the model must determine whether the team initiating the long ball or the opposing team will gain possession following the contest. Three machine learning models are used to address this problem: XGBoost, Random Forest, and Logistic Regression. Random Forest is an ensemble method that combines multiple decision trees to reach a single result, offering resistance to overfitting, especially when the feature space is large and noisy &lt;a href=&quot;https://arxiv.org/abs/1511.05741&quot;&gt;(Biau &amp;amp; Scornet, 2016)&lt;/a&gt;. Logistic Regression provides a simple and interpretable model, relying on a linear combination of input features passed through a sigmoid function to estimate the probability of each class &lt;a href=&quot;https://www.geeksforgeeks.org/machine-learning/understanding-logistic-regression/&quot;&gt;(GeeksforGeeks, 2016)&lt;/a&gt;. Comparing these models allows for an evaluation of accuracy between different models.&lt;/p&gt;
 
 &lt;h2 id=&quot;gain&quot;&gt;Gain&lt;/h2&gt;
 
-&lt;p&gt;To quantify the probability that a goal occurs in the possession after a second ball win, a Markov chain model called gain is proposed. This approach is similar to [25][], [24][], and [32][], but adjusted to my problem, which captures both immediate and transitional danger of second balls. This is basically my attempt at using expected threat.&lt;/p&gt;
+&lt;p&gt;To quantify the probability that a goal occurs in the possession after a second ball win, a Markov chain model called gain is proposed. This approach is similar to &lt;a href=&quot;https://nessis.org/nessis11/rudd.pdf&quot;&gt;(Rudd, 2011)&lt;/a&gt;, &lt;a href=&quot;https://karun.in/blog/expected-threat.html&quot;&gt;(Singh, 2018)&lt;/a&gt;, and &lt;a href=&quot;https://www.sloansportsconference.com/research-papers/decomposing-the-immeasurable-sport-a-deep-learning-expected-possession-value-framework-for-soccer&quot;&gt;(Fernandez et al., 2019)&lt;/a&gt;, but adjusted to my problem, which captures both immediate and transitional danger of second balls. This is basically my attempt at implementing expected threat.&lt;/p&gt;
 
 &lt;h3 id=&quot;markov-chains-for-possession-transitions&quot;&gt;Markov Chains for Possession Transitions&lt;/h3&gt;
 
-&lt;p&gt;A Markov chain is a probabilistic model that represents a system transitioning between discrete states, where the probability of moving to the next state depends only on the current state and not the sequence of events that precedes it [[55]][cite-markov]. The assumption that the next state depends only on the current state, known as the Markov property, is a simplification that enables efficient modelling of second ball possessions. In reality, past actions may influence future outcomes, but this assumption is reasonable in a soccer context. For instance, there are many ways a team might advance the ball into the attacking third. However, once the ball is in the attacking third, the likelihood of scoring or losing possession is mainly determined by the current position and state of play, rather than the actions that led there. Absorbing states are such that once transitioned into, they cannot be left. In my context, there are two absorbing states: a goal and the end-of-possession. Transitions represent the movement of the ball between states. A transition matrix is constructed using observed transitions from the data, and convergence is used to estimate the long-term trends of the absorbing states.&lt;/p&gt;
+&lt;p&gt;A Markov chain is a probabilistic model that represents a system transitioning between discrete states, where the probability of moving to the next state depends only on the current state and not the sequence of events that precedes it &lt;a href=&quot;https://math.libretexts.org/Bookshelves/Applied_Mathematics/Applied_Finite_Mathematics_%28Sekhon_and_Bloom%29/10%3A_Markov_Chains/10.01%3A_Introduction_to_Markov_Chains&quot;&gt;(Sekhon &amp;amp; Bloom, 2020)&lt;/a&gt;. The assumption that the next state depends only on the current state, known as the Markov property, is a simplification that enables efficient modelling of second ball possessions. In reality, past actions may influence future outcomes, but this assumption is reasonable in a football context. For instance, there are many ways a team might advance the ball into the attacking third. However, once the ball is in the attacking third, the likelihood of scoring or losing possession is mainly determined by the current position and state of play, rather than the actions that led there. Absorbing states are such that once transitioned into, they cannot be left. In my context, there are two absorbing states: a goal and the end-of-possession. Transitions represent the movement of the ball between states. A transition matrix is constructed using observed transitions from the data, and convergence is used to estimate the long-term trends of the absorbing states. Below is the transition matrix.&lt;/p&gt;
 
 \[P = \begin{bmatrix}
 p_{z_0, z_0} &amp;amp; p_{z_0, z_1} &amp;amp; \cdots &amp;amp; p_{z_0, z_{23}} &amp;amp; p_{z_0, z_g} &amp;amp; p_{z_0, z_{eop}} \\
@@ -151,9 +167,9 @@ p_{z_1, z_0} &amp;amp; p_{z_1, z_1} &amp;amp; \cdots &amp;amp; p_{z_1, z_{23}} &
 p_{z_{23}, z_0} &amp;amp; p_{z_{23}, z_1} &amp;amp; \cdots &amp;amp; p_{z_{23}, z_{23}} &amp;amp; p_{z_{23}, z_g} &amp;amp; p_{z_{23}, z_{eop}} \\
 0 &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0 &amp;amp; 1 &amp;amp; 0 \\
 0 &amp;amp; 0 &amp;amp; \cdots &amp;amp; 0 &amp;amp; 0 &amp;amp; 1
-\end{bmatrix} \tag{3.5}\]
+\end{bmatrix}\]
 
-&lt;p&gt;The Markov chain framework is well-suited to this problem due to its interpretability, simplicity, and ability to capture the stochastic nature of ball progression in soccer. Formally, the possession evolution is modelled as a Markov process where:&lt;/p&gt;
+&lt;p&gt;The Markov chain framework is well-suited to this problem due to its interpretability, simplicity, and ability to capture the stochastic nature of ball progression in football. Formally, the possession evolution is modelled as a Markov process where:&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;Transient States&lt;/strong&gt;: The 24 grid zones ${z_1, \ldots, z_{24}}$&lt;/li&gt;
@@ -163,7 +179,7 @@ p_{z_{23}, z_0} &amp;amp; p_{z_{23}, z_1} &amp;amp; \cdots &amp;amp; p_{z_{23}, 
 
 &lt;h3 id=&quot;convergence-of-the-transition-matrix&quot;&gt;Convergence of the Transition Matrix&lt;/h3&gt;
 
-&lt;p&gt;Each multiplication of the transition matrix $P$ by itself represents an additional step in the possession sequence. Specifically, $P^n$ describes the probabilities of reaching any given state after $n$ transitions [[56]][cite-convergence]. For second ball possessions, the probability of a possession eventually reaching one of the absorbing states is of interest. By repeatedly multiplying the matrix by itself, these probabilities change and eventually stabilize. This process is known as &lt;em&gt;convergence&lt;/em&gt;. In practice, the matrix is repeatedly multiplied by itself until there is a small enough state difference between iterations. The difference threshold value is arbitrarily chosen, and in this work 0.025 is used. Convergence allows for the long-term distribution of second ball possessions to be determined.&lt;/p&gt;
+&lt;p&gt;Each multiplication of the transition matrix $P$ by itself represents an additional step in the possession sequence. Specifically, $P^n$ describes the probabilities of reaching any given state after $n$ transitions &lt;a href=&quot;https://iopscience.iop.org/article/10.1088/1757-899X/335/1/012046&quot;&gt;(Permana et al., 2018)&lt;/a&gt;. For second ball possessions, the probability of a possession eventually reaching one of the absorbing states is of interest. By repeatedly multiplying the matrix by itself, these probabilities change and eventually stabilize. This process is known as &lt;em&gt;convergence&lt;/em&gt;. In practice, the matrix is repeatedly multiplied by itself until there is a small enough state difference between iterations. The difference threshold value is arbitrarily chosen, and in this work 0.025 is used. Convergence allows for the long-term distribution of second ball possessions to be determined.&lt;/p&gt;
 
 &lt;h3 id=&quot;model-formulation-2&quot;&gt;Model Formulation&lt;/h3&gt;
 
@@ -195,7 +211,7 @@ p_{z_{23}, z_0} &amp;amp; p_{z_{23}, z_1} &amp;amp; \cdots &amp;amp; p_{z_{23}, 
 
 \[xP(G_H, z_i) = P_{first} P(G_H) - P(G_H)[i] \tag{3.8}\]
 
-&lt;p&gt;Comparing expected gain to the actual gain players receive from second ball wins provides insight into which players underperform or overperform relative to expectations.&lt;/p&gt;
+&lt;p&gt;Comparing expected gain to the actual gain players receive from second ball wins provides insight into which players underperform or overperform relative to expectations. Due to time constraints, I didn’t implement this in my work, but is a natural extension.&lt;/p&gt;
 
 &lt;h2 id=&quot;component-performance&quot;&gt;Component Performance&lt;/h2&gt;
 
@@ -204,32 +220,87 @@ p_{z_{23}, z_0} &amp;amp; p_{z_{23}, z_1} &amp;amp; \cdots &amp;amp; p_{z_{23}, 
 &lt;h3 id=&quot;location-prediction-1&quot;&gt;Location Prediction&lt;/h3&gt;
 
 &lt;p&gt;Rather than relying solely on the top-1 predicted location for second balls, this work
-adopts a top-3 prediction strategy. In the context of soccer, the landing zone of a second
-ball is uncertain due to chaotic nature. By considering the three most probable zones, a
+adopts a top-3 prediction strategy. In the context of football, the landing zone of a second
+ball is uncertain due to seemingly chaotic nature. By considering the three most probable zones, a
 more realistic representation of how the model is thinking and where it is predicting the
 second balls to land is captured. Additionally, top-3 evaluation reduces the harshness
 of strict classification accuracy and better reflects the model’s value in practical settings
 where anticipating a region, rather than a single zone, can inform decision-making.&lt;/p&gt;
 
-&lt;p&gt;ACCURACY TABLE&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Model&lt;/th&gt;
+      &lt;th&gt;Top-1 Accuracy&lt;/th&gt;
+      &lt;th&gt;Top-3 Accuracy&lt;/th&gt;
+      &lt;th&gt;Log Loss&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;XGBoost&lt;/td&gt;
+      &lt;td&gt;0.2382&lt;/td&gt;
+      &lt;td&gt;0.6022&lt;/td&gt;
+      &lt;td&gt;2.6712&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Naive Baseline&lt;/td&gt;
+      &lt;td&gt;0.1063&lt;/td&gt;
+      &lt;td&gt;0.2849&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 
 &lt;p&gt;The location prediction component achieved a 23.8% top-1 and
-60.2% top-3 accuracy. While these numbers indicate low prediction accuracy, they are notable given the complexity and novelty of the task. A naive baseline approach, simply predicting the most common zones, only has an accuracy of 10.6% top-1 and 28.5% top-3 accuracy. Significantly outperforming the naive baseline suggests the model is not random and has some ability to learn spatial patterns. Despite room for improvement, these results mark an important step forward in quantifying and modelling second ball outcomes in football.&lt;/p&gt;
+60.2% top-3 accuracy. While these numbers indicate low prediction accuracy, they are notable given the complexity and novelty of the task. A naive baseline approach, simply predicting the most common zones, only has an accuracy of 10.6% top-1 and 28.5% top-3 accuracy. Significantly outperforming the naive baseline suggests the model is not random and has some ability to learn spatial patterns. Despite room for improvement, these results mark an important result in quantifying and modelling second ball outcomes in football.&lt;/p&gt;
 
 &lt;h3 id=&quot;winning-team-prediction&quot;&gt;Winning Team Prediction&lt;/h3&gt;
 
-&lt;p&gt;To evaluate the performance of the team winning prediction component, three core met
-rics are reported: accuracy, log loss, and the area under the receiver operating character
-istic curve (AUC-ROC). AUC-ROC offers a more nuanced evaluation by measuring the
-model’s ability to distinguish between positive and negative classes [63]. An AUC-ROC
+&lt;p&gt;To evaluate the performance of the team winning prediction component, three core metrics are reported: accuracy, log loss, and the area under the receiver operating characteristic curve (AUC-ROC). AUC-ROC offers a more nuanced evaluation by measuring the
+model’s ability to distinguish between positive and negative classes &lt;a href=&quot;https://link.springer.com/chapter/10.1007/978-3-031-35314-7_2&quot;&gt;(Naidu et al., 2023)&lt;/a&gt;. An AUC-ROC
 score of 0.5 indicates random performance, whereas a score closer to 1.0 reflects strong
 discriminatory power. Log loss and accuracy are once again included to further help
 analyze the model performance.&lt;/p&gt;
 
-&lt;p&gt;TABLE ACCURACY&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Model&lt;/th&gt;
+      &lt;th&gt;Accuracy&lt;/th&gt;
+      &lt;th&gt;AUC-ROC Score&lt;/th&gt;
+      &lt;th&gt;Log Loss&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Logistic Regression&lt;/td&gt;
+      &lt;td&gt;0.704&lt;/td&gt;
+      &lt;td&gt;0.761&lt;/td&gt;
+      &lt;td&gt;0.584&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Random Forest&lt;/td&gt;
+      &lt;td&gt;0.718&lt;/td&gt;
+      &lt;td&gt;0.790&lt;/td&gt;
+      &lt;td&gt;0.554&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;XGBoost&lt;/td&gt;
+      &lt;td&gt;0.722&lt;/td&gt;
+      &lt;td&gt;0.799&lt;/td&gt;
+      &lt;td&gt;0.548&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Naive Baseline&lt;/td&gt;
+      &lt;td&gt;0.585&lt;/td&gt;
+      &lt;td&gt;0.5&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 
-&lt;p&gt;In Table 4.2, it is shown that although all three models perform similarly before and
-after ablation, XGBoost is marginally the best. It is more important that the naive
+&lt;p&gt;In the table above, it is shown that although all three models perform similarly, XGBoost is marginally the best. It is more important that the naive
 baseline of always predicting team B as the winner of the second ball is outperformed.
 With a slightly imbalanced dataset, predicting team B every time results in an accuracy
 of 0.585, significantly lower than the best accuracy of 0.722. Another important note is
@@ -242,19 +313,130 @@ meaningfully confident at discerning between winning and losing outcomes&lt;/p&g
 &lt;h4 id=&quot;visualizing-convergence&quot;&gt;Visualizing Convergence&lt;/h4&gt;
 
 &lt;p&gt;To get an intuition for how the long-term distribution of second ball possessions emerge,
-the heat maps of the absorbing states can be observed. Figure 4.9 shows the probability
+the heat maps of the absorbing states can be observed. The figures below shows the probability
 of the possession ending after 20 transitions. There is a clear pattern that the closer the
 team in possession gets to the opponent’s goal, the more likely the possession will end.
-Again, this is trivial, but now we have evidence to back up the claim. Figure 4.9 also
-shows the probability of a goal after 20 transitions. Again, there is a clear pattern that
+Again, this is trivial, but now we have evidence to back up the claim. The figures also
+show the probability of a goal after 20 transitions. Again, there is a clear pattern that
 the closer the team in possession gets to the opponent’s goal, the more likely they are to
 score.&lt;/p&gt;
 
-&lt;p&gt;HEAT MAPS&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/eop_prob.png&quot; alt=&quot;eop_heatmap&quot; /&gt;
+&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/goal_prob.png&quot; alt=&quot;goal_heatmap&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;zone-valuation&quot;&gt;Zone Valuation&lt;/h4&gt;
+
+&lt;p&gt;Visualizing the gain per zone can provide insight into how areas of the pitch are valued.
+Unless otherwise stated, the analysis will be conducted using H = 5 (goal of occurring in next 5 transitions).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/gain.png&quot; alt=&quot;gain&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As expected, the cumulative probability that a goal occurs in the next H actions
+increases as H increases. Similarly to the convergence probabilities, we see that for H = 5, 10, 15, the closer
+and narrower a player is to the opponent’s goal the more likely a goal will occur.&lt;/p&gt;
+
+&lt;h4 id=&quot;bootstrapping&quot;&gt;Bootstrapping&lt;/h4&gt;
+
+&lt;p&gt;To quantify the uncertainty in the gain component, the bootstrap, a resampling technique, is used. Bootstrapping uses an observed sample to construct a statistic’s sampling
+distribution &lt;a href=&quot;https://psycnet.apa.org/record/2011-23864-022&quot;&gt;(Beasley &amp;amp; Rodgers, 2012)&lt;/a&gt;. The observed median from the original sample of N scores is calculated.
+An empirical sampling distribution is created by repeatedly drawing N random samples
+with replacement from the dataset of second ball possessions. Drawing N random samples is considered one bootstrap sample. This process is repeated B = 1000 times. The bootstrap distribution is formed by calculating the median for each bootstrap sample.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/bootstrap.png&quot; alt=&quot;bootstrap&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;From the above figure, it is clear that the original gain scores are very similar to the bootstrapped medians. Confidence intervals are minimal from defensive zones and appear to
+grow towards attacking zones. Having more uncertainty in attacking zones is not surprising since there are fewer samples. However, the attacking zones’ confidence intervals
+are not large, which gives evidence that the bootstrapped gain distribution is valid.&lt;/p&gt;
+
+&lt;h4 id=&quot;calibration&quot;&gt;Calibration&lt;/h4&gt;
+
+&lt;p&gt;The calibration of the gain was assessed by plotting empirical probabilities against predicted probabilities. The initial regression slope of approximately 1.7 indicates calibration issues compared to the perfect calibration slope of 1. Excluding zones 11, 17, and
+23 decreases the slope to 1.089, which is very strong. The outliers have low empirical
+counts since they are attacking zones, suggesting the empirical probability does not reflect the underlying gain distribution. However, for the majority of zones, the Markov
+chain framework produces well-calibrated estimates.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/calibration.png&quot; alt=&quot;calibration&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;player-analysis&quot;&gt;Player Analysis&lt;/h2&gt;
 
-&lt;h2 id=&quot;team-analysis&quot;&gt;Team Analysis&lt;/h2&gt;</content><author><name></name></author><category term="notes" /><summary type="html">In [part 1][part1], we looked into building upon [Hang’s] framework for extracting second ball wins from data and incorporated our own ideas such as high-order balls to create player and team statistics and heatmaps. Feel free to give it a read but if you havn’t all you need to know for this post is the two following points.</summary></entry><entry><title type="html">The Quantification and Analysis of Second Balls in Football Part 1</title><link href="http://localhost:4000/blog/notes/2026/06/19/quantifyingSB.html" rel="alternate" type="text/html" title="The Quantification and Analysis of Second Balls in Football Part 1" /><published>2026-06-19T00:00:00-04:00</published><updated>2026-06-19T00:00:00-04:00</updated><id>http://localhost:4000/blog/notes/2026/06/19/quantifyingSB</id><content type="html" xml:base="http://localhost:4000/blog/notes/2026/06/19/quantifyingSB.html">&lt;p&gt;The evaluation of in-game actions of football players and how they affect the outcome
+&lt;p&gt;Now for the main result of this thesis, the xSBV for players. The table below shows the average
+xSBV for players with more than thirty-eight second ball wins. The cumulative xSBV is
+also shown along with the average and cumulative gain difference. The total number of
+second balls won from each player is also listed. It is noted that second ball wins that
+are won and transitioned into the same zone are not counted since the gain would equal
+zero. The zones that are not counted are a significant limitation of the xSBV model and
+are discussed in the limitations section towards the end.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/xsbv_player.png&quot; alt=&quot;player-xsbv&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Yann Gerard M’Vila leads the list with the highest average xSBV (0.000152), supported by a relatively strong total gain differential (0.1576) across 40 events. The others in the top 5 have similar average xSBV scores, but considerably lower then M’vila. Therefore, in terms of creating value from second ball wins, it is concluded that Yann M’vila is the best. As a midfielder from Sunderland who would not widely be regarded as a “top” midfielder, it is exciting that the metric shows him as the best in the Premier League with respect to improving a team’s chances of scoring from second ball wins. Looking back at the Premier League table, we notice that Sunderland finished in 17th place, avoiding relegation by one spot.&lt;/p&gt;
+
+&lt;p&gt;At the opposite end, Victor Wanyama and Glenn Whelan post near-zero averages, and N’Golo Kante, Eric Dier, and Mark Noble register negative values. However, it is crucial to note that these metrics only capture the probability of goals and do not reflect defensive value. Many of the lower-ranked players are defensive midfielders whose primary role is to disrupt opposition play and secure possession with safe passes. Without the value of the opponent winning the ball, we cannot fully capture the importance of these players. However, we can use average gain and cumulative gain and cumulative gain to get a better idea of their importance.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/gain_player.png&quot; alt=&quot;gain-player&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Even without accounting for defensive contribution, Table 4.5 shows the importance
+of defensive midfielders. Victor Wanyama and Glenn Whelan both have entered the top
+5 comparatively, while the rest have similar scores. So by using part of the full metric,
+the zonal value of player’s second ball wins can be seen.&lt;/p&gt;
+
+&lt;h2 id=&quot;team-analysis&quot;&gt;Team Analysis&lt;/h2&gt;
+
+&lt;p&gt;Now, the xSBV scores per team can be analyzed. Again, the teams are ranked in order of highest xSBV to lowest.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/xsbv_team.png&quot; alt=&quot;team-xsbv&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The above figure reveals some interesting results. Originally, it was thought that lower table
+teams would have worse xSBV, but that is not necessarily the case. A more reasonable
+explanation would be that high xSBV would be associated with teams with a direct,
+long-ball play style. So it makes sense that worse teams already focus on quick attacks
+following second ball wins. However, not all lower table teams have high xSBV. For
+example, Newcastle, the team that was closest to avoiding relegation, had the third
+worst xSBV score. The lower score indicates that Newcastle could have benefited from
+improvements in attacking play following second ball wins. Cases like Newcastle are
+exactly who this metric is geared toward. There is a possibility that if Newcastle had
+worked to improve their xSBV, they could have avoided relegation.&lt;/p&gt;
+
+&lt;p&gt;To provide coaches and players with tactical guidance for winning second balls, heat maps
+are presented, which show trends of where second balls are likely to land. Although the
+location prediction component does not predict zones with high accuracy, it does seem
+to understand the spatial relationships of second ball win locations. As component
+performance is improved, a similar location distribution is expected, but with higher
+prediction accuracy.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/tactic.png&quot; alt=&quot;team-tactic&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;However, from the above figure, it can be shown that a long ball from
+zone 12 to 16 is most likely to fall into zones 13 and 14. It is also noted that zone 17
+has the next highest probability. Therefore, a tactic could be to target zone 16 from goal
+kicks with many players in zones 13 and 14, with a few players running in behind to
+zone 17 for flick-on headers. This is one example, but by looking at team-specific visuals
+of where past success occurred, coaches can use the ideas from the location prediction
+component to create new tactics for their team.&lt;/p&gt;
+
+&lt;h2 id=&quot;limitations-and-future-work&quot;&gt;Limitations and Future Work&lt;/h2&gt;
+
+&lt;p&gt;It goes without saying as my first real attempt at football analytics and modelling, this novel work has no shortcoming of limitations. With many of these limitations however, come new questions and future work that can be built upon.&lt;/p&gt;
+
+&lt;p&gt;The biggest limitation belongs to the data used. Without access to tracking data, event data was used, almost certaintly missing out on valuable predictive information that would help strengthen the model. Knowing the locations of players should help improve predictions on all fronts, from where the second ball occurs to which team is most likely to win it. A natural extension would be to reproduce these components with tracking data to see how accuracy improves.&lt;/p&gt;
+
+&lt;p&gt;Also, the methodology is inherently flawed as manual annotation of games were used to identify second ball scenarios. Certain edge cases are very likely to have been missed, meaning there still is no way to extract all second balls with 100% accuracy. That being said this method still provides a way to highly increase the speed at which many second balls can be extracted, compared to manually having to annotate games by hand.&lt;/p&gt;
+
+&lt;p&gt;Set pieces are also not included in the analysis. This was due to scope of research and the difference in nature of open play and set pieces. I believe results most likely would be different and so including set pieces in the same analysis could have taken away from the results. A simple extension to investigate second balls from set pieces would be a natural and interesting pathway forward.&lt;/p&gt;
+
+&lt;p&gt;Also, only second ball wins were analyzed. In reality, ignoring second balls where possession was not established contributes to a lower number of second balls per game, and potential game dynamics that are left unexplored. For example, second balls where possession is never immediately established maybe is where real oppurtunity lies for teams to improve on their number of second ball wins.&lt;/p&gt;
+
+&lt;p&gt;For the gain component, the model assigns scores by using the difference in probability of scoring a goal within the near future from two different zones. The problem is that if the second ball winner gets the ball and transitions it to the same zone, the resulting difference in gain would equal zero. In reality, the difference should not be zero since winning the second ball itself provides value for your team, regardless of where you transition it to. Continuing with this, the defensive value of winning a second ball is massive as it is stopping your opponent from making transitions that improve their teams chances of scoring, which is not inlcluded in gain since its purely a goal scoring metric. Improving or creating a new way to understand the value second ball wins add to the defense as well as the attack is a natural extension.&lt;/p&gt;
+
+&lt;p&gt;Last, the values from the xSBV model are hard to interpret. Since the values from each component are very small due to accuracy of components, the xSBV becomes very small. In retrospect, the need to combine all components into a single output was probably not necessary as each part by itself can be useful in its own right. The idea of having a single metric with a fancy name definetly sucked me in. However, the metric can still be used as comparing players within the metric still works as the scores are relative. Thus, we still established rankings of players and teams.&lt;/p&gt;
+
+&lt;p&gt;This is by no means as an exhaustive list, and there’s many more in my actual thesis. I wanted to get my favorite limitations and ideas for future work in this post as I think they may have the most value in providing others with ideas while understanding where my work falls short.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h2&gt;
+
+&lt;p&gt;If you have made it this far, I would like to say thanks! This thesis marked a big chapter in my life and I am glad that I was able to shrink it down into a (somewhat) more tolerable verision. At the beginning I had two simple goals. The first to follow my passions and create a project in football analytics. The second was to come up with an idea that was relatively (if at all) unresearched and see what I could come up with. Although, it is nothing ground breaking and honestly in my opinion not that great, I am quite proud to have seen it through from start to finish. Along with that I think there are some cool ideas and insights sprinkled throughout and I have definitely learned a lot and will be a better researcher and football analyst beacuse of it. I look forward to continuing improving my analytics skills and hopefully create cooler and better things in the future. As always any comments or feedback would be appreciated so feel free to reach out on Twitter or email.&lt;/p&gt;
+
+&lt;p&gt;Jack Sears&lt;/p&gt;</content><author><name></name></author><category term="notes" /><summary type="html">In part 1, we looked into building upon Hang’s framework for extracting second ball wins from data and incorporated our own ideas such as high-order balls to create player and team statistics and heatmaps. Feel free to give it a read but if you haven’t, all you need to know for this post is the two following points.</summary></entry><entry><title type="html">The Quantification and Analysis of Second Balls in Football Part 1</title><link href="http://localhost:4000/blog/notes/2026/06/19/quantifyingSB.html" rel="alternate" type="text/html" title="The Quantification and Analysis of Second Balls in Football Part 1" /><published>2026-06-19T00:00:00-04:00</published><updated>2026-06-19T00:00:00-04:00</updated><id>http://localhost:4000/blog/notes/2026/06/19/quantifyingSB</id><content type="html" xml:base="http://localhost:4000/blog/notes/2026/06/19/quantifyingSB.html">&lt;p&gt;The evaluation of in-game actions of football players and how they affect the outcome
 of a game is an important part of football analytics &lt;a href=&quot;https://link.springer.com/book/10.1007/978-3-658-21177-6&quot;&gt;(Link, 2018)&lt;/a&gt;. Unlike traditional
 statistics that focus on goals and assists, evaluating other actions that players perform
 looks deeper into the nuances of player behaviour and decision-making.&lt;/p&gt;
@@ -1593,8 +1775,8 @@ or analyzing the value of winning second balls and how to do so successfully. Th
 &lt;script&gt;
 (function() {
   const m = [
-    [&quot;France&quot;,&quot;Spain&quot;,1.56,1.12,&quot;&quot;],
-    [&quot;England&quot;,&quot;Argentina&quot;,1.26,1.07,&quot;&quot;],
+    [&quot;France&quot;,&quot;Spain&quot;,1.56,1.12,&quot;0-2&quot;],
+    [&quot;England&quot;,&quot;Argentina&quot;,1.26,1.07,&quot;1-2&quot;],
   ];
 
   const pred = {
@@ -1629,11 +1811,87 @@ or analyzing the value of winning second balls and how to do so successfully. Th
 })();
 &lt;/script&gt;
 
+&lt;h2 id=&quot;final&quot;&gt;Final&lt;/h2&gt;
+
+&lt;p&gt;Updated July 20&lt;/p&gt;
+
+&lt;p&gt;Was slacking a bit and forgot to update. Previous round was rough, as neither of the bookies favorites made the final. Not much I think can be done at this stage as there’s only 2 games and the team’s are so close we shall just let it play out.&lt;/p&gt;
+
+&lt;table class=&quot;wc-table&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Match&lt;/th&gt;
+      &lt;th&gt;Predicted&lt;/th&gt;
+      &lt;th&gt;xG&lt;/th&gt;
+      &lt;th&gt;Actual&lt;/th&gt;
+      &lt;th&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody id=&quot;wc-tbody-f&quot;&gt;&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;script&gt;
+(function() {
+  const m = [
+    [&quot;France&quot;,&quot;England&quot;,2.32,1.09,&quot;4-6&quot;],
+    [&quot;Spain&quot;,&quot;Argentina&quot;,1.44,0.92,&quot;1-0&quot;],
+  ];
+
+  const pred = {
+    &quot;France vs England&quot;: &quot;3-2&quot;,
+    &quot;England vs Argentina&quot;: &quot;1-1&quot;,
+  };
+
+  function outcome(p, actual) {
+    if (!actual) return &apos;&lt;span class=&quot;wc-hit tbd&quot;&gt;–&lt;/span&gt;&apos;;
+    if (p === actual) return &apos;&lt;span class=&quot;wc-hit exact&quot;&gt;exact&lt;/span&gt;&apos;;
+    const pr = p.split(&apos;-&apos;), ar = actual.split(&apos;-&apos;);
+    const ps = Math.sign(pr[0]-pr[1]), as = Math.sign(ar[0]-ar[1]);
+    return ps === as
+      ? &apos;&lt;span class=&quot;wc-hit result&quot;&gt;result&lt;/span&gt;&apos;
+      : &apos;&lt;span class=&quot;wc-hit wrong&quot;&gt;wrong&lt;/span&gt;&apos;;
+  }
+
+  const tb = document.getElementById(&apos;wc-tbody-f&apos;);
+  m.forEach(function(r) {
+    const key = r[0]+&apos; vs &apos;+r[1];
+    const p = pred[key] || (Math.round(r[2])+&apos;-&apos;+Math.round(r[3]));
+    const actual = r[4];
+    tb.innerHTML +=
+      &apos;&lt;tr&gt;&apos; +
+      &apos;&lt;td&gt;&apos;+r[0]+&apos; &lt;span style=&quot;color:#ccc&quot;&gt;vs&lt;/span&gt; &apos;+r[1]+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;td class=&quot;wc-score&quot;&gt;&apos;+p+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;td class=&quot;wc-xg&quot;&gt;&apos;+r[2].toFixed(2)+&apos; / &apos;+r[3].toFixed(2)+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;td class=&quot;wc-actual&quot;&gt;&apos;+(actual||&apos;–&apos;)+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;td&gt;&apos;+outcome(p, actual||&apos;&apos;)+&apos;&lt;/td&gt;&apos; +
+      &apos;&lt;/tr&gt;&apos;;
+  });
+})();
+&lt;/script&gt;
+
+&lt;p&gt;I increased the England France scoring predictions from 2-1 France, to 3-2, as I figured the third place match would be high scoring, but truly the unthinkable happened haha. Also pure domination from Spain and I had them myself down as 1-0 win but obviously took the models prediction.&lt;/p&gt;
+
 &lt;h2 id=&quot;wrap-up&quot;&gt;Wrap Up&lt;/h2&gt;
 
 &lt;p&gt;Updated June 12, 2026&lt;/p&gt;
 
-&lt;p&gt;I don’t have much to say right now other than GO CANADA, and hopefully these predictions can serve me well. I will at the least update this post at the end of every groupstage round, but hopefully more often than that. Anyways I appreciate those who made it this far and best of luck to you and your team you will be cheering on this World Cup!&lt;/p&gt;</content><author><name></name></author><category term="notes" /><summary type="html"></summary></entry><entry><title type="html">Welcome to Jekyll!</title><link href="http://localhost:4000/blog/jekyll/update/2026/05/06/example.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2026-05-06T12:42:24-04:00</published><updated>2026-05-06T12:42:24-04:00</updated><id>http://localhost:4000/blog/jekyll/update/2026/05/06/example</id><content type="html" xml:base="http://localhost:4000/blog/jekyll/update/2026/05/06/example.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+&lt;p&gt;I don’t have much to say right now other than GO CANADA, and hopefully these predictions can serve me well. I will at the least update this post at the end of every groupstage round, but hopefully more often than that. Anyways I appreciate those who made it this far and best of luck to you and your team you will be cheering on this World Cup!&lt;/p&gt;
+
+&lt;p&gt;Updated July 20, 2026&lt;/p&gt;
+
+&lt;p&gt;Well the world cup is finished, congrats to Spain, and every other team that created history and special moments for their countries.&lt;/p&gt;
+
+&lt;p&gt;I ended up finishing 42/408 in my office league, narrowly missing the top 10%. 104 games predicted, 21 results correct, 30 close scores, and 14 exact scores. A prediction success rate of 63%. A few takeaways/lessons/ideas to learn from and hopefully improve upon next time.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Use a method of comparison. I should have made my predictions for each game as an avid football fan, seeing how my predictions would have stacked up vs the model.&lt;/li&gt;
+  &lt;li&gt;Compare the results of the model to other common approaches. Does this model actually meaningfully improve predictions, or would I have had better success predicting the most common scoreline historically for every game?&lt;/li&gt;
+  &lt;li&gt;In a game scenario like this office pool, are there oppurtunites to sytematically hedge my prediction to try and make ground? I.e if the model had two teams with relatively close odds, and one team was heavily being chosen to win more than the other, picking the less common choice may statistically have given me advantage.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Overall, this was a fun experience and I am glad I did it. Although I know it was not thourougly thought through or planned, it is nice to have seen it through from start to end, and more importantly it has piqued my interest in continuing to do more predictions and learning how to improve them. Thanks for following along!&lt;/p&gt;
+
+&lt;p&gt;Jack Sears&lt;/p&gt;</content><author><name></name></author><category term="notes" /><summary type="html"></summary></entry><entry><title type="html">Welcome to Jekyll!</title><link href="http://localhost:4000/blog/jekyll/update/2026/05/06/example.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2026-05-06T12:42:24-04:00</published><updated>2026-05-06T12:42:24-04:00</updated><id>http://localhost:4000/blog/jekyll/update/2026/05/06/example</id><content type="html" xml:base="http://localhost:4000/blog/jekyll/update/2026/05/06/example.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
 
 &lt;p&gt;Jekyll requires blog post files to be named according to the following format:&lt;/p&gt;
 

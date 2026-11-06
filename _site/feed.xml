@@ -1,17 +1,41 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2026-11-04T13:57:29-05:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">Jack’s Blog</title><subtitle>A blog where I post about the projects and ideas I have been working on relating to football analytics.</subtitle><entry><title type="html">FPL Gameweek 10 Preview</title><link href="http://localhost:4000/blog/notes/2026/11/04/fplgw9.html" rel="alternate" type="text/html" title="FPL Gameweek 10 Preview" /><published>2026-11-04T00:00:00-05:00</published><updated>2026-11-04T00:00:00-05:00</updated><id>http://localhost:4000/blog/notes/2026/11/04/fplgw9</id><content type="html" xml:base="http://localhost:4000/blog/notes/2026/11/04/fplgw9.html">&lt;h1 id=&quot;fpl-gameweek-10-preview&quot;&gt;FPL Gameweek 10 Preview&lt;/h1&gt;
-
-&lt;p&gt;First of who knows how many. Idea is to use Claude Code to help me automate a set of data visualizations for each game week of fantasy premier league. Using these visuals I’ll discuss my thoughts on players and teams for the upcoming gameweek, good and bad. Will try to keep it short and digestible.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2026-11-05T19:53:05-05:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">Jack’s Blog</title><subtitle>A blog where I post about the projects and ideas I have been working on relating to football analytics.</subtitle><entry><title type="html">FPL Gameweek 10 Preview</title><link href="http://localhost:4000/blog/notes/2026/11/04/fplgw9.html" rel="alternate" type="text/html" title="FPL Gameweek 10 Preview" /><published>2026-11-04T00:00:00-05:00</published><updated>2026-11-04T00:00:00-05:00</updated><id>http://localhost:4000/blog/notes/2026/11/04/fplgw9</id><content type="html" xml:base="http://localhost:4000/blog/notes/2026/11/04/fplgw9.html">&lt;p&gt;First of who knows how many. Idea is to use Claude Code to help me automate a set of data visualizations for each game week of fantasy premier league. Using these visuals I’ll discuss my thoughts on players and teams for the upcoming gameweek, good and bad. Will try to keep it short and digestible.&lt;/p&gt;
 
 &lt;h2 id=&quot;teams&quot;&gt;Teams&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/fplgw10/team_attack.png&quot; alt=&quot;teamXG&quot; /&gt;
-&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/fplgw10/team_defence.png&quot; alt=&quot;teamXGA&quot; /&gt;
-&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/fplgw10/team_cs_goals.png&quot; alt=&quot;teamBar&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;We can begin by taking a look at the xG vs actual goals scored for each team in the Prem.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/fplgw10/team_attack.png&quot; alt=&quot;teamXG&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Manchester City and Brighton are elite attacks (hold or buy, don’t sell). I would proceed with caution with Chelsea in JP’s absence (hold or sell, don’t buy). Arsenal, Ipswich, Brentford, and Bournemouth are consistent and good enough to own. Lots of underperforming potential with fixture swings that we will look at later.&lt;/p&gt;
+
+&lt;p&gt;Next is xG Against vs goals conceded:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/fplgw10/team_defence.png&quot; alt=&quot;teamXGA&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;2-3 Arsenal Defender’s. That’s it. Target fixtures and defcon from the rest.&lt;/p&gt;
+
+&lt;p&gt;The following is one of my favorite graphics to show which team’s are keeping vs conceding clean sheets and which team’s are scoring lots vs few goals.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/fplgw10/team_cs_goals.png&quot; alt=&quot;teamBar&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;United and Ipswich haven’t kept a single clean sheet. Palace, Chelsea, and Sunderland have many 2+ goal games. These are the main fixtures to target. Although Nottingham and Coventry don’t get many clean sheets, they also often only concede once. Ignore them for attacking fixtures.&lt;/p&gt;
+
+&lt;h2 id=&quot;fixtures&quot;&gt;Fixtures&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/fplgw10/fdr_gw10_14.png&quot; alt=&quot;fdr&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;defenders&quot;&gt;Defenders&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/fplgw10/pos_def_xgi.png&quot; alt=&quot;xGIDEF&quot; /&gt;
-&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/fplgw10/defcon_defenders.png&quot; alt=&quot;defcon_defenders&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><category term="notes" /><summary type="html">FPL Gameweek 10 Preview</summary></entry><entry><title type="html">Fantasy Premier League 2026/27</title><link href="http://localhost:4000/blog/notes/2026/08/02/fplmath.html" rel="alternate" type="text/html" title="Fantasy Premier League 2026/27" /><published>2026-08-02T00:00:00-04:00</published><updated>2026-08-02T00:00:00-04:00</updated><id>http://localhost:4000/blog/notes/2026/08/02/fplmath</id><content type="html" xml:base="http://localhost:4000/blog/notes/2026/08/02/fplmath.html">&lt;iframe src=&quot;/blog/assets/fpl_dashboard/index.html&quot; width=&quot;100%&quot; height=&quot;900&quot; style=&quot;border:none; border-radius:8px;&quot;&gt;
+&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/fplgw10/defcon_defenders.png&quot; alt=&quot;defcon_defenders&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;midfielders&quot;&gt;Midfielders&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/fplgw10/pos_mid_xgi.png&quot; alt=&quot;xGIMID&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;forwards&quot;&gt;Forwards&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/fplgw10/pos_fwd_xgi.png&quot; alt=&quot;xGIDEF&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><category term="notes" /><summary type="html">First of who knows how many. Idea is to use Claude Code to help me automate a set of data visualizations for each game week of fantasy premier league. Using these visuals I’ll discuss my thoughts on players and teams for the upcoming gameweek, good and bad. Will try to keep it short and digestible.</summary></entry><entry><title type="html">Fantasy Premier League 2026/27</title><link href="http://localhost:4000/blog/notes/2026/08/02/fplmath.html" rel="alternate" type="text/html" title="Fantasy Premier League 2026/27" /><published>2026-08-02T00:00:00-04:00</published><updated>2026-08-02T00:00:00-04:00</updated><id>http://localhost:4000/blog/notes/2026/08/02/fplmath</id><content type="html" xml:base="http://localhost:4000/blog/notes/2026/08/02/fplmath.html">&lt;iframe src=&quot;/blog/assets/fpl_dashboard/index.html&quot; width=&quot;100%&quot; height=&quot;900&quot; style=&quot;border:none; border-radius:8px;&quot;&gt;
 &lt;/iframe&gt;</content><author><name></name></author><category term="notes" /><summary type="html"></summary></entry><entry><title type="html">The Quantification and Analysis of Second Balls in Football Part 2</title><link href="http://localhost:4000/blog/notes/2026/07/26/analyzingSB.html" rel="alternate" type="text/html" title="The Quantification and Analysis of Second Balls in Football Part 2" /><published>2026-07-26T00:00:00-04:00</published><updated>2026-07-26T00:00:00-04:00</updated><id>http://localhost:4000/blog/notes/2026/07/26/analyzingSB</id><content type="html" xml:base="http://localhost:4000/blog/notes/2026/07/26/analyzingSB.html">&lt;p&gt;In &lt;a href=&quot;https://jack-sears.github.io/blog/notes/2026/06/19/quantifyingSB.html&quot;&gt;part 1&lt;/a&gt;, we looked into building upon &lt;a href=&quot;https://lchunhang.medium.com/quantifying-second-ball-wins-d626ac56f108&quot;&gt;Hang’s&lt;/a&gt; framework for extracting second ball wins from data and incorporated our own ideas such as high-order balls to create player and team statistics and heatmaps. Feel free to give it a read but if you haven’t, all you need to know for this post is the two following points.&lt;/p&gt;
 
 &lt;ul&gt;

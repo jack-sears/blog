@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2026-11-19T19:29:11-05:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">Jack’s Blog</title><subtitle>A blog where I post about the projects and ideas I have been working on relating to football analytics.</subtitle><entry><title type="html">FPL Gameweek 11 Preview</title><link href="http://localhost:4000/blog/notes/2026/11/19/fplgw11.html" rel="alternate" type="text/html" title="FPL Gameweek 11 Preview" /><published>2026-11-19T00:00:00-05:00</published><updated>2026-11-19T00:00:00-05:00</updated><id>http://localhost:4000/blog/notes/2026/11/19/fplgw11</id><content type="html" xml:base="http://localhost:4000/blog/notes/2026/11/19/fplgw11.html">&lt;p&gt;Intro&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2026-11-19T19:51:50-05:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">Jack’s Blog</title><subtitle>A blog where I post about the projects and ideas I have been working on relating to football analytics.</subtitle><entry><title type="html">FPL Gameweek 11 Preview</title><link href="http://localhost:4000/blog/notes/2026/11/19/fplgw11.html" rel="alternate" type="text/html" title="FPL Gameweek 11 Preview" /><published>2026-11-19T00:00:00-05:00</published><updated>2026-11-19T00:00:00-05:00</updated><id>http://localhost:4000/blog/notes/2026/11/19/fplgw11</id><content type="html" xml:base="http://localhost:4000/blog/notes/2026/11/19/fplgw11.html">&lt;p&gt;Intro&lt;/p&gt;
 
 &lt;h2 id=&quot;teams&quot;&gt;Teams&lt;/h2&gt;
 
@@ -7,6 +7,10 @@
 &lt;p&gt;&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/fplgw11/gw10_team_defence.png&quot; alt=&quot;teamXGA&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/fplgw11/gw10_team_cs_goals.png&quot; alt=&quot;teamBar&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;fixtures&quot;&gt;Fixtures&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/fplgw11/gw11_fdr_gw11_15.png&quot; alt=&quot;fdr&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;defenders&quot;&gt;Defenders&lt;/h2&gt;
 

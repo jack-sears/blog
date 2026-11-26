@@ -1,60 +1,84 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2026-11-25T19:28:05-05:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">Jack’s Blog</title><subtitle>A blog where I post about the projects and ideas I have been working on relating to football analytics.</subtitle><entry><title type="html">FPL GW12: Trends, Underlying Numbers and the Run to Christmas</title><link href="http://localhost:4000/blog/2026/11/25/fpl-gw12.html" rel="alternate" type="text/html" title="FPL GW12: Trends, Underlying Numbers and the Run to Christmas" /><published>2026-11-25T00:00:00-05:00</published><updated>2026-11-25T00:00:00-05:00</updated><id>http://localhost:4000/blog/2026/11/25/fpl-gw12</id><content type="html" xml:base="http://localhost:4000/blog/2026/11/25/fpl-gw12.html">&lt;!-- Intro --&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2026-11-26T14:29:15-05:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">Jack’s Blog</title><subtitle>A blog where I post about the projects and ideas I have been working on relating to football analytics.</subtitle><entry><title type="html">FPL GW12: Trends, Underlying Numbers and the Run to Christmas</title><link href="http://localhost:4000/blog/2026/11/26/fpl-gw12.html" rel="alternate" type="text/html" title="FPL GW12: Trends, Underlying Numbers and the Run to Christmas" /><published>2026-11-26T00:00:00-05:00</published><updated>2026-11-26T00:00:00-05:00</updated><id>http://localhost:4000/blog/2026/11/26/fpl-gw12</id><content type="html" xml:base="http://localhost:4000/blog/2026/11/26/fpl-gw12.html">&lt;!-- Intro --&gt;
+&lt;p&gt;A quick look at last week before we get into the good stuff.&lt;/p&gt;
 
-&lt;h2 id=&quot;team-attack-whos-trending-up&quot;&gt;Team Attack: Who’s Trending Up?&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/fplgw12/gw12points.png&quot; alt=&quot;points&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/fpl/gw11_team_attack_trend.png&quot; alt=&quot;Team xG vs goals, coloured by difficulty of last three opponents, with trend arrows&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;44 points was all it took to get a slight green arrow and move up to just shy of the top 100k. I felt good with moving some money out of the midfield with Ndiaye and an added bonus with the Rudoni 10 pointer (should have taken my own advice and captained whoever plays palace). Ajer wouldn’t have started for me so although he hauled I am still happy with the Vuskovic transfer, especially longterm, but it did feel a bit unlucky that my double brighton cleansheet was wiped with less than 5 minutes to go vs Hull. Starting Kinsky to diversify into Spurs’ good fixture was one of my biggest headaches but I ultimately backed Ispwich over Hull attack, oh well. Gvardiol getting benched was easily the most frustrating part of the week and I should’ve transferred him as he has become quite the problem and there are simply better options.&lt;/p&gt;
 
-&lt;!-- Talking points --&gt;
+&lt;p&gt;&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/fplgw12/gw12team.png&quot; alt=&quot;team&quot; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;team-defence-whos-tightening-up&quot;&gt;Team Defence: Who’s Tightening Up?&lt;/h2&gt;
+&lt;p&gt;Looking at how my team is lining up this week, I am happy with everything, just need to address the Gvardiol situation. 4 free transfers.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/fpl/gw11_team_defence_trend.png&quot; alt=&quot;Team xGA vs goals conceded, coloured by difficulty of last three opponents, with trend arrows&quot; /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;teams&quot;&gt;Teams&lt;/h2&gt;
+&lt;p&gt;A small addition to the team attack and defense charts. I have added change in xG over the past 3 games via arrows, while color coding their fixture difficulty. This should help us get a better of idea of where teams are headed and why.&lt;/p&gt;
 
-&lt;!-- Talking points --&gt;
-
-&lt;h2 id=&quot;defenders-attacking-threat-vs-defcon&quot;&gt;Defenders: Attacking Threat vs DEFCON&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/fpl/gw11_def_scatter.png&quot; alt=&quot;Defenders: xGI per 90 vs defensive contributions per 90, coloured by xGA per 90&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/fplgw12/gw11_team_attack_trend.png&quot; alt=&quot;Team xG vs goals, coloured by difficulty of last three opponents, with trend arrows&quot; /&gt;&lt;/p&gt;
 
 &lt;!-- Talking points --&gt;
 
-&lt;h2 id=&quot;midfielders-goals&quot;&gt;Midfielders: Goals&lt;/h2&gt;
+&lt;p&gt;Nothing new here but it is cool to see teams like Liverpool and Bournemouth taking advantage of easier fixtures while City have struggled with tougher, setting all three on a path to what almost looks like the same ending point. I guess we can also all laugh at Sunderland as they continue to improve xG wise while scoring less and less goals…&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/fpl/gw11_mid_goals_share.png&quot; alt=&quot;Midfielders: goals vs xG, coloured by share of team xG&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/fpl/gw11_mid_goals_share_p90.png&quot; alt=&quot;Midfielders: goals vs xG per 90, coloured by share of team xG&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/fplgw12/gw11_team_defence_trend.png&quot; alt=&quot;Team xGA vs goals conceded, coloured by difficulty of last three opponents, with trend arrows&quot; /&gt;&lt;/p&gt;
 
 &lt;!-- Talking points --&gt;
 
-&lt;h2 id=&quot;midfielders-assists&quot;&gt;Midfielders: Assists&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/fpl/gw11_mid_assists_share.png&quot; alt=&quot;Midfielders: assists vs xA, coloured by share of team xA&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/fpl/gw11_mid_assists_share_p90.png&quot; alt=&quot;Midfielders: assists vs xA per 90, coloured by share of team xA&quot; /&gt;&lt;/p&gt;
-
-&lt;!-- Talking points --&gt;
-
-&lt;h2 id=&quot;forwards-goals&quot;&gt;Forwards: Goals&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/fpl/gw11_fwd_goals_share_p90.png&quot; alt=&quot;Forwards: goals vs xG per 90, coloured by share of team xG&quot; /&gt;&lt;/p&gt;
-
-&lt;!-- Talking points --&gt;
-
-&lt;h2 id=&quot;forwards-assists&quot;&gt;Forwards: Assists&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/fpl/gw11_fwd_assists_share_p90.png&quot; alt=&quot;Forwards: assists vs xA per 90, coloured by share of team xA&quot; /&gt;&lt;/p&gt;
-
-&lt;!-- Talking points --&gt;
+&lt;p&gt;No surprises here, Arsenal with tougher fixtures and potentially no Raya raises a few eyebrows, Leeds and Tottenham continue to impress, and Liverpool, Brentford, Brighton, and Bournemouth are doing well. Palace, United, and Ipswich are still the big 3 but not in a good way.&lt;/p&gt;
 
 &lt;h2 id=&quot;fixtures-gw1216-including-europe-and-cups&quot;&gt;Fixtures: GW12–16, Including Europe and Cups&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/fpl/gw12_fdr_gw12_16_midweek.png&quot; alt=&quot;Fixture difficulty GW12–16 with European and Carabao Cup games&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;I have updated the FDR to include European and Cup fixtures which should be considered when making transfers.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/fplgw12/gw12_fdr_gw12_16_midweek.png&quot; alt=&quot;Fixture difficulty GW12–16 with European and Carabao Cup games&quot; /&gt;&lt;/p&gt;
 
 &lt;!-- Talking points --&gt;
 
+&lt;p&gt;I think this is a very important time, as the next 5 fixtures happen over the following 2 weeks. Arsenal for example have Tottenham (A) in 14, Madrid in the UCL mid week, and then Bournemouth(H). Two decent premier league fixtures but for a player like Califiori or other rotation risks, it could get ugly. Leeds for example, although play City (A) midweek in 13, with no Europe the following week you can be confident in player minutes vs Ipswich (H) in 14. I just think it’s worth considering before making transfers.&lt;/p&gt;
+
+&lt;h2 id=&quot;defenders&quot;&gt;Defenders&lt;/h2&gt;
+
+&lt;p&gt;This is my favorite new graphic.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/fplgw12/gw11_def_scatter.png&quot; alt=&quot;Defenders: xGI per 90 vs defensive contributions per 90, coloured by xGA per 90&quot; /&gt;&lt;/p&gt;
+
+&lt;!-- Talking points --&gt;
+
+&lt;p&gt;Defcon, XGI, and defensive strength all in one. You can’t go wrong with players well above the defcon line with good defensive teams such as Silva, Hill, and Muharemovic. Affengruber is a sneaky pick as he is putting up great defcon and playing for a good defense in Fulham. When their fixtures turn he could be an interesting differential. Khalaili of Palace looks great except for the color of his dot, as Palace are conceding A LOT of goals. Could be one to watch if Thomas Frank can turn the ship around and bring some defensive stability.&lt;/p&gt;
+
+&lt;h2 id=&quot;midfielders&quot;&gt;Midfielders&lt;/h2&gt;
+
+&lt;p&gt;For Midfielder and Forward charts I added in a color coding of the percentage of each player’s teams xG and xA they contribute too.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/fplgw12/gw11_mid_goals_share_p90.png&quot; alt=&quot;Midfielders: goals vs xG per 90, coloured by share of team xG&quot; /&gt;&lt;/p&gt;
+
+&lt;!-- Talking points --&gt;
+
+&lt;p&gt;For example, Bruno and Mbeumo combine typically for 50% of united goals, covering most of their attack. Make of this what you will but nothing too interesting for me as my midfield is set right now with Tavernier, Rogers, and Mbeumo all putting up good numbers.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/fplgw12/gw11_mid_assists_share_p90.png&quot; alt=&quot;Midfielders: assists vs xA per 90, coloured by share of team xA&quot; /&gt;&lt;/p&gt;
+
+&lt;!-- Talking points --&gt;
+
+&lt;p&gt;Let me know your thoughts on assists.&lt;/p&gt;
+
+&lt;h2 id=&quot;forwards&quot;&gt;Forwards&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/fplgw12/gw11_fwd_goals_share_p90.png&quot; alt=&quot;Forwards: goals vs xG per 90, coloured by share of team xG&quot; /&gt;&lt;/p&gt;
+
+&lt;!-- Talking points --&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/fplgw12/gw11_fwd_assists_share_p90.png&quot; alt=&quot;Forwards: assists vs xA per 90, coloured by share of team xA&quot; /&gt;&lt;/p&gt;
+
+&lt;!-- Talking points --&gt;
+
+&lt;p&gt;We can see clear forward picks emerging. Haaland and Isak are living up to their names with Barry, Evanilson, Jackson, Brobbey, and DCL offering cheaper options. Nico Jackson is putting up the worst underlying xG but his xA and fixtures are good. He will probably be the forward to swap soon and it’ll most likely be back to JP. DCL is also putting up some solid numbers and being the only pen taker on the list outside of Haaland and Isak, really should not be ignored.  I am not a big fan of xA for forwards, as it just seems much less reliable, so I stick mostly to xG to help make decisions.&lt;/p&gt;
+
 &lt;h2 id=&quot;wrap-up&quot;&gt;Wrap-Up&lt;/h2&gt;
 
-&lt;!-- Picks, transfers, captaincy --&gt;</content><author><name></name></author><category term="fpl" /><category term="football" /><category term="data" /><summary type="html"></summary></entry><entry><title type="html">FPL Gameweek 11 Preview</title><link href="http://localhost:4000/blog/notes/2026/11/19/fplgw11.html" rel="alternate" type="text/html" title="FPL Gameweek 11 Preview" /><published>2026-11-19T00:00:00-05:00</published><updated>2026-11-19T00:00:00-05:00</updated><id>http://localhost:4000/blog/notes/2026/11/19/fplgw11</id><content type="html" xml:base="http://localhost:4000/blog/notes/2026/11/19/fplgw11.html">&lt;p&gt;Been playing fpl for a while now and wanted to mess around with Claude to see what kind of visuals I could create to help make decisions about my team. Below is my current team and I have 5 free transfers.&lt;/p&gt;
+&lt;p&gt;Another preview done and some exciting weeks ahead. I think we are starting to get a good understanding of teams to target, stay away from, and monitor closely in case of a turn in form. I will most likely be transferring in Muharemovic for Gvardiol given Leeds’ great fixtures and lack of European football. As always let me know what you found most useful and any suggestions you might have for future posts.&lt;/p&gt;
+
+&lt;p&gt;Thanks for reading and goodluck these next few weeks. @jacksears.bsky.social&lt;/p&gt;
+
+&lt;!-- Picks, transfers, captaincy --&gt;</content><author><name></name></author><category term="fpl" /><category term="football" /><category term="data" /><summary type="html">A quick look at last week before we get into the good stuff.</summary></entry><entry><title type="html">FPL Gameweek 11 Preview</title><link href="http://localhost:4000/blog/notes/2026/11/19/fplgw11.html" rel="alternate" type="text/html" title="FPL Gameweek 11 Preview" /><published>2026-11-19T00:00:00-05:00</published><updated>2026-11-19T00:00:00-05:00</updated><id>http://localhost:4000/blog/notes/2026/11/19/fplgw11</id><content type="html" xml:base="http://localhost:4000/blog/notes/2026/11/19/fplgw11.html">&lt;p&gt;Been playing fpl for a while now and wanted to mess around with Claude to see what kind of visuals I could create to help make decisions about my team. Below is my current team and I have 5 free transfers.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://jack-sears.github.io/blog/assets/images/fplgw11/gw11team.png&quot; alt=&quot;team&quot; /&gt;&lt;/p&gt;
 
